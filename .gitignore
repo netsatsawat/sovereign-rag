@@ -1,11 +1,9 @@
-__pycache__/
-*.py[cod]
+# Regenerable, and large. The manifests carry the sha256 of each, so the
+# reproducibility contract holds without committing 40 MB:
+#   python src/chunker.py --budget 600
+#   curl -sL -o data/multihoprag_corpus.parquet <hf url>
+data/*.parquet
+data/*.jsonl
+data/qwen3_tokenizer.json
 .venv/
-venv/
-.env
-*.egg-info/
-dist/
-build/
-.DS_Store
-.ipynb_checkpoints/
-data/local/
+__pycache__/
