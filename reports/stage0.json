@@ -1,0 +1,569 @@
+{
+ "stage": 0,
+ "machine": {
+  "platform": "macOS-26.5-arm64-arm-64bit",
+  "processor": "Apple M5",
+  "ram_gb": 26
+ },
+ "ollama_version": "0.32.5",
+ "generator": "qwen3:8b",
+ "embedder": "qwen3-embedding:0.6b",
+ "g1_throughput": {
+  "cold_load_s": 1.6,
+  "runs": [
+   {
+    "case": "short",
+    "prompt_tokens": 77,
+    "gen_tokens": 64,
+    "prefill_tok_s": 369.4,
+    "decode_tok_s": 20.31,
+    "total_s": 3.44
+   },
+   {
+    "case": "long_decode",
+    "prompt_tokens": 77,
+    "gen_tokens": 94,
+    "prefill_tok_s": 1697.4,
+    "decode_tok_s": 22.32,
+    "total_s": 4.34
+   },
+   {
+    "case": "long_prefill",
+    "prompt_tokens": 2050,
+    "gen_tokens": 64,
+    "prefill_tok_s": 529.0,
+    "decode_tok_s": 21.21,
+    "total_s": 7.0
+   }
+  ]
+ },
+ "g2_context": {
+  "rows": [
+   {
+    "num_ctx": 4096,
+    "resident_gb": 5.9,
+    "vram_gb": 5.9,
+    "split": "0% CPU / 100% GPU"
+   },
+   {
+    "num_ctx": 8192,
+    "resident_gb": 6.6,
+    "vram_gb": 6.6,
+    "split": "0% CPU / 100% GPU"
+   },
+   {
+    "num_ctx": 16384,
+    "resident_gb": 7.9,
+    "vram_gb": 7.9,
+    "split": "0% CPU / 100% GPU"
+   }
+  ]
+ },
+ "g4_coresidency": {
+  "resident": [
+   {
+    "name": "qwen3-embedding:0.6b",
+    "gb": 2.37,
+    "split": "0% CPU / 100% GPU"
+   },
+   {
+    "name": "qwen3:8b",
+    "gb": 5.57,
+    "split": "0% CPU / 100% GPU"
+   }
+  ],
+  "total_gb": 7.94,
+  "both_resident": true,
+  "embed_call_s": 7.17,
+  "fits_24gb": true
+ },
+ "g3_extraction_pilot": {
+  "verdict": "FAIL as specified; PASS at 512-token chunks",
+  "gate": {
+   "valid_20_of_20": "not reached \u2014 aborted on latency",
+   "under_90s": false
+  },
+  "cause": "decode-bound on extraction payload size, not model speed. One 1024-token chunk emits 4,044 output tokens at ~21 tok/s.",
+  "configs_measured": [
+   {
+    "schema": "full (entity+relationship descriptions)",
+    "chunk_tokens": 1024,
+    "s_per_chunk": 188.7,
+    "gen_tokens": 4044,
+    "passes_90s": false,
+    "chunks": 831,
+    "projected_index_h": 43.6
+   },
+   {
+    "schema": "entity descriptions only",
+    "chunk_tokens": 1024,
+    "s_per_chunk": 130.1,
+    "gen_tokens": 2777,
+    "entities": 35,
+    "relationships": 50,
+    "passes_90s": false,
+    "chunks": 831,
+    "projected_index_h": 30.0
+   },
+   {
+    "schema": "lean (no descriptions)",
+    "chunk_tokens": 1024,
+    "s_per_chunk": 110.6,
+    "gen_tokens": 2386,
+    "entities": 33,
+    "relationships": 52,
+    "passes_90s": false,
+    "chunks": 831,
+    "projected_index_h": 25.5
+   },
+   {
+    "schema": "entity descriptions only",
+    "chunk_tokens": 512,
+    "s_per_chunk": 60.2,
+    "gen_tokens": 1331,
+    "entities": 19,
+    "relationships": 21,
+    "passes_90s": true,
+    "chunks": 1662,
+    "projected_index_h": 27.8
+   },
+   {
+    "schema": "lean (no descriptions)",
+    "chunk_tokens": 512,
+    "s_per_chunk": 41.0,
+    "gen_tokens": 915,
+    "entities": 17,
+    "relationships": 17,
+    "passes_90s": true,
+    "chunks": 1662,
+    "projected_index_h": 18.9
+   }
+  ],
+  "superlinearity_finding": {
+   "status": "REFUTED by a 10-pair probe. The n=1 measurement had the sign wrong.",
+   "original_claim": "Halving the chunk cuts total index time 26% AND passes the latency gate \u2014 both, not a trade. Extrapolated from ONE chunk.",
+   "measured_n9": {
+    "wall_1024_total_s": 629,
+    "wall_512x2_total_s": 842,
+    "ratio": 0.75,
+    "gen_tokens_1024": 13826,
+    "gen_tokens_512x2": 19124,
+    "token_ratio": 1.38,
+    "entities_1024": 180,
+    "entities_512x2": 246,
+    "relationships_1024": 231,
+    "relationships_512x2": 300,
+    "rels_lost_by_splitting": 133,
+    "rels_provably_severed": 39,
+    "severed_share_of_loss": 0.29,
+    "rels_gained_by_splitting": 202,
+    "truncated_pairs_excluded": 1
+   },
+   "corrected_conclusion": "Splitting is MORE expensive and MORE thorough, not cheaper and worse. 512x2 costs 1.33x the wall clock of 1024 and emits 1.38x the tokens, while finding 37% more entities and 30% more relationships. The trade is cost against recall, in the opposite direction to the one claimed.",
+   "severance_claim_also_wrong": "Only 39 of 133 relationships lost by splitting (29%) were provably severed by the boundary. The other 71% is extractor non-determinism across a changed context window, not a structural cost of chunking.",
+   "corroboration": "Independently consistent with the chunking workflow's measured cost exponent k=1.43 (total index cost scales as T*s^(k-1)), which also implies smaller chunks cost more in total. Their 256-token projection rises to ~24 h for the same reason.",
+   "lesson": "One chunk was an outlier with an unusually verbose whole-chunk extraction. A single measurement was used to argue for restructuring the study."
+  },
+  "open_decision": "512-token chunking is a study-wide change, not a graph-only one: the fairness contract requires identical chunking across all arms.",
+  "script_bug_found": "no num_predict cap in the pilot, so a runaway extraction blocked past the 600s client timeout. Cap added."
+ },
+ "e1_chunker": {
+  "status": "PASS",
+  "chunker_version": "sentence-pack-v1",
+  "tokenizer_sha256": "aeb13307a71acd8f",
+  "canary_tokens": 23,
+  "chars_per_token_measured": 4.612,
+  "chars_per_token_naive_assumption": 4.0,
+  "at_600": {
+   "chunks": 1214,
+   "mean_tokens": 498.4,
+   "fill": 0.831,
+   "max": 600,
+   "over_budget": 0,
+   "hard_splits": 0,
+   "sha256": "b6c62cee1ce76d3d"
+  },
+  "at_1200": {
+   "chunks": 694,
+   "mean_tokens": 859.2,
+   "fill": 0.716,
+   "max": 1195,
+   "over_budget": 0,
+   "hard_splits": 0,
+   "sha256": "5978e31f19c653b7"
+  },
+  "integrity": {
+   "sentences_lost": 0,
+   "sentences_duplicated": 0,
+   "method": "every pySBD sentence of every article asserted present in that article's chunks; counts checked against the source"
+  },
+  "bug_found_and_fixed": "BPE merges across sentence joins, so a joined chunk can tokenize LONGER than the sum of its sentences. 4 of 1,213 chunks exceeded a 600 budget by up to 3 tokens. The packer now re-counts the real joined string and carries the overflow sentences into the next chunk rather than dropping them.",
+  "vs_research_projection": {
+   "projected_600": "1,102-1,139",
+   "measured_600": 1214,
+   "projected_1200": "~639",
+   "measured_1200": 694,
+   "note": "measured is ~7-9% higher; the paragraph-boundary preference flushes early on news text, which averages 46.6 paragraphs per article. Fill is 0.831, not the projected 0.917."
+  }
+ },
+ "e1b_severance": {
+  "at_600": {
+   "spans_checked": 4243,
+   "spans_severed": 0,
+   "span_severance_pct": 0.0,
+   "queries_checked": 1521,
+   "queries_losing_a_span": 0,
+   "query_impact_pct": 0.0,
+   "by_question_type": {
+    "comparison_query": {
+     "spans": 1016,
+     "severed": 0,
+     "span_severance_pct": 0.0,
+     "queries": 470,
+     "queries_hit": 0,
+     "query_impact_pct": 0.0
+    },
+    "inference_query": {
+     "spans": 2340,
+     "severed": 0,
+     "span_severance_pct": 0.0,
+     "queries": 697,
+     "queries_hit": 0,
+     "query_impact_pct": 0.0
+    },
+    "temporal_query": {
+     "spans": 887,
+     "severed": 0,
+     "span_severance_pct": 0.0,
+     "queries": 354,
+     "queries_hit": 0,
+     "query_impact_pct": 0.0
+    }
+   }
+  },
+  "at_1200": {
+   "spans_checked": 4243,
+   "spans_severed": 0,
+   "span_severance_pct": 0.0,
+   "queries_checked": 1521,
+   "queries_losing_a_span": 0,
+   "query_impact_pct": 0.0,
+   "by_question_type": {
+    "comparison_query": {
+     "spans": 1016,
+     "severed": 0,
+     "span_severance_pct": 0.0,
+     "queries": 470,
+     "queries_hit": 0,
+     "query_impact_pct": 0.0
+    },
+    "inference_query": {
+     "spans": 2340,
+     "severed": 0,
+     "span_severance_pct": 0.0,
+     "queries": 697,
+     "queries_hit": 0,
+     "query_impact_pct": 0.0
+    },
+    "temporal_query": {
+     "spans": 887,
+     "severed": 0,
+     "span_severance_pct": 0.0,
+     "queries": 354,
+     "queries_hit": 0,
+     "query_impact_pct": 0.0
+    }
+   }
+  },
+  "baseline_naive_char_scheme": {
+   "span_severance_pct": 6.83,
+   "query_impact_pct": 17.18,
+   "by_type_query_impact": {
+    "inference": 24.8,
+    "comparison": 16.4,
+    "temporal": 16.6,
+    "null": 0.0
+   },
+   "source": "measured by the chunking research on the pre-existing scheme"
+  },
+  "power_control": {
+   "why": "0.00% at both budgets was too clean to accept. A severance test that cannot detect severance would report 0% for a broken chunker too, so the detector was run against schemes known to sever.",
+   "naive_char_scheme_no_overlap": {
+    "1024tok": {
+     "span_pct": 4.86,
+     "query_pct": 13.41
+    },
+    "512tok": {
+     "span_pct": 7.73,
+     "query_pct": 20.84
+    },
+    "256tok": {
+     "span_pct": 15.15,
+     "query_pct": 36.88
+    }
+   },
+   "naive_1024_with_128tok_overlap": {
+    "span_pct": 0.0,
+    "query_pct": 0.0
+   },
+   "conclusion": "The detector has power: severance rises monotonically as chunks shrink. It reports 0% for the overlapped naive scheme because 512 chars of overlap recovers spans whose median length is 185 chars.",
+   "the_finding": "Sentence alignment achieves at ZERO overlap what the naive scheme needs 512 chars of overlap to achieve: 0.00% evidence severance. Overlap costs ~12.5% more chunks and, for the graph arm, ~20% more LLM calls plus duplicate entities. Sentence alignment costs nothing at index time.",
+   "vs_prediction": "Research predicted 0.5-2% residual from 6 multi-sentence gold spans and pySBD boundary error. Measured 0.00% on 4,243 spans. MultiHop-RAG's `fact` fields appear to be sentence-aligned by construction. Note the span counts differ from the research's 981 \u2014 this counts every (query, evidence) pair, not unique spans."
+  }
+ },
+ "e0_e2e3": {
+  "n_requested": 30,
+  "n_comparable": 22,
+  "e0_preconditions": {
+   "calls": 189,
+   "non_stop": 9,
+   "thinking_seen": 0,
+   "all_stop": false,
+   "no_thinking": true
+  },
+  "wall_ratio_600_over_1200": {
+   "geometric_mean": 1.328,
+   "ci95": [
+    1.164,
+    1.498
+   ]
+  },
+  "token_ratio_600_over_1200": {
+   "geometric_mean": 1.353,
+   "ci95": [
+    1.189,
+    1.523
+   ]
+  },
+  "totals": {
+   "wall_s_1200": 3292.8,
+   "wall_s_600": 4278.4,
+   "gen_tokens_1200": 67168,
+   "gen_tokens_600": 88453,
+   "entities_1200": 821,
+   "entities_600": 1024,
+   "rels_1200": 937,
+   "rels_600": 1279,
+   "rels_lost_at_600": 413,
+   "boundary_severed": 17,
+   "within_chunk_unemitted": 279,
+   "unclassified": 117,
+   "rels_gained_at_600": 755
+  },
+  "severed_share_of_loss": 0.041,
+  "unemitted_share_of_loss": 0.676,
+  "headline": {
+   "e0_verdict": "FAIL on truncation, PASS on thinking. 0 of 189 calls emitted thinking tokens, so `think:false` works and the cost model is not measuring reasoning. But 9 of 189 (4.8%) hit the 8,000-token cap and returned unparseable JSON. Truncation is a standing failure mode of local graph extraction at any fixed budget, not a nuisance to raise the cap past.",
+   "cost_verdict": "Smaller chunks cost MORE, now bounded. 600-chunking takes 1.328x the wall clock (95% CI 1.164-1.498) and emits 1.353x the tokens (CI 1.189-1.523) of 1200-chunking on the same articles. Both CIs exclude 1.0. This closes the superlinearity claim made from n=1, which had the sign inverted.",
+   "edge_verdict": {
+    "claim": "Overlap, the standard mitigation, addresses only 4% of the edges that chunking costs you.",
+    "of_413_edges_present_at_1200_and_absent_at_600": {
+     "boundary_severed_pct": 4.1,
+     "within_chunk_unemitted_pct": 67.6,
+     "unclassified_pct": 28.3
+    },
+    "why_it_matters": "Boundary severance is what overlap and gleanings are designed to fix, and it is 4% of the problem. 68% is the model declining to state a relation whose BOTH endpoints sat inside a single 600-token chunk it was shown. Extraction is deterministic here (same input, byte-identical output, verified 3x), so this is context-dependence, not sampling noise, and no overlap setting recovers it.",
+    "caveat": "28.3% unclassified: one or both endpoints could not be located in any 600-chunk by substring match, usually an entity-name variant. Reported rather than reallocated.",
+    "counterweight": "600-chunking is not strictly worse. It found 755 edges the 1200 chunking missed and 25% more entities (1,024 vs 821). The trade is cost and coherence against recall."
+   }
+  }
+ },
+ "e4_embed_sweep": {
+  "variants": {
+   "600_body": {
+    "budget": 600,
+    "variant": "body",
+    "dim": 1024,
+    "queries": 1521,
+    "hits_at_10": 96.78,
+    "mrr_at_10": 0.7164,
+    "by_type": {
+     "comparison_query": {
+      "n": 470,
+      "hits_at_10": 95.53,
+      "mrr_at_10": 0.7306
+     },
+     "inference_query": {
+      "n": 697,
+      "hits_at_10": 97.27,
+      "mrr_at_10": 0.7019
+     },
+     "temporal_query": {
+      "n": 354,
+      "hits_at_10": 97.46,
+      "mrr_at_10": 0.7261
+     }
+    }
+   },
+   "600_title": {
+    "budget": 600,
+    "variant": "title",
+    "dim": 1024,
+    "queries": 1521,
+    "hits_at_10": 96.45,
+    "mrr_at_10": 0.7312,
+    "by_type": {
+     "comparison_query": {
+      "n": 470,
+      "hits_at_10": 94.04,
+      "mrr_at_10": 0.7307
+     },
+     "inference_query": {
+      "n": 697,
+      "hits_at_10": 97.7,
+      "mrr_at_10": 0.7034
+     },
+     "temporal_query": {
+      "n": 354,
+      "hits_at_10": 97.18,
+      "mrr_at_10": 0.7867
+     }
+    }
+   },
+   "600_title+source": {
+    "budget": 600,
+    "variant": "title+source",
+    "dim": 1024,
+    "queries": 1521,
+    "hits_at_10": 96.65,
+    "mrr_at_10": 0.7404,
+    "by_type": {
+     "comparison_query": {
+      "n": 470,
+      "hits_at_10": 94.47,
+      "mrr_at_10": 0.7391
+     },
+     "inference_query": {
+      "n": 697,
+      "hits_at_10": 97.85,
+      "mrr_at_10": 0.7207
+     },
+     "temporal_query": {
+      "n": 354,
+      "hits_at_10": 97.18,
+      "mrr_at_10": 0.7809
+     }
+    }
+   },
+   "1200_body": {
+    "budget": 1200,
+    "variant": "body",
+    "dim": 1024,
+    "queries": 1521,
+    "hits_at_10": 96.98,
+    "mrr_at_10": 0.7094,
+    "by_type": {
+     "comparison_query": {
+      "n": 470,
+      "hits_at_10": 94.47,
+      "mrr_at_10": 0.7186
+     },
+     "inference_query": {
+      "n": 697,
+      "hits_at_10": 98.13,
+      "mrr_at_10": 0.6917
+     },
+     "temporal_query": {
+      "n": 354,
+      "hits_at_10": 98.02,
+      "mrr_at_10": 0.732
+     }
+    }
+   },
+   "1200_title": {
+    "budget": 1200,
+    "variant": "title",
+    "dim": 1024,
+    "queries": 1521,
+    "hits_at_10": 97.04,
+    "mrr_at_10": 0.7206,
+    "by_type": {
+     "comparison_query": {
+      "n": 470,
+      "hits_at_10": 95.74,
+      "mrr_at_10": 0.712
+     },
+     "inference_query": {
+      "n": 697,
+      "hits_at_10": 97.56,
+      "mrr_at_10": 0.6995
+     },
+     "temporal_query": {
+      "n": 354,
+      "hits_at_10": 97.74,
+      "mrr_at_10": 0.7734
+     }
+    }
+   },
+   "1200_title+source": {
+    "budget": 1200,
+    "variant": "title+source",
+    "dim": 1024,
+    "queries": 1521,
+    "hits_at_10": 96.98,
+    "mrr_at_10": 0.7196,
+    "by_type": {
+     "comparison_query": {
+      "n": 470,
+      "hits_at_10": 95.32,
+      "mrr_at_10": 0.7239
+     },
+     "inference_query": {
+      "n": 697,
+      "hits_at_10": 97.27,
+      "mrr_at_10": 0.689
+     },
+     "temporal_query": {
+      "n": 354,
+      "hits_at_10": 98.59,
+      "mrr_at_10": 0.7744
+     }
+    }
+   }
+  },
+  "chunk_size_effect_body": {
+   "hits_600": 96.78,
+   "hits_1200": 96.98,
+   "delta_points": -0.2
+  },
+  "chunk_size_effect_title": {
+   "hits_600": 96.45,
+   "hits_1200": 97.04,
+   "delta_points": -0.59
+  },
+  "chunk_size_effect_title+source": {
+   "hits_600": 96.65,
+   "hits_1200": 96.98,
+   "delta_points": -0.33
+  },
+  "header_effect_title_at_600": -0.33,
+  "header_effect_title+source_at_600": -0.13,
+  "header_effect_title_at_1200": 0.06,
+  "header_effect_title+source_at_1200": 0.0,
+  "headline": {
+   "verdict": "Hits@10 is SATURATED on this subset and cannot discriminate. All six configurations land between 96.45% and 97.04% \u2014 a 0.59-point spread across two chunk sizes and three header variants. The metric is measuring the corpus, not the retriever.",
+   "cause": "253 articles produce 694-1,214 chunks. Retrieving 10 of them is 0.8-1.4% of the corpus, and the queries were written from those very articles. Any competent embedder clears it.",
+   "consequence_for_the_study": "The pre-registered headline \u2014 that chunk size moves the primary metric more than architecture does \u2014 CANNOT be tested with Hits@10 on this subset. Measured chunk-size effect on the dense arm is 0.20-0.59 points, against the 16.1 points the research projected for the hybrid arm across 150-1200. Either the projection does not transfer to dense retrieval, or the ceiling is hiding it. Both require a harder primary metric before Stage 1.",
+   "options_in_preference_order": [
+    "Harder metric: strict all-evidence-retrieved (every gold doc for a query in top-k), or Hits@1. MRR@10 already shows 4x the spread of Hits@10 (0.031 vs 0.0059).",
+    "Full 609-article corpus rather than the tech+business subset \u2014 2.4x the distractors, and it costs graph index hours proportionally.",
+    "Both."
+   ],
+   "title_prepend_does_not_help_dense": {
+    "measured_points_vs_body_only": {
+     "title_at_600": -0.33,
+     "title_at_1200": 0.06,
+     "title_source_at_600": -0.13,
+     "title_source_at_1200": 0.0
+    },
+    "note": "The research measured +1.0 for title and +3.5 for title+source on BM25. Neither transfers to dense retrieval: BM25 wins by matching the literal outlet string, and an embedding gets no comparable windfall. The outlet-name leakage is therefore an arm-asymmetric BM25 artifact specifically, which strengthens the case for reporting the stripped configuration as primary."
+   },
+   "by_question_type_600_title": {
+    "comparison": 94.04,
+    "inference": 97.7,
+    "temporal": 97.18,
+    "note": "comparison is the hardest stratum by 3 points even at the ceiling."
+   }
+  }
+ }
+}

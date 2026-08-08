@@ -1,0 +1,914 @@
+{
+ "n_requested": 30,
+ "n_comparable": 22,
+ "e0_preconditions": {
+  "calls": 189,
+  "non_stop": 9,
+  "thinking_seen": 0,
+  "all_stop": false,
+  "no_thinking": true
+ },
+ "wall_ratio_600_over_1200": {
+  "geometric_mean": 1.328,
+  "ci95": [
+   1.164,
+   1.498
+  ]
+ },
+ "token_ratio_600_over_1200": {
+  "geometric_mean": 1.353,
+  "ci95": [
+   1.189,
+   1.523
+  ]
+ },
+ "totals": {
+  "wall_s_1200": 3292.8,
+  "wall_s_600": 4278.4,
+  "gen_tokens_1200": 67168,
+  "gen_tokens_600": 88453,
+  "entities_1200": 821,
+  "entities_600": 1024,
+  "rels_1200": 937,
+  "rels_600": 1279,
+  "rels_lost_at_600": 413,
+  "boundary_severed": 17,
+  "within_chunk_unemitted": 279,
+  "unclassified": 117,
+  "rels_gained_at_600": 755
+ },
+ "rows": [
+  {
+   "doc_id": "https://techcrunch.com/2023/12/21/a-provocative-role-for-technologists-in-product-innovation/",
+   "comparable": true,
+   "chunks": {
+    "at_1200": 2,
+    "at_600": 3
+   },
+   "wall_s": {
+    "at_1200": 261.8,
+    "at_600": 171.3
+   },
+   "gen_tokens": {
+    "at_1200": 5676,
+    "at_600": 3909
+   },
+   "entities": {
+    "at_1200": 70,
+    "at_600": 56
+   },
+   "relationships": {
+    "at_1200": 62,
+    "at_600": 62,
+    "lost_at_600": 32,
+    "boundary_severed": 0,
+    "within_chunk_unemitted": 30,
+    "unclassified": 2,
+    "gained_at_600": 32
+   }
+  },
+  {
+   "doc_id": "https://techcrunch.com/2023/10/13/israels-startup-ecosystem-down-but-not-out/",
+   "comparable": false,
+   "chunks": {
+    "at_1200": 2,
+    "at_600": 4
+   },
+   "wall_s": {
+    "at_1200": 511.7,
+    "at_600": 259.9
+   },
+   "gen_tokens": {
+    "at_1200": 10769,
+    "at_600": 5657
+   },
+   "entities": {
+    "at_1200": 46,
+    "at_600": 84
+   },
+   "relationships": {
+    "at_1200": 40,
+    "at_600": 84,
+    "lost_at_600": 34,
+    "boundary_severed": 0,
+    "within_chunk_unemitted": 29,
+    "unclassified": 5,
+    "gained_at_600": 78
+   }
+  },
+  {
+   "doc_id": "https://www.theverge.com/2023/12/13/23993937/dubai-un-climate-change-conference-cop28-united-nations-fossil-fuels",
+   "comparable": true,
+   "chunks": {
+    "at_1200": 2,
+    "at_600": 3
+   },
+   "wall_s": {
+    "at_1200": 109.9,
+    "at_600": 166.9
+   },
+   "gen_tokens": {
+    "at_1200": 2346,
+    "at_600": 3589
+   },
+   "entities": {
+    "at_1200": 34,
+    "at_600": 52
+   },
+   "relationships": {
+    "at_1200": 32,
+    "at_600": 46,
+    "lost_at_600": 25,
+    "boundary_severed": 4,
+    "within_chunk_unemitted": 19,
+    "unclassified": 2,
+    "gained_at_600": 39
+   }
+  },
+  {
+   "doc_id": "https://www.cnbc.com/2023/09/28/nike-nke-earnings-q1-2024.html",
+   "comparable": true,
+   "chunks": {
+    "at_1200": 2,
+    "at_600": 4
+   },
+   "wall_s": {
+    "at_1200": 95.2,
+    "at_600": 200.6
+   },
+   "gen_tokens": {
+    "at_1200": 2030,
+    "at_600": 4494
+   },
+   "entities": {
+    "at_1200": 27,
+    "at_600": 62
+   },
+   "relationships": {
+    "at_1200": 26,
+    "at_600": 63,
+    "lost_at_600": 2,
+    "boundary_severed": 0,
+    "within_chunk_unemitted": 2,
+    "unclassified": 0,
+    "gained_at_600": 39
+   }
+  },
+  {
+   "doc_id": "https://techcrunch.com/2023/12/04/softbank-corp-cubic-telecom/",
+   "comparable": false,
+   "chunks": {
+    "at_1200": 2,
+    "at_600": 3
+   },
+   "wall_s": {
+    "at_1200": 389.9,
+    "at_600": 440.3
+   },
+   "gen_tokens": {
+    "at_1200": 8407,
+    "at_600": 9709
+   },
+   "entities": {
+    "at_1200": 6,
+    "at_600": 24
+   },
+   "relationships": {
+    "at_1200": 6,
+    "at_600": 24,
+    "lost_at_600": 0,
+    "boundary_severed": 0,
+    "within_chunk_unemitted": 0,
+    "unclassified": 0,
+    "gained_at_600": 18
+   }
+  },
+  {
+   "doc_id": "https://techcrunch.com/2023/11/07/ubers-q3-numbers-profitability-gains/",
+   "comparable": true,
+   "chunks": {
+    "at_1200": 2,
+    "at_600": 3
+   },
+   "wall_s": {
+    "at_1200": 210.8,
+    "at_600": 213.4
+   },
+   "gen_tokens": {
+    "at_1200": 4634,
+    "at_600": 4800
+   },
+   "entities": {
+    "at_1200": 48,
+    "at_600": 57
+   },
+   "relationships": {
+    "at_1200": 47,
+    "at_600": 73,
+    "lost_at_600": 16,
+    "boundary_severed": 0,
+    "within_chunk_unemitted": 9,
+    "unclassified": 7,
+    "gained_at_600": 42
+   }
+  },
+  {
+   "doc_id": "https://www.theverge.com/23990974/social-media-2023-fediverse-mastodon-threads-activitypub",
+   "comparable": true,
+   "chunks": {
+    "at_1200": 3,
+    "at_600": 5
+   },
+   "wall_s": {
+    "at_1200": 143.7,
+    "at_600": 209.6
+   },
+   "gen_tokens": {
+    "at_1200": 3141,
+    "at_600": 4580
+   },
+   "entities": {
+    "at_1200": 40,
+    "at_600": 53
+   },
+   "relationships": {
+    "at_1200": 43,
+    "at_600": 64,
+    "lost_at_600": 13,
+    "boundary_severed": 0,
+    "within_chunk_unemitted": 13,
+    "unclassified": 0,
+    "gained_at_600": 34
+   }
+  },
+  {
+   "doc_id": "https://iotbusinessnews.com/2023/11/18/77657-digital-twin-market-analyzing-growth-and-4-emerging-trends/",
+   "comparable": false,
+   "chunks": {
+    "at_1200": 3,
+    "at_600": 5
+   },
+   "wall_s": {
+    "at_1200": 546.6,
+    "at_600": 287.9
+   },
+   "gen_tokens": {
+    "at_1200": 11620,
+    "at_600": 6442
+   },
+   "entities": {
+    "at_1200": 49,
+    "at_600": 80
+   },
+   "relationships": {
+    "at_1200": 54,
+    "at_600": 90,
+    "lost_at_600": 23,
+    "boundary_severed": 0,
+    "within_chunk_unemitted": 22,
+    "unclassified": 1,
+    "gained_at_600": 59
+   }
+  },
+  {
+   "doc_id": "https://techcrunch.com/2023/10/25/amazon-brings-conversational-ai-to-kids-with-launch-of-explore-with-alexa/",
+   "comparable": true,
+   "chunks": {
+    "at_1200": 2,
+    "at_600": 3
+   },
+   "wall_s": {
+    "at_1200": 191.8,
+    "at_600": 122.4
+   },
+   "gen_tokens": {
+    "at_1200": 4216,
+    "at_600": 2718
+   },
+   "entities": {
+    "at_1200": 45,
+    "at_600": 26
+   },
+   "relationships": {
+    "at_1200": 72,
+    "at_600": 38,
+    "lost_at_600": 53,
+    "boundary_severed": 0,
+    "within_chunk_unemitted": 31,
+    "unclassified": 22,
+    "gained_at_600": 19
+   }
+  },
+  {
+   "doc_id": "https://techcrunch.com/2023/10/10/eu-dsa-warning-elon-musk-x/",
+   "comparable": true,
+   "chunks": {
+    "at_1200": 3,
+    "at_600": 5
+   },
+   "wall_s": {
+    "at_1200": 101.0,
+    "at_600": 172.0
+   },
+   "gen_tokens": {
+    "at_1200": 2185,
+    "at_600": 3746
+   },
+   "entities": {
+    "at_1200": 22,
+    "at_600": 30
+   },
+   "relationships": {
+    "at_1200": 34,
+    "at_600": 52,
+    "lost_at_600": 9,
+    "boundary_severed": 0,
+    "within_chunk_unemitted": 9,
+    "unclassified": 0,
+    "gained_at_600": 27
+   }
+  },
+  {
+   "doc_id": "https://techcrunch.com/2023/10/30/fortnite-is-the-latest-game-to-entice-players-with-a-portal-to-the-past/",
+   "comparable": true,
+   "chunks": {
+    "at_1200": 2,
+    "at_600": 4
+   },
+   "wall_s": {
+    "at_1200": 171.2,
+    "at_600": 204.7
+   },
+   "gen_tokens": {
+    "at_1200": 3555,
+    "at_600": 4433
+   },
+   "entities": {
+    "at_1200": 48,
+    "at_600": 53
+   },
+   "relationships": {
+    "at_1200": 58,
+    "at_600": 78,
+    "lost_at_600": 26,
+    "boundary_severed": 0,
+    "within_chunk_unemitted": 12,
+    "unclassified": 14,
+    "gained_at_600": 46
+   }
+  },
+  {
+   "doc_id": "https://techcrunch.com/2023/10/24/pebble-the-twitter-alternative-previously-known-as-t2-is-closing-down/",
+   "comparable": true,
+   "chunks": {
+    "at_1200": 2,
+    "at_600": 3
+   },
+   "wall_s": {
+    "at_1200": 93.1,
+    "at_600": 147.5
+   },
+   "gen_tokens": {
+    "at_1200": 1955,
+    "at_600": 3323
+   },
+   "entities": {
+    "at_1200": 25,
+    "at_600": 39
+   },
+   "relationships": {
+    "at_1200": 27,
+    "at_600": 45,
+    "lost_at_600": 7,
+    "boundary_severed": 0,
+    "within_chunk_unemitted": 7,
+    "unclassified": 0,
+    "gained_at_600": 25
+   }
+  },
+  {
+   "doc_id": "https://techcrunch.com/2023/12/07/simply-homes-nabs-22m-leverages-ai-to-tackle-affordable-housing-crisis/",
+   "comparable": false,
+   "chunks": {
+    "at_1200": 2,
+    "at_600": 3
+   },
+   "wall_s": {
+    "at_1200": 429.3,
+    "at_600": 219.2
+   },
+   "gen_tokens": {
+    "at_1200": 9433,
+    "at_600": 4911
+   },
+   "entities": {
+    "at_1200": 20,
+    "at_600": 64
+   },
+   "relationships": {
+    "at_1200": 22,
+    "at_600": 63,
+    "lost_at_600": 8,
+    "boundary_severed": 0,
+    "within_chunk_unemitted": 8,
+    "unclassified": 0,
+    "gained_at_600": 49
+   }
+  },
+  {
+   "doc_id": "https://techcrunch.com/2023/11/30/one-year-later-chatgpt-is-still-alive-and-kicking/",
+   "comparable": true,
+   "chunks": {
+    "at_1200": 2,
+    "at_600": 4
+   },
+   "wall_s": {
+    "at_1200": 111.6,
+    "at_600": 178.4
+   },
+   "gen_tokens": {
+    "at_1200": 2425,
+    "at_600": 4002
+   },
+   "entities": {
+    "at_1200": 39,
+    "at_600": 59
+   },
+   "relationships": {
+    "at_1200": 32,
+    "at_600": 55,
+    "lost_at_600": 7,
+    "boundary_severed": 0,
+    "within_chunk_unemitted": 7,
+    "unclassified": 0,
+    "gained_at_600": 30
+   }
+  },
+  {
+   "doc_id": "https://www.smh.com.au/business/markets/asx-set-to-open-lower-as-wall-street-closes-september-with-more-losses-20231002-p5e8zn.html?ref=rss&utm_medium=rss&utm_source=rss_business",
+   "comparable": true,
+   "chunks": {
+    "at_1200": 2,
+    "at_600": 3
+   },
+   "wall_s": {
+    "at_1200": 100.3,
+    "at_600": 132.7
+   },
+   "gen_tokens": {
+    "at_1200": 2228,
+    "at_600": 3002
+   },
+   "entities": {
+    "at_1200": 39,
+    "at_600": 47
+   },
+   "relationships": {
+    "at_1200": 31,
+    "at_600": 44,
+    "lost_at_600": 13,
+    "boundary_severed": 0,
+    "within_chunk_unemitted": 2,
+    "unclassified": 11,
+    "gained_at_600": 26
+   }
+  },
+  {
+   "doc_id": "https://www.theverge.com/2023/10/31/23940814/sam-bankman-fried-ftx-alameda-customer-funds-fraud-trial",
+   "comparable": true,
+   "chunks": {
+    "at_1200": 2,
+    "at_600": 4
+   },
+   "wall_s": {
+    "at_1200": 88.3,
+    "at_600": 122.5
+   },
+   "gen_tokens": {
+    "at_1200": 1956,
+    "at_600": 2823
+   },
+   "entities": {
+    "at_1200": 19,
+    "at_600": 29
+   },
+   "relationships": {
+    "at_1200": 33,
+    "at_600": 36,
+    "lost_at_600": 15,
+    "boundary_severed": 0,
+    "within_chunk_unemitted": 13,
+    "unclassified": 2,
+    "gained_at_600": 18
+   }
+  },
+  {
+   "doc_id": "https://www.theverge.com/2023/10/27/23935683/sam-bankman-fried-ftx-fraud-direct-testimony-jury",
+   "comparable": true,
+   "chunks": {
+    "at_1200": 3,
+    "at_600": 5
+   },
+   "wall_s": {
+    "at_1200": 123.3,
+    "at_600": 158.9
+   },
+   "gen_tokens": {
+    "at_1200": 2762,
+    "at_600": 3642
+   },
+   "entities": {
+    "at_1200": 28,
+    "at_600": 33
+   },
+   "relationships": {
+    "at_1200": 30,
+    "at_600": 45,
+    "lost_at_600": 5,
+    "boundary_severed": 1,
+    "within_chunk_unemitted": 2,
+    "unclassified": 2,
+    "gained_at_600": 20
+   }
+  },
+  {
+   "doc_id": "https://www.theverge.com/2023/9/26/23891037/apple-eddy-cue-testimony-us-google",
+   "comparable": true,
+   "chunks": {
+    "at_1200": 2,
+    "at_600": 3
+   },
+   "wall_s": {
+    "at_1200": 83.3,
+    "at_600": 113.7
+   },
+   "gen_tokens": {
+    "at_1200": 1842,
+    "at_600": 2621
+   },
+   "entities": {
+    "at_1200": 18,
+    "at_600": 23
+   },
+   "relationships": {
+    "at_1200": 33,
+    "at_600": 38,
+    "lost_at_600": 13,
+    "boundary_severed": 0,
+    "within_chunk_unemitted": 8,
+    "unclassified": 5,
+    "gained_at_600": 18
+   }
+  },
+  {
+   "doc_id": "https://www.theverge.com/2023/10/6/23906899/ftx-alameda-sam-bankman-fried-trial-gary-wang-testimony",
+   "comparable": true,
+   "chunks": {
+    "at_1200": 3,
+    "at_600": 5
+   },
+   "wall_s": {
+    "at_1200": 122.0,
+    "at_600": 261.9
+   },
+   "gen_tokens": {
+    "at_1200": 2713,
+    "at_600": 4465
+   },
+   "entities": {
+    "at_1200": 28,
+    "at_600": 45
+   },
+   "relationships": {
+    "at_1200": 47,
+    "at_600": 67,
+    "lost_at_600": 22,
+    "boundary_severed": 0,
+    "within_chunk_unemitted": 12,
+    "unclassified": 10,
+    "gained_at_600": 42
+   }
+  },
+  {
+   "doc_id": "https://www.theverge.com/21570383/price-matching-policy-apple-google-microsoft",
+   "comparable": true,
+   "chunks": {
+    "at_1200": 3,
+    "at_600": 6
+   },
+   "wall_s": {
+    "at_1200": 392.6,
+    "at_600": 571.8
+   },
+   "gen_tokens": {
+    "at_1200": 4337,
+    "at_600": 7704
+   },
+   "entities": {
+    "at_1200": 46,
+    "at_600": 66
+   },
+   "relationships": {
+    "at_1200": 65,
+    "at_600": 127,
+    "lost_at_600": 47,
+    "boundary_severed": 0,
+    "within_chunk_unemitted": 20,
+    "unclassified": 27,
+    "gained_at_600": 109
+   }
+  },
+  {
+   "doc_id": "https://techcrunch.com/2023/11/03/if-your-startup-doesnt-seem-impossible-at-first-its-not-hard-enough/",
+   "comparable": true,
+   "chunks": {
+    "at_1200": 2,
+    "at_600": 4
+   },
+   "wall_s": {
+    "at_1200": 154.7,
+    "at_600": 170.1
+   },
+   "gen_tokens": {
+    "at_1200": 3320,
+    "at_600": 3657
+   },
+   "entities": {
+    "at_1200": 60,
+    "at_600": 62
+   },
+   "relationships": {
+    "at_1200": 42,
+    "at_600": 47,
+    "lost_at_600": 14,
+    "boundary_severed": 0,
+    "within_chunk_unemitted": 13,
+    "unclassified": 1,
+    "gained_at_600": 19
+   }
+  },
+  {
+   "doc_id": "https://techcrunch.com/2023/11/21/binance-to-pay-4-3b-in-fines-and-ceo-cz-to-step-down-plead-guilty-to-anti-money-laundering-charges/",
+   "comparable": false,
+   "chunks": {
+    "at_1200": 2,
+    "at_600": 3
+   },
+   "wall_s": {
+    "at_1200": 98.8,
+    "at_600": 470.1
+   },
+   "gen_tokens": {
+    "at_1200": 2159,
+    "at_600": 9829
+   },
+   "entities": {
+    "at_1200": 25,
+    "at_600": 23
+   },
+   "relationships": {
+    "at_1200": 31,
+    "at_600": 25,
+    "lost_at_600": 18,
+    "boundary_severed": 0,
+    "within_chunk_unemitted": 9,
+    "unclassified": 9,
+    "gained_at_600": 12
+   }
+  },
+  {
+   "doc_id": "https://www.theverge.com/21539047/best-amazon-kindle-deals",
+   "comparable": false,
+   "chunks": {
+    "at_1200": 2,
+    "at_600": 4
+   },
+   "wall_s": {
+    "at_1200": 409.7,
+    "at_600": 229.4
+   },
+   "gen_tokens": {
+    "at_1200": 8893,
+    "at_600": 5179
+   },
+   "entities": {
+    "at_1200": 11,
+    "at_600": 65
+   },
+   "relationships": {
+    "at_1200": 12,
+    "at_600": 78,
+    "lost_at_600": 3,
+    "boundary_severed": 1,
+    "within_chunk_unemitted": 2,
+    "unclassified": 0,
+    "gained_at_600": 69
+   }
+  },
+  {
+   "doc_id": "https://fortune.com/2023/12/06/sen-robert-menendez-bribery-charges-bank-ceos-cfpb-settlements/",
+   "comparable": true,
+   "chunks": {
+    "at_1200": 2,
+    "at_600": 3
+   },
+   "wall_s": {
+    "at_1200": 76.6,
+    "at_600": 151.4
+   },
+   "gen_tokens": {
+    "at_1200": 1670,
+    "at_600": 3274
+   },
+   "entities": {
+    "at_1200": 24,
+    "at_600": 36
+   },
+   "relationships": {
+    "at_1200": 22,
+    "at_600": 39,
+    "lost_at_600": 3,
+    "boundary_severed": 0,
+    "within_chunk_unemitted": 1,
+    "unclassified": 2,
+    "gained_at_600": 20
+   }
+  },
+  {
+   "doc_id": "https://techcrunch.com/2023/12/01/8-authors-and-their-8-gift-book-picks-for-this-holiday-season/",
+   "comparable": true,
+   "chunks": {
+    "at_1200": 3,
+    "at_600": 5
+   },
+   "wall_s": {
+    "at_1200": 173.0,
+    "at_600": 168.5
+   },
+   "gen_tokens": {
+    "at_1200": 3761,
+    "at_600": 3657
+   },
+   "entities": {
+    "at_1200": 48,
+    "at_600": 52
+   },
+   "relationships": {
+    "at_1200": 45,
+    "at_600": 41,
+    "lost_at_600": 18,
+    "boundary_severed": 6,
+    "within_chunk_unemitted": 12,
+    "unclassified": 0,
+    "gained_at_600": 14
+   }
+  },
+  {
+   "doc_id": "https://fortune.com/2023/11/17/jeffrey-epstein-us-virgin-islands-jpmorgan-attorney-general-investigation-fired/",
+   "comparable": true,
+   "chunks": {
+    "at_1200": 3,
+    "at_600": 5
+   },
+   "wall_s": {
+    "at_1200": 131.1,
+    "at_600": 209.6
+   },
+   "gen_tokens": {
+    "at_1200": 2806,
+    "at_600": 4604
+   },
+   "entities": {
+    "at_1200": 32,
+    "at_600": 43
+   },
+   "relationships": {
+    "at_1200": 43,
+    "at_600": 70,
+    "lost_at_600": 31,
+    "boundary_severed": 1,
+    "within_chunk_unemitted": 28,
+    "unclassified": 2,
+    "gained_at_600": 58
+   }
+  },
+  {
+   "doc_id": "https://fortune.com/2023/10/22/will-egypt-take-palestinian-refugees-from-gaza-israel-hamas-war/",
+   "comparable": true,
+   "chunks": {
+    "at_1200": 2,
+    "at_600": 3
+   },
+   "wall_s": {
+    "at_1200": 216.7,
+    "at_600": 250.2
+   },
+   "gen_tokens": {
+    "at_1200": 4564,
+    "at_600": 5507
+   },
+   "entities": {
+    "at_1200": 44,
+    "at_600": 57
+   },
+   "relationships": {
+    "at_1200": 63,
+    "at_600": 90,
+    "lost_at_600": 23,
+    "boundary_severed": 0,
+    "within_chunk_unemitted": 18,
+    "unclassified": 5,
+    "gained_at_600": 50
+   }
+  },
+  {
+   "doc_id": "https://www.engadget.com/what-we-expect-at-apples-scary-fast-event-m3-powered-macbook-pros-and-new-imacs-191549274.html?src=rss",
+   "comparable": true,
+   "chunks": {
+    "at_1200": 2,
+    "at_600": 3
+   },
+   "wall_s": {
+    "at_1200": 140.8,
+    "at_600": 180.3
+   },
+   "gen_tokens": {
+    "at_1200": 3046,
+    "at_600": 3903
+   },
+   "entities": {
+    "at_1200": 37,
+    "at_600": 44
+   },
+   "relationships": {
+    "at_1200": 50,
+    "at_600": 59,
+    "lost_at_600": 19,
+    "boundary_severed": 5,
+    "within_chunk_unemitted": 11,
+    "unclassified": 3,
+    "gained_at_600": 28
+   }
+  },
+  {
+   "doc_id": "https://www.engadget.com/the-best-apple-cyber-monday-deals-of-2023-save-on-airpods-ipads-apple-watches-and-more-100030003.html?src=rss",
+   "comparable": false,
+   "chunks": {
+    "at_1200": 3,
+    "at_600": 6
+   },
+   "wall_s": {
+    "at_1200": 228.4,
+    "at_600": 643.4
+   },
+   "gen_tokens": {
+    "at_1200": 4736,
+    "at_600": 13863
+   },
+   "entities": {
+    "at_1200": 46,
+    "at_600": 54
+   },
+   "relationships": {
+    "at_1200": 76,
+    "at_600": 83,
+    "lost_at_600": 29,
+    "boundary_severed": 0,
+    "within_chunk_unemitted": 25,
+    "unclassified": 4,
+    "gained_at_600": 36
+   }
+  },
+  {
+   "doc_id": "https://techcrunch.com/2023/11/18/a-timeline-of-sam-altmans-firing-from-openai-and-the-fallout/",
+   "comparable": false,
+   "chunks": {
+    "at_1200": 3,
+    "at_600": 5
+   },
+   "wall_s": {
+    "at_1200": 443.2,
+    "at_600": 227.4
+   },
+   "gen_tokens": {
+    "at_1200": 9683,
+    "at_600": 4953
+   },
+   "entities": {
+    "at_1200": 17,
+    "at_600": 39
+   },
+   "relationships": {
+    "at_1200": 23,
+    "at_600": 71,
+    "lost_at_600": 2,
+    "boundary_severed": 0,
+    "within_chunk_unemitted": 1,
+    "unclassified": 1,
+    "gained_at_600": 50
+   }
+  }
+ ],
+ "severed_share_of_loss": 0.041,
+ "unemitted_share_of_loss": 0.676
+}
