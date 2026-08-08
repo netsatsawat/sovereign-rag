@@ -1,0 +1,29 @@
+{
+ "chunker_version": "sentence-pack-v1",
+ "budget_tokens": 1200,
+ "overlap_tokens": 0,
+ "tokenizer_sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+ "canary": {
+  "text": "The U.S. Federal Reserve said on Sept. 12 that Inc. filings rose 3.5%.",
+  "n_tokens": 23
+ },
+ "corpus_sha256": "8729d87c81dfe9d1",
+ "categories": [
+  "technology",
+  "business"
+ ],
+ "articles": 253,
+ "chunks": 694,
+ "chunks_sha256": "5978e31f19c653b7",
+ "body_tokens_total": 586518,
+ "chars_per_token": 4.612,
+ "tokens": {
+  "mean": 859.2,
+  "median": 1037.5,
+  "min": 26,
+  "max": 1195,
+  "fill_rate": 0.716
+ },
+ "hard_splits": 0,
+ "over_budget": 0
+}

@@ -1,0 +1,30 @@
+budget 600: 1214 chunks, 1521 scorable queries
+    queries@600: 640/1521  17s
+    queries@600: 1280/1521  31s
+    body@600: 640/1214  65s
+    600 body          Hits@10  96.78%  MRR@10 0.7164
+    title@600: 640/1214  69s
+    600 title         Hits@10  96.45%  MRR@10 0.7312
+    title+source@600: 640/1214  67s
+    600 title+source  Hits@10  96.65%  MRR@10 0.7404
+budget 1200: 694 chunks, 1521 scorable queries
+    queries@1200: 640/1521  15s
+    queries@1200: 1280/1521  30s
+    body@1200: 640/694  125s
+   1200 body          Hits@10  96.98%  MRR@10 0.7094
+    title@1200: 640/694  125s
+   1200 title         Hits@10  97.04%  MRR@10 0.7206
+    title+source@1200: 640/694  125s
+   1200 title+source  Hits@10  96.98%  MRR@10 0.7196
+
+  chunk-size effect (600 minus 1200), Hits@10 points:
+    body          -0.20
+    title         -0.59
+    title+source  -0.33
+  header effect vs body-only, Hits@10 points:
+    title+source_at_1200   +0.00
+    title+source_at_600    -0.13
+    title_at_1200          +0.06
+    title_at_600           -0.33
+
+wrote /Users/net/Documents/001-personal-projects/sovereign-rag/reports/e4_embed.json

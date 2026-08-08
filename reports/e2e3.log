@@ -1,0 +1,40 @@
+   1/30 ok  1200:2ch  261.8s/ 5676tok  600:3ch  171.3s/ 3909tok  rels  62-> 62 lost  32 (sev  0 / unemit 30) [7m]
+   2/30 BAD 1200:2ch  511.7s/10769tok  600:4ch  259.9s/ 5657tok  rels  40-> 84 lost  34 (sev  0 / unemit 29) [20m]
+   3/30 ok  1200:2ch  109.9s/ 2346tok  600:3ch  166.9s/ 3589tok  rels  32-> 46 lost  25 (sev  4 / unemit 19) [25m]
+   4/30 ok  1200:2ch   95.2s/ 2030tok  600:4ch  200.6s/ 4494tok  rels  26-> 63 lost   2 (sev  0 / unemit  2) [30m]
+   5/30 BAD 1200:2ch  389.9s/ 8407tok  600:3ch  440.3s/ 9709tok  rels   6-> 24 lost   0 (sev  0 / unemit  0) [43m]
+   6/30 ok  1200:2ch  210.8s/ 4634tok  600:3ch  213.4s/ 4800tok  rels  47-> 73 lost  16 (sev  0 / unemit  9) [51m]
+   7/30 ok  1200:3ch  143.7s/ 3141tok  600:5ch  209.6s/ 4580tok  rels  43-> 64 lost  13 (sev  0 / unemit 13) [56m]
+   8/30 BAD 1200:3ch  546.6s/11620tok  600:5ch  287.9s/ 6442tok  rels  54-> 90 lost  23 (sev  0 / unemit 22) [70m]
+   9/30 ok  1200:2ch  191.8s/ 4216tok  600:3ch  122.4s/ 2718tok  rels  72-> 38 lost  53 (sev  0 / unemit 31) [76m]
+  10/30 ok  1200:3ch  101.0s/ 2185tok  600:5ch  172.0s/ 3746tok  rels  34-> 52 lost   9 (sev  0 / unemit  9) [80m]
+  11/30 ok  1200:2ch  171.2s/ 3555tok  600:4ch  204.7s/ 4433tok  rels  58-> 78 lost  26 (sev  0 / unemit 12) [86m]
+  12/30 ok  1200:2ch   93.1s/ 1955tok  600:3ch  147.5s/ 3323tok  rels  27-> 45 lost   7 (sev  0 / unemit  7) [90m]
+  13/30 BAD 1200:2ch  429.3s/ 9433tok  600:3ch  219.2s/ 4911tok  rels  22-> 63 lost   8 (sev  0 / unemit  8) [101m]
+  14/30 ok  1200:2ch  111.6s/ 2425tok  600:4ch  178.4s/ 4002tok  rels  32-> 55 lost   7 (sev  0 / unemit  7) [106m]
+  15/30 ok  1200:2ch  100.3s/ 2228tok  600:3ch  132.7s/ 3002tok  rels  31-> 44 lost  13 (sev  0 / unemit  2) [110m]
+  16/30 ok  1200:2ch   88.3s/ 1956tok  600:4ch  122.5s/ 2823tok  rels  33-> 36 lost  15 (sev  0 / unemit 13) [113m]
+  17/30 ok  1200:3ch  123.3s/ 2762tok  600:5ch  158.9s/ 3642tok  rels  30-> 45 lost   5 (sev  1 / unemit  2) [118m]
+  18/30 ok  1200:2ch   83.3s/ 1842tok  600:3ch  113.7s/ 2621tok  rels  33-> 38 lost  13 (sev  0 / unemit  8) [121m]
+  19/30 ok  1200:3ch  122.0s/ 2713tok  600:5ch  261.9s/ 4465tok  rels  47-> 67 lost  22 (sev  0 / unemit 12) [128m]
+  20/30 ok  1200:3ch  392.6s/ 4337tok  600:6ch  571.8s/ 7704tok  rels  65->127 lost  47 (sev  0 / unemit 20) [144m]
+  21/30 ok  1200:2ch  154.7s/ 3320tok  600:4ch  170.1s/ 3657tok  rels  42-> 47 lost  14 (sev  0 / unemit 13) [149m]
+  22/30 BAD 1200:2ch   98.8s/ 2159tok  600:3ch  470.1s/ 9829tok  rels  31-> 25 lost  18 (sev  0 / unemit  9) [159m]
+  23/30 BAD 1200:2ch  409.7s/ 8893tok  600:4ch  229.4s/ 5179tok  rels  12-> 78 lost   3 (sev  1 / unemit  2) [169m]
+  24/30 ok  1200:2ch   76.6s/ 1670tok  600:3ch  151.4s/ 3274tok  rels  22-> 39 lost   3 (sev  0 / unemit  1) [173m]
+  25/30 ok  1200:3ch  173.0s/ 3761tok  600:5ch  168.5s/ 3657tok  rels  45-> 41 lost  18 (sev  6 / unemit 12) [179m]
+  26/30 ok  1200:3ch  131.1s/ 2806tok  600:5ch  209.6s/ 4604tok  rels  43-> 70 lost  31 (sev  1 / unemit 28) [185m]
+  27/30 ok  1200:2ch  216.7s/ 4564tok  600:3ch  250.2s/ 5507tok  rels  63-> 90 lost  23 (sev  0 / unemit 18) [192m]
+  28/30 ok  1200:2ch  140.8s/ 3046tok  600:3ch  180.3s/ 3903tok  rels  50-> 59 lost  19 (sev  5 / unemit 11) [198m]
+  29/30 BAD 1200:3ch  228.4s/ 4736tok  600:6ch  643.4s/13863tok  rels  76-> 83 lost  29 (sev  0 / unemit 25) [212m]
+  30/30 BAD 1200:3ch  443.2s/ 9683tok  600:5ch  227.4s/ 4953tok  rels  23-> 71 lost   2 (sev  0 / unemit  1) [223m]
+
+  E0: 189 calls, non-stop 9, thinking seen 0  -> FAIL
+  wall  600/1200 ratio 1.328 CI [1.164, 1.498]
+  token 600/1200 ratio 1.353 CI [1.189, 1.523]
+  rels  1200 937 -> 600 1279  (lost 413, gained 755)
+    boundary-severed      17  (4% of loss)
+    within-chunk unemitted 279  (68% of loss)
+    unclassified           117
+
+wrote /Users/net/Documents/001-personal-projects/sovereign-rag/reports/e2e3.json
