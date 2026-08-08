@@ -25,5 +25,6 @@
   "fill_rate": 0.716
  },
  "hard_splits": 0,
+ "dropped_articles_title_over_budget": 0,
  "over_budget": 0
 }

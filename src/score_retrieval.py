@@ -1,34 +1,36 @@
 """Stage 1, retrieval layer — three retrievers, two chunkings, hard metrics.
 
-This is the first run against the actual study grid, and it exists because E4
-showed Hits@10 saturated (0.59-point spread across six configurations). The
-fix is metrics that ask a harder question:
+v2, after adversarial verification of v1 found four defects in this file:
 
-  hits@10      any gold document in the top-10 chunks       (the saturated one,
-               kept for continuity with E4)
-  hits@1       the single top chunk belongs to a gold doc
-  strict@10    EVERY gold document for the query appears among the top-10
-               chunks' documents. Multi-hop queries carry 2-4 gold docs, so
-               this is the metric that actually matches the benchmark's claim
-  mrr@10       rank of the first gold document
+  RRF depth asymmetry   v1 fused BM25 to depth 50 against dense capped at 10,
+                        so ranks 11-50 were BM25-only and every hybrid cell was
+                        a BM25-tilted truncated fusion. Both lists now fuse at
+                        FUSE_DEPTH=50.
+  orphan control block  the fixed-token control was computed ad hoc with no
+                        committed producer, no CI and no reportable flag. It is
+                        now a first-class config (k=5 at BOTH budgets, so the
+                        slot-count effect and the chunk-size effect separate).
+  unrecomputable CIs    query embeddings were re-embedded live on every run and
+                        never saved. They are now written to data/emb_queries.*
+                        once and loaded thereafter; per-query outcome vectors
+                        are committed in the results JSON, so every CI can be
+                        recomputed offline.
+  stats-plan deviation  the PRD registers B=10,000 and Holm-Bonferroni across a
+                        pre-registered family; v1 shipped B=3,000 and no
+                        multiplicity control. Both now follow the plan, and
+                        `reportable` means Holm-adjusted p < 0.05 — CI bounds
+                        are displayed but do not decide the flag.
 
-Retrievers, all over the identical committed chunk text (fairness contract):
-
-  bm25         in-repo implementation, postings-verified against brute force
-  dense        qwen3-embedding vectors, cosine, precomputed by embed_index.py
-  hybrid       reciprocal-rank fusion of the two, k_rrf=60 (the standard
-               constant from the RRF paper, not tuned here)
-
-Reportability: for each stratum and metric, the bm25-vs-dense and hybrid-vs-
-best-single deltas carry a paired-bootstrap 95% CI over queries. A delta whose
-CI includes zero is flagged reportable=false, and the renderer greys it — the
-noise floor lives here, never in JavaScript (FR-U3).
+Metrics per (budget, k, arm): hits@k (any gold doc), hits@1, strict@k (EVERY
+gold doc present — multi-hop queries carry 2-4), mrr@k over deduped docs.
+Dense/hybrid query cost includes query embedding time, reported separately.
 
     python src/score_retrieval.py
 """
 
 from __future__ import annotations
 
+import hashlib
 import json
 import random
 import statistics
@@ -43,8 +45,11 @@ from bm25 import BM25
 
 ROOT = Path(__file__).parent.parent
 OUT = ROOT / "reports" / "stage1_retrieval.json"
-K = 10
+FUSE_DEPTH = 50
 K_RRF = 60
+B_RESAMPLES = 10_000
+GRID = [(600, 10), (1200, 10), (1200, 5), (600, 5)]
+ARMS = ("bm25", "dense", "hybrid")
 
 
 def load_queries(docs: set[str]) -> list[dict]:
@@ -52,20 +57,36 @@ def load_queries(docs: set[str]) -> list[dict]:
     out = []
     for r in rows:
         gold = {e["url"] for e in (r.get("evidence_list") or []) if e.get("url") in docs}
-        # Only queries whose ENTIRE evidence set lives in the corpus are
-        # scorable under strict@10 -- a query with one gold doc outside the
-        # subset can never satisfy "all evidence retrieved" and would count
-        # as a miss against every retriever equally, diluting rather than
-        # discriminating.
         full = {e["url"] for e in (r.get("evidence_list") or []) if e.get("url")}
+        # strict@k is only meaningful when the whole evidence set is in-corpus
         if gold and gold == full:
             out.append({"query": r["query"], "type": r.get("question_type") or "unknown",
                         "gold": gold})
     return out
 
 
+def query_vectors(qs: list[dict]) -> tuple[np.ndarray, float]:
+    """Load the saved query matrix, or embed once and save it. The saved
+    matrix is what makes every dense CI recomputable offline."""
+    qhash = hashlib.sha256("\n".join(q["query"] for q in qs).encode()).hexdigest()[:16]
+    npy = ROOT / "data" / "emb_queries.npy"
+    meta_p = ROOT / "data" / "emb_queries.meta.json"
+    if npy.exists() and meta_p.exists():
+        meta = json.loads(meta_p.read_text())
+        if meta.get("queries_sha256") == qhash:
+            return np.load(npy), float(meta.get("embed_wall_s", 0.0))
+    from embed_index import embed_all
+    t0 = time.time()
+    Q = embed_all([q["query"] for q in qs], "queries")
+    wall = round(time.time() - t0, 1)
+    np.save(npy, Q)
+    meta_p.write_text(json.dumps({
+        "embedder": "qwen3-embedding:0.6b", "queries_sha256": qhash,
+        "rows": int(Q.shape[0]), "dim": int(Q.shape[1]), "embed_wall_s": wall}))
+    return Q, wall
+
+
 def doc_ranks(chunk_order: list[int], doc_of: list[str]) -> list[str]:
-    """Top-k chunk list -> ordered unique documents."""
     seen, docs = set(), []
     for i in chunk_order:
         d = doc_of[i]
@@ -77,146 +98,167 @@ def doc_ranks(chunk_order: list[int], doc_of: list[str]) -> list[str]:
 
 def metrics_for(top_chunks: list[int], doc_of: list[str], gold: set[str]) -> dict:
     docs = doc_ranks(top_chunks, doc_of)
-    hit1 = doc_of[top_chunks[0]] in gold if top_chunks else False
-    hit10 = any(d in gold for d in docs)
-    strict = gold.issubset(set(docs))
     rr = 0.0
     for rank, d in enumerate(docs, 1):
         if d in gold:
             rr = 1.0 / rank
             break
-    return {"hits1": hit1, "hits10": hit10, "strict10": strict, "rr": rr}
+    return {"hits1": bool(top_chunks) and doc_of[top_chunks[0]] in gold,
+            "hitsk": any(d in gold for d in docs),
+            "strict": gold.issubset(set(docs)),
+            "rr": rr}
 
 
-def boot_delta(a: list[float], b: list[float], n: int = 3000, seed: int = 0):
-    """Paired bootstrap CI on mean(a) - mean(b) over queries."""
+def boot(diffs: list[float], n: int = B_RESAMPLES, seed: int = 0):
+    """Paired percentile bootstrap on per-query differences; also a two-sided
+    bootstrap p-value for the Holm family."""
     rng = random.Random(seed)
-    diffs = [x - y for x, y in zip(a, b)]
+    m = len(diffs)
     means = []
     for _ in range(n):
-        s = [diffs[rng.randrange(len(diffs))] for _ in range(len(diffs))]
-        means.append(statistics.fmean(s))
+        means.append(statistics.fmean(diffs[rng.randrange(m)] for _ in range(m)))
     means.sort()
     lo, hi = means[int(0.025 * n)], means[int(0.975 * n)]
-    return round(statistics.fmean(diffs), 4), round(lo, 4), round(hi, 4)
+    ge = sum(1 for x in means if x >= 0) / n
+    le = sum(1 for x in means if x <= 0) / n
+    p = max(min(2 * min(ge, le), 1.0), 1.0 / n)
+    return statistics.fmean(diffs), lo, hi, p
+
+
+def holm(family: dict[str, float], alpha: float = 0.05) -> dict[str, bool]:
+    """Holm-Bonferroni: reportable flags across the whole delta family."""
+    items = sorted(family.items(), key=lambda kv: kv[1])
+    out, m = {}, len(items)
+    still = True
+    for i, (k, p) in enumerate(items):
+        if still and p <= alpha / (m - i):
+            out[k] = True
+        else:
+            still = False
+            out[k] = False
+    return out
 
 
 def main() -> None:
-    qtext_vecs: dict[str, np.ndarray] = {}
-    results: dict = {"k": K, "k_rrf": K_RRF, "configs": {}, "deltas": {}}
+    chunks_by_budget, doc_by_budget = {}, {}
+    for b in (600, 1200):
+        chunks_by_budget[b] = [json.loads(l) for l in (ROOT / "data" / f"chunks_{b}.jsonl").open()]
+        doc_by_budget[b] = [c["doc_id"] for c in chunks_by_budget[b]]
+    docs = set(doc_by_budget[600])
+    assert docs == set(doc_by_budget[1200]), "budgets must cover identical documents"
+    qs = load_queries(docs)
 
-    for budget in (600, 1200):
-        chunks = [json.loads(l) for l in (ROOT / "data" / f"chunks_{budget}.jsonl").open()]
-        doc_of = [c["doc_id"] for c in chunks]
-        docs = set(doc_of)
-        qs = load_queries(docs)
+    Q, q_embed_s = query_vectors(qs)
+    assert Q.shape[0] == len(qs), "saved query matrix out of step with query filter"
 
-        # dense side
+    results = {"fuse_depth": FUSE_DEPTH, "k_rrf": K_RRF, "bootstrap_resamples": B_RESAMPLES,
+               "multiplicity": "holm-bonferroni across all deltas, alpha=0.05",
+               "queries": len(qs), "query_embed_wall_s": q_embed_s,
+               "configs": {}, "deltas": {}, "per_query": {}}
+
+    per_query_cache: dict[tuple, list[dict]] = {}
+    for budget, k in GRID:
+        chunks, doc_of = chunks_by_budget[budget], doc_by_budget[budget]
         C = np.load(ROOT / "data" / f"emb_{budget}.npy")
         meta = json.loads((ROOT / "data" / f"emb_{budget}.meta.json").read_text())
         assert meta["doc_ids"] == doc_of, "embedding matrix out of step with chunk file"
 
-        key = "queries"
-        if key not in qtext_vecs:
-            import sys
-            sys.path.insert(0, str(ROOT / "src"))
-            from embed_index import embed_all
-            qtext_vecs[key] = embed_all([q["query"] for q in qs], "queries")
-            results["query_count_600"] = len(qs)
-        Q = qtext_vecs[key]
-        if Q.shape[0] != len(qs):        # 1200 subset differs in scorable queries
-            from embed_index import embed_all
-            Q = embed_all([q["query"] for q in qs], f"queries@{budget}")
-
         t0 = time.time()
         sims = Q @ C.T
-        topk_d = np.argpartition(-sims, K, axis=1)[:, :K]
-        order_d = np.take_along_axis(
-            topk_d, np.argsort(-np.take_along_axis(sims, topk_d, axis=1), axis=1), axis=1)
+        depth = min(FUSE_DEPTH, sims.shape[1] - 1)
+        part = np.argpartition(-sims, depth, axis=1)[:, :depth]
+        order_all = np.take_along_axis(
+            part, np.argsort(-np.take_along_axis(sims, part, axis=1), axis=1), axis=1)
         dense_s = time.time() - t0
 
-        # lexical side
         t0 = time.time()
         idx = BM25([c["text"] for c in chunks])
         build_s = time.time() - t0
         t0 = time.time()
-        bm_tops = [idx.top_k(q["query"], max(K, 50)) for q in qs]
+        bm_tops = [idx.top_k(q["query"], FUSE_DEPTH) for q in qs]
         bm25_s = time.time() - t0
 
-        per_query: dict[str, list[dict]] = {"bm25": [], "dense": [], "hybrid": []}
+        pq_rows: dict[str, list[dict]] = {a: [] for a in ARMS}
         for qi, q in enumerate(qs):
-            bm = bm_tops[qi]
-            dn = list(order_d[qi])
-            per_query["bm25"].append(metrics_for(bm[:K], doc_of, q["gold"]))
-            per_query["dense"].append(metrics_for(dn, doc_of, q["gold"]))
-            # RRF over chunk ranks from both lists
+            bm, dn = bm_tops[qi], list(order_all[qi])
+            pq_rows["bm25"].append(metrics_for(bm[:k], doc_of, q["gold"]))
+            pq_rows["dense"].append(metrics_for(dn[:k], doc_of, q["gold"]))
             score: dict[int, float] = defaultdict(float)
-            for rank, i in enumerate(bm[:50], 1):
+            for rank, i in enumerate(bm, 1):          # both lists at FUSE_DEPTH
                 score[i] += 1.0 / (K_RRF + rank)
             for rank, i in enumerate(dn, 1):
                 score[i] += 1.0 / (K_RRF + rank)
-            fused = sorted(score, key=lambda i: (-score[i], i))[:K]
-            per_query["hybrid"].append(metrics_for(fused, doc_of, q["gold"]))
+            fused = sorted(score, key=lambda i: (-score[i], i))[:k]
+            pq_rows["hybrid"].append(metrics_for(fused, doc_of, q["gold"]))
 
-        for arm, rows in per_query.items():
+        for arm in ARMS:
+            rows = pq_rows[arm]
+            per_query_cache[(budget, k, arm)] = rows
             by_type: dict[str, list[dict]] = defaultdict(list)
             for q, r in zip(qs, rows):
                 by_type[q["type"]].append(r)
-            cfg = {
-                "budget": budget, "arm": arm, "queries": len(qs),
-                "overall": {m: round(100 * statistics.fmean(r[m] for r in rows), 2)
-                            for m in ("hits1", "hits10", "strict10")}
-                | {"mrr10": round(statistics.fmean(r["rr"] for r in rows), 4)},
-                "by_type": {t: {m: round(100 * statistics.fmean(r[m] for r in v), 2)
-                                for m in ("hits1", "hits10", "strict10")}
-                            | {"mrr10": round(statistics.fmean(r["rr"] for r in v), 4),
-                               "n": len(v)}
-                            for t, v in sorted(by_type.items())},
-                "cost_s": {"index_build": round(build_s, 1) if arm == "bm25" else
-                           (meta["wall_s"] if arm == "dense" else None),
-                           "query_total": round(bm25_s if arm == "bm25" else
-                                                dense_s if arm == "dense" else
-                                                bm25_s + dense_s, 2)},
-            }
-            results["configs"][f"{budget}_{arm}"] = cfg
+            agg = lambda rs: {m: round(100 * statistics.fmean(r[m] for r in rs), 2)
+                              for m in ("hits1", "hitsk", "strict")} | \
+                             {"mrr": round(statistics.fmean(r["rr"] for r in rs), 4)}
+            cfg = {"budget": budget, "k": k, "arm": arm,
+                   "overall": agg(rows),
+                   "by_type": {t: agg(v) | {"n": len(v)} for t, v in sorted(by_type.items())},
+                   "cost_s": {
+                       "index_build": round(build_s, 1) if arm == "bm25" else meta["wall_s"],
+                       "query_side": round(bm25_s, 2) if arm == "bm25"
+                       else round(q_embed_s + dense_s, 2) if arm == "dense"
+                       else round(bm25_s + q_embed_s + dense_s, 2),
+                       "note": "dense/hybrid query_side includes one-time query embedding "
+                               f"({q_embed_s}s); similarity search itself is {dense_s:.2f}s"}}
+            results["configs"][f"{budget}_k{k}_{arm}"] = cfg
             o = cfg["overall"]
-            print(f"  {budget:5} {arm:7} hits@1 {o['hits1']:6.2f}  hits@10 {o['hits10']:6.2f}  "
-                  f"strict@10 {o['strict10']:6.2f}  mrr {o['mrr10']:.4f}", flush=True)
+            print(f"  {budget:5} k={k:2} {arm:7} hits@1 {o['hits1']:6.2f}  "
+                  f"hits@k {o['hitsk']:6.2f}  strict@k {o['strict']:6.2f}  mrr {o['mrr']:.4f}",
+                  flush=True)
+        # committed per-query outcome vectors: every CI recomputable offline
+        results["per_query"][f"{budget}_k{k}"] = {
+            a: {"strict": [int(r["strict"]) for r in pq_rows[a]],
+                "hits1": [int(r["hits1"]) for r in pq_rows[a]]} for a in ARMS}
+    results["query_types"] = [q["type"] for q in qs]
 
-        # reportability: paired deltas per stratum, strict@10 and hits1
-        for metric in ("strict10", "hits1"):
-            for pair in (("hybrid", "bm25"), ("hybrid", "dense"), ("bm25", "dense")):
-                a = [float(r[metric]) for r in per_query[pair[0]]]
-                b = [float(r[metric]) for r in per_query[pair[1]]]
-                d, lo, hi = boot_delta(a, b)
-                results["deltas"][f"{budget}_{pair[0]}_vs_{pair[1]}_{metric}"] = {
-                    "delta_pts": round(100 * d, 2),
-                    "ci95_pts": [round(100 * lo, 2), round(100 * hi, 2)],
-                    "reportable": not (lo <= 0 <= hi),
-                }
-                by_t: dict[str, tuple[list, list]] = defaultdict(lambda: ([], []))
-                for q, ra, rb in zip(qs, per_query[pair[0]], per_query[pair[1]]):
-                    by_t[q["type"]][0].append(float(ra[metric]))
-                    by_t[q["type"]][1].append(float(rb[metric]))
-                for t, (aa, bb) in by_t.items():
-                    d2, lo2, hi2 = boot_delta(aa, bb)
-                    results["deltas"][f"{budget}_{pair[0]}_vs_{pair[1]}_{metric}_{t}"] = {
-                        "delta_pts": round(100 * d2, 2),
-                        "ci95_pts": [round(100 * lo2, 2), round(100 * hi2, 2)],
-                        "reportable": not (lo2 <= 0 <= hi2), "n": len(aa),
-                    }
+    # ---- delta family: arm-vs-arm within config, and chunk-size/slot contrasts
+    pvals: dict[str, float] = {}
 
-    # the pre-registered question, at the retrieval layer: chunk size vs arm
-    for arm in ("bm25", "dense", "hybrid"):
-        a = results["configs"].get(f"600_{arm}")
-        b = results["configs"].get(f"1200_{arm}")
-        if a and b:
-            results[f"chunk_size_effect_{arm}"] = {
-                m: round(a["overall"][m] - b["overall"][m], 2)
-                for m in ("hits1", "hits10", "strict10")}
+    def add_delta(name: str, a_rows, b_rows, metric: str, qs_filter=None):
+        ix = range(len(qs)) if qs_filter is None else [i for i, q in enumerate(qs)
+                                                      if q["type"] == qs_filter]
+        diffs = [float(a_rows[i][metric]) - float(b_rows[i][metric]) for i in ix]
+        d, lo, hi, p = boot(diffs)
+        results["deltas"][name] = {
+            "delta_pts": round(100 * d, 2),
+            "ci95_pts": [round(100 * lo, 2), round(100 * hi, 2)],
+            "p_boot": round(p, 5), "n": len(diffs)}
+        pvals[name] = p
+
+    for budget, k in GRID:
+        for a, b in (("hybrid", "bm25"), ("hybrid", "dense"), ("bm25", "dense")):
+            ra, rb = per_query_cache[(budget, k, a)], per_query_cache[(budget, k, b)]
+            for metric in ("strict", "hits1"):
+                add_delta(f"{budget}_k{k}_{a}_vs_{b}_{metric}", ra, rb, metric)
+                for t in sorted({q["type"] for q in qs}):
+                    add_delta(f"{budget}_k{k}_{a}_vs_{b}_{metric}_{t}", ra, rb, metric, t)
+    # the two contrasts the write-up leans on, as first-class paired deltas
+    for arm in ARMS:
+        add_delta(f"fixed_tokens_600k10_vs_1200k5_{arm}_strict",
+                  per_query_cache[(600, 10, arm)], per_query_cache[(1200, 5, arm)], "strict")
+        add_delta(f"matched_k5_1200_vs_600_{arm}_strict",
+                  per_query_cache[(1200, 5, arm)], per_query_cache[(600, 5, arm)], "strict")
+        add_delta(f"matched_k10_1200_vs_600_{arm}_strict",
+                  per_query_cache[(1200, 10, arm)], per_query_cache[(600, 10, arm)], "strict")
+
+    flags = holm(pvals)
+    for name, ok in flags.items():
+        results["deltas"][name]["reportable"] = ok
 
     OUT.write_text(json.dumps(results, indent=1))
-    print(f"\nwrote {OUT}")
+    n_rep = sum(flags.values())
+    print(f"\n  {len(pvals)} deltas, {n_rep} reportable after Holm-Bonferroni")
+    print(f"wrote {OUT}")
 
 
 if __name__ == "__main__":

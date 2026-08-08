@@ -1,67 +1,82 @@
 # Stage 1 — the retrieval layer, measured
 
-Run 9 Aug 2026, immediately after Stage 0, on the same machine and the same
-committed chunk files. Three retrievers over identical chunk text (the
-fairness contract), two chunk budgets, per question type, 1,381 queries whose
-entire evidence set lies inside the corpus. Generation arms are pending; the
-graph index is building in the background (`ops/graph_index.py`, checkpointed).
+Run 9 Aug 2026 on the committed chunk files. Three retrievers over identical
+chunk text (the fairness contract), a 2×2 grid of chunk budget × k, per
+question type, 1,381 queries whose entire evidence set lies inside the corpus.
+Generation arms pending; the graph index builds in the background, checkpointed.
 
-## The metric fix worked
+**This file was rewritten after adversarial verification of its first version
+found a fusion bug and three overclaims. The corrections are stated inline
+rather than removed.** v1's headline "fusion actively hurts (−3.04
+[−5.36, −0.72])" was an artifact of depth-asymmetric RRF — BM25 fused to depth
+50 against dense capped at 10. With both lists fused at depth 50, the delta
+shrinks to −1.52 [−3.69, 0.58], not reportable. The finding is retracted; what
+survives is "fusion does not measurably help."
 
-Stage 0 found Hits@10 saturated: 0.59 points of spread across six
-configurations. **strict@10** — every gold document for the query present in
-the top-10 chunks — spreads **30.1% to 43.1%** over the same grid. The metric
-now discriminates, on the same corpus, without paying 2.4× for the full-609
-graph index. The full-corpus option stays open but is no longer forced.
+## The metric
 
-## Results, strict@10 overall
+**strict@k** — every gold document for the query present among the top-k
+chunks' documents. Chosen after Stage 0 showed Hits@10 saturated (96.5–97.0%
+across E4's six dense configs, 0.59-pt spread); declared in STAGE0.md before
+Stage 1 ran, selected post-hoc from two candidates. It is not pre-registered
+and is not described as such. Stats follow the registered plan: paired
+bootstrap, B=10,000, Holm–Bonferroni across all 105 deltas; `reportable`
+means Holm-adjusted p<0.05. Per-query outcome vectors are committed in
+`stage1_retrieval.json`, so every CI recomputes offline.
 
-| | BM25 | dense | hybrid (RRF) |
+## Results, strict@k overall
+
+| | BM25 | dense | hybrid (RRF, depth 50) |
 |---|---|---|---|
-| 600 @ k=10 | **37.51** | 30.12 | 35.92 |
-| 1200 @ k=10 | **43.08** | 32.44 | 40.04 |
-| 1200 @ k=5 (fixed-token control) | **25.34** | 18.75 | 22.74 |
+| 600 @ k=10 | **37.51** | 30.12 | 35.99 |
+| 1200 @ k=10 | **43.08** | 32.44 | 41.56 |
+| 600 @ k=5 | **22.95** | 16.87 | 21.14 |
+| 1200 @ k=5 | **25.34** | 18.75 | 22.95 |
 
-Per stratum, the spread is larger: comparison 61.4% (BM25@1200) against
-inference 20.0% (dense@600). The stratum decides the difficulty; the
-retriever decides the rank.
+## Findings
 
-## Three findings
+**1. BM25 leads in every cell, and fusing dense into it does not help.**
+BM25−dense at 1200/k10: **+10.64 [8.04, 13.25]**, reportable. Hybrid−BM25 is
+negative in all four cells but never clears the Holm bar (−1.52 at both
+budgets, k=10). No per-stratum cell survives multiplicity in dense's favour.
+Note what this is *not*: the pre-registered "BM25 wins single-fact lookup"
+concerned a stratum this benchmark does not contain — all 1,381 queries are
+multi-hop with 2–4 gold documents. What is measured is stronger and
+different: BM25 wins *multi-hop evidence assembly* on this corpus.
 
-**1. BM25 wins everywhere, and fusing it with dense retrieval hurts.**
-Hybrid−BM25 at 1200 is **−3.04 points, 95% CI [−5.36, −0.72]** — reportable,
-and negative. At 600 it is −1.59 [−3.62, 0.51], below the noise floor and
-greyed. This replicates the *Dissecting Agentic RAG* direction at the fusion
-level on a different corpus: the cleverer component costs points. The
-pre-registered prediction that BM25 wins single-fact-adjacent traffic
-survives contact with measurement.
+**2. The budget convention decides the chunk-size winner, and the flip is a
+slot effect, not a chunk-size effect.** At matched k, 1200-token chunks win
+at both k=5 (+2.39 [1.01, 3.77]) and k=10 (+5.58 [3.91, 7.24]). At a fixed
+~6,000-token budget, 600@k10 beats 1200@k5 by **+12.17 [10.35, 14.12]** —
+because ten retrieval slots can hold ten distinct documents and five can hold
+five, and strict@k needs 2–4. Larger chunks are better per chunk; more slots
+are better per token. Any chunk-size claim that does not state its budget
+convention is meaningless.
 
-**2. The chunk-size effect flips sign depending on what you hold fixed.**
-At fixed k=10, 1200-token chunks beat 600 by ~5.6 points — but they read 2×
-the tokens. At a fixed ~6,000-token budget, 600@k10 beats 1200@k5 by **12.2
-points** (37.51 vs 25.34). §4.5.7 predicted exactly this confound; it is now
-measured, and it means any chunk-size claim must state its budget convention
-or it is meaningless.
+**3. Retriever choice moves strict@k about twice what chunk size does over
+the range tested.** Retriever effect +10.64 vs chunk-size effect +5.58, same
+metric, same queries. This does not support the projected headline (chunk
+size dominating architecture), which came from a 150→1200 sweep; only
+600→1200 is tested here. It rhymes with — but does not replicate —
+*Dissecting Agentic RAG*: that paper ablated an agent's adaptive router, and
+its winning fixed arm was itself hybrid retrieval. The shared direction is
+narrower: added retrieval machinery must earn its keep, and here it did not.
 
-**3. The pre-registered headline is NOT supported at this range, and that is
-reported rather than buried.** The research projected chunk size moving the
-primary metric more than architecture. Measured at fixed k across 600→1200:
-chunk-size effect ≤5.6 points, retriever effect (BM25−dense at 1200) **10.64
-points [8.04, 13.18]**. Over the range tested, retriever choice moves
-strict@10 roughly twice as much as chunk size. The projection came from a
-150→1200 sweep; only 600→1200 is tested here, so the wider claim remains
-open — but at the sizes a practitioner would actually pick between, the
-architecture-shaped decision dominates.
+## Cost, retrieval layer (600-budget cells; 1200 comparable)
 
-## Cost, retrieval layer
-
-BM25 index build: 0.2 s. Dense index: 119.5 s of embedding (one-time,
-saved to disk). All-query retrieval: BM25 3.2 s, dense 0.02 s.
+BM25 index build 0.2 s; dense chunk embedding 119.5 s (one-time, saved).
+Query side: BM25 3.2 s for all 1,381 queries; dense **≈41 s** — of which
+query embedding is ~40 s (one-time, now saved to `data/emb_queries.npy`) and
+similarity search 0.02 s. v1 published the 0.02 s alone, which was
+apples-to-oranges; the embedding cost is the dense query cost.
 
 ## Artifacts
 
-`reports/stage1_retrieval.json` — every number, with paired-bootstrap 95% CIs
-and precomputed `reportable` flags. `reports/crossover.html` — single-file,
-no-network rendering with the traffic-mix slider; regenerate with
-`python src/make_crossover.py`. Deltas whose CI includes zero are greyed by
-flag, never recomputed in the page.
+`stage1_retrieval.json` — configs, 105 deltas with CIs, bootstrap p-values,
+Holm flags, and per-query outcome vectors (offline-recomputable CIs).
+`crossover.html` — regenerated from that JSON by `src/make_crossover.py`;
+greying reads the committed Holm flags. Producers for every stage0.json
+block: `ops/e1b_severance.py` (severance + power control),
+`ops/e1_integrity.py` (chunker integrity), `ops/verify_bm25.py`,
+`ops/repeat_determinism.py` (GPU-gated), `ops/fetch_data.py` (data
+provenance, content-hash based). Pins in `requirements.txt`.

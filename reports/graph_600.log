@@ -1,1 +1,5 @@
 1214 chunks, 0 already indexed, 1214 to go
+  10/1214  ok            39.1s  recent  58.0s/chunk  eta  19.4h  elapsed 0.2h
+  20/1214  ok            55.4s  recent  52.8s/chunk  eta  17.5h  elapsed 0.3h
+  30/1214  ok            38.5s  recent  49.9s/chunk  eta  16.4h  elapsed 0.4h
+1214 chunks, 31 already indexed, 1183 to go
