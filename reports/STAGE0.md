@@ -3,7 +3,9 @@
 Run 8–9 Aug 2026 on one Apple M5, 24 GB unified, Ollama 0.32.5. Generator
 `qwen3:8b` Q4_K_M, embedder `qwen3-embedding:0.6b` q8_0. No API key, no second
 machine, no hosted call. Every number below is measured on this box; nothing is
-projected from a token price.
+projected from a token price. One labelled exception: the 27B comparison figures
+come from a prior single-run calibration session and are not among this study's
+committed artifacts.
 
 Stage 0 exists to answer one question — *can this study run here, as specified* —
 cheaply enough that the answer costs an evening rather than four nights of
@@ -20,7 +22,8 @@ before Stage 1, and one of them is the primary metric.
 | Prefill | 369–1,697 tok/s | ✅ projection was 350 |
 | Resident, 4k/8k/16k ctx | 5.9 / 6.6 / 7.9 GB, **100% GPU at every size** | ✅ |
 | Generator + embedder co-resident | 7.94 GB of 24 | ✅ |
-| Cold load | 11.4 s | — |
+| Cold load (8B) | 1.6 s | — |
+| Cold load (27B, prior calibration session — not a committed artifact of this study) | 11.4 s | — |
 
 The 8B choice is vindicated by one number: **it never touches CPU.** The 27B ran
 11% on CPU at 4k context and 19% at 32k, and that split is the whole reason it
@@ -94,7 +97,9 @@ Of **413 relationships present at 1200 and absent at 600**:
 | Unclassified — endpoint not locatable by substring | 117 | 28.3% |
 
 **Overlap and gleanings — the standard mitigations, shipped by every GraphRAG
-implementation — address the 4%.**
+implementation — address the boundary-severed class: 4.1% of the loss where
+classification succeeded, bounded above by 32.4% if every unclassifiable edge
+(28.3%, endpoints not locatable by substring) were in fact severed.**
 
 The 68% is the model declining to state a relation whose two endpoints both sat
 inside a single chunk it was given. Extraction here is deterministic — same
@@ -153,7 +158,7 @@ inference and temporal.
 ## What must change before Stage 1
 
 1. **A harder primary metric.** Strict all-evidence-retrieved, or Hits@1. MRR@10
-   already shows 4× the spread of Hits@10 and is the cheap interim.
+   already shows 5.3× the spread of Hits@10 (0.0310 vs 0.0059) and is the cheap interim.
 2. **Probably the full 609-article corpus** rather than the tech+business subset
    — 2.4× the distractors, at proportional graph-index cost.
 3. **A corpus-hour budget, not a per-chunk gate.** A 90-second per-chunk gate

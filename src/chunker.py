@@ -86,6 +86,10 @@ def pack(article: dict, tok: Tokenizer, budget: int, seg: pysbd.Segmenter) -> li
     header_n = len(tok.encode(header, add_special_tokens=False).ids) if header else 0
     room = budget - header_n
     if room <= 0:
+        # Dead code on this corpus (max title 57 tokens), but a title at or
+        # over budget must not silently delete an article. Surfaced via the
+        # manifest's dropped_articles counter.
+        article["_dropped_title_over_budget"] = True
         return []
 
     sents = units(body, seg)
@@ -225,6 +229,8 @@ def main() -> None:
                    "min": min(ns), "max": max(ns),
                    "fill_rate": round(statistics.fmean(ns) / args.budget, 3)},
         "hard_splits": sum(1 for c in chunks if c.get("hard_split")),
+        "dropped_articles_title_over_budget": sum(
+            1 for a in rows if a.get("_dropped_title_over_budget")),
         "over_budget": sum(1 for c in chunks if c["n_tokens"] > args.budget),
     }
     (OUT / f"chunks_{args.budget}.manifest.json").write_text(json.dumps(manifest, indent=1))

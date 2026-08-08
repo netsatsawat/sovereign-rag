@@ -96,6 +96,10 @@ class BM25:
                 denom = f + K1 * (1.0 - B + B * dl / self.avgdl) if self.avgdl else 1.0
                 acc[ix] = acc.get(ix, 0.0) + idf * (f * (K1 + 1.0)) / denom
         if not acc:
-            return list(range(min(k, self.n)))
+            # Diverged from the sovereign-learning-loop original, which
+            # returned chunks 0..k-1 here: reporting arbitrary documents as
+            # "retrieved" for a zero-overlap query would fake a hit. An empty
+            # list scores as a miss, which is what actually happened.
+            return []
         ranked = sorted(acc.items(), key=lambda kv: (-kv[1], kv[0]))
         return [ix for ix, _ in ranked[:k]]

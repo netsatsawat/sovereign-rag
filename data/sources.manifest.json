@@ -1,0 +1,14 @@
+{
+ "multihoprag_corpus.parquet": {
+  "url": "https://huggingface.co/api/datasets/yixuantt/MultiHopRAG/parquet/corpus/train/0.parquet",
+  "file_sha256": "8729d87c81dfe9d1",
+  "content_sha256": "745ec1a9d05c3421",
+  "rows": 609
+ },
+ "multihoprag_queries.parquet": {
+  "url": "https://huggingface.co/api/datasets/yixuantt/MultiHopRAG/parquet/MultiHopRAG/train/0.parquet",
+  "file_sha256": "edb671d7640d83a4",
+  "content_sha256": "2f9ddce8d6d35ea4",
+  "rows": 2556
+ }
+}

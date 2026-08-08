@@ -71,8 +71,8 @@ document for the query retrieved in the top 10 chunks</p>
 
 <div class="banner"><b>Scope labels, before any number.</b> Retrieval layer only — no
 generation, no LLM judge; the agentic and graph arms are pending (graph index in progress).
-Hits@10 is saturated on this corpus (96.5–97.0% across all configs) and is not shown as a
-headline; strict@10 is the pre-registered replacement. Deltas whose 95% CI includes zero are
+<span id="satrange"></span> strict@k is the replacement declared in STAGE0.md before Stage 1 ran
+(chosen post-hoc from two candidate metrics). Deltas whose 95% CI includes zero are
 greyed — the flag is computed offline, never in this page.</div>
 
 <h2>Per-stratum, per-retriever</h2>
@@ -99,8 +99,11 @@ greyed — the flag is computed offline, never in this page.</div>
 <script>
 const D = JSON.parse(document.getElementById('data').textContent);
 const ARMS = ["bm25","dense","hybrid"], BUDGETS=[600,1200];
+const cfg=(b,a,k=10)=>D.configs[`${b}_k${k}_${a}`];
+const allH10=Object.values(D.configs).filter(c=>c.k===10).map(c=>c.overall.hitsk);
+const h10lo=Math.min(...allH10).toFixed(1), h10hi=Math.max(...allH10).toFixed(1);
 const nice = {bm25:"BM25", dense:"dense", hybrid:"hybrid (RRF)"};
-const strata = Object.keys(D.configs["600_bm25"].by_type);
+const strata = Object.keys(cfg(600,"bm25").by_type);
 
 function bar(host, label, cls, pct, extra){
   const r=document.createElement('div'); r.className='row';
@@ -110,13 +113,14 @@ function bar(host, label, cls, pct, extra){
   host.appendChild(r);
 }
 
+document.getElementById('satrange').textContent=`Hits@10 is saturated on this corpus (${h10lo}\u2013${h10hi}% across all k=10 configs) and is not a headline;`;
 const sh=document.getElementById('strata');
 for(const s of strata){
   const box=document.createElement('div'); box.className='stratum';
-  const n=D.configs["600_bm25"].by_type[s].n;
+  const n=cfg(600,"bm25").by_type[s].n;
   box.innerHTML=`<h3>${s.replace('_query','')} <span class="tag">n=${n} · native, third-party authored</span></h3>`;
   for(const b of BUDGETS) for(const a of ARMS){
-    bar(box, `${nice[a]} @${b}`, `${a} b${b}`, D.configs[`${b}_${a}`].by_type[s].strict10);
+    bar(box, `${nice[a]} @${b}`, `${a} b${b}`, cfg(b,a).by_type[s].strict);
   }
   sh.appendChild(box);
 }
@@ -125,8 +129,8 @@ const mixHost=document.getElementById('mix');
 const sliders={};
 const presets={"native mix":null,"lookup-heavy":{inference_query:70,comparison_query:20,temporal_query:10},
                "analyst desk":{inference_query:25,comparison_query:45,temporal_query:30}};
-const totN = strata.reduce((t,s)=>t+D.configs["600_bm25"].by_type[s].n,0);
-const nativePct = s => Math.round(100*D.configs["600_bm25"].by_type[s].n/totN);
+const totN = strata.reduce((t,s)=>t+cfg(600,"bm25").by_type[s].n,0);
+const nativePct = s => Math.round(100*cfg(600,"bm25").by_type[s].n/totN);
 for(const s of strata){
   const wrap=document.createElement('label');
   wrap.innerHTML=`${s.replace('_query','')} <input type="range" min="0" max="100" value="${nativePct(s)}" id="w_${s}">
@@ -150,7 +154,7 @@ function render(){
     tot? Math.round(100*w[s]/tot)+'%':'0%';
   const scores=[];
   for(const b of BUDGETS) for(const a of ARMS){
-    let v=0; for(const s of strata) v+=w[s]*D.configs[`${b}_${a}`].by_type[s].strict10;
+    let v=0; for(const s of strata) v+=w[s]*cfg(b,a).by_type[s].strict;
     scores.push({k:`${nice[a]} @${b}`, cls:a, v: tot? v/tot:0});
   }
   scores.sort((x,y)=>y.v-x.v);
@@ -163,32 +167,39 @@ for(const s of strata) document.getElementById('w_'+s).oninput=render;
 render();
 
 const ftc=document.getElementById('ftc');
-ftc.innerHTML='<tr><th>retriever</th><th>600 @ k=10</th><th>1200 @ k=10 (2× tokens)</th><th>1200 @ k=5 (equal tokens)</th></tr>'+
+ftc.innerHTML='<tr><th>retriever</th><th>600 @ k=5</th><th>600 @ k=10</th><th>1200 @ k=5</th><th>1200 @ k=10</th></tr>'+
  ARMS.map(a=>`<tr><td>${nice[a]}</td>
-   <td>${D.configs['600_'+a].overall.strict10.toFixed(2)}%</td>
-   <td>${D.configs['1200_'+a].overall.strict10.toFixed(2)}%</td>
-   <td>${D.fixed_token_control_1200_k5.configs[a].strict10.toFixed(2)}%</td></tr>`).join('');
+   <td>${cfg(600,a,5).overall.strict.toFixed(2)}%</td>
+   <td>${cfg(600,a,10).overall.strict.toFixed(2)}%</td>
+   <td>${cfg(1200,a,5).overall.strict.toFixed(2)}%</td>
+   <td>${cfg(1200,a,10).overall.strict.toFixed(2)}%</td></tr>`).join('')+
+ `<tr><td colspan=5 style="color:var(--dim)">fixed ~6,000-token budget: 600@k10 − 1200@k5 (BM25) = `+
+ `${D.deltas['fixed_tokens_600k10_vs_1200k5_bm25_strict'].delta_pts>0?'+':''}`+
+ `${D.deltas['fixed_tokens_600k10_vs_1200k5_bm25_strict'].delta_pts} `+
+ `[${D.deltas['fixed_tokens_600k10_vs_1200k5_bm25_strict'].ci95_pts}] — a slot effect, not a chunk-size effect; `+
+ `at matched k, 1200 wins both (+${D.deltas['matched_k5_1200_vs_600_bm25_strict'].delta_pts}, `+
+ `+${D.deltas['matched_k10_1200_vs_600_bm25_strict'].delta_pts})</td></tr>`;
 
 const dt=document.getElementById('deltas');
 let rows='<tr><th>comparison</th><th>Δ pts</th><th>95% CI</th><th></th></tr>';
 for(const b of BUDGETS) for(const pair of [["hybrid","bm25"],["hybrid","dense"],["bm25","dense"]]){
-  const k=`${b}_${pair[0]}_vs_${pair[1]}_strict10`; const d=D.deltas[k]; if(!d) continue;
+  const k=`${b}_k10_${pair[0]}_vs_${pair[1]}_strict`; const d=D.deltas[k]; if(!d) continue;
   const grey=d.reportable?'':' class="grey"';
   rows+=`<tr${grey}><td>@${b} ${nice[pair[0]]} − ${nice[pair[1]]}</td>
     <td>${d.delta_pts>0?'+':''}${d.delta_pts}</td>
     <td>[${d.ci95_pts[0]}, ${d.ci95_pts[1]}]</td>
-    <td>${d.reportable?'':'below noise floor — not reported'}</td></tr>`;
+    <td>${d.reportable?'':'not significant after Holm\u2013Bonferroni — not reported'}</td></tr>`;
 }
 dt.innerHTML=rows;
 
 const ct=document.getElementById('cost');
-ct.innerHTML='<tr><th>config</th><th>index build</th><th>all-query retrieval</th></tr>'+
- BUDGETS.flatMap(b=>ARMS.map(a=>{const c=D.configs[`${b}_${a}`].cost_s;
-   return `<tr><td>${nice[a]} @${b}</td><td>${c.index_build??'—'} s</td><td>${c.query_total} s</td></tr>`})).join('');
+ct.innerHTML='<tr><th>config</th><th>index build</th><th>query side (incl. one-time query embedding for dense/hybrid)</th></tr>'+
+ BUDGETS.flatMap(b=>ARMS.map(a=>{const c=cfg(b,a).cost_s;
+   return `<tr><td>${nice[a]} @${b}</td><td>${c.index_build??'—'} s</td><td>${c.query_side} s</td></tr>`})).join('');
 
 document.getElementById('foot').textContent=
   `Every number originates in reports/stage1_retrieval.json; regenerate this page with `+
-  `python src/make_crossover.py. k=${D.k}, RRF k=${D.k_rrf}. Queries scored only when their `+
+  `python src/make_crossover.py. RRF fuse depth ${D.fuse_depth}, k_rrf=${D.k_rrf}, B=${D.bootstrap_resamples}, ${D.multiplicity}. Queries scored only when their `+
   `entire evidence set lies inside the corpus.`;
 </script>
 </div></body></html>

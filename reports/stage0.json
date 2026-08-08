@@ -159,7 +159,7 @@
     "rels_gained_by_splitting": 202,
     "truncated_pairs_excluded": 1
    },
-   "corrected_conclusion": "Splitting is MORE expensive and MORE thorough, not cheaper and worse. 512x2 costs 1.33x the wall clock of 1024 and emits 1.38x the tokens, while finding 37% more entities and 30% more relationships. The trade is cost against recall, in the opposite direction to the one claimed.",
+   "corrected_conclusion": "Splitting is MORE expensive and MORE thorough, not cheaper and worse. 512x2 costs 1.34x the wall clock of 1024 and emits 1.38x the tokens, while finding 37% more entities and 30% more relationships. The trade is cost against recall, in the opposite direction to the one claimed.",
    "severance_claim_also_wrong": "Only 39 of 133 relationships lost by splitting (29%) were provably severed by the boundary. The other 71% is extractor non-determinism across a changed context window, not a structural cost of chunking.",
    "corroboration": "Independently consistent with the chunking workflow's measured cost exponent k=1.43 (total index cost scales as T*s^(k-1)), which also implies smaller chunks cost more in total. Their 256-token projection rises to ~24 h for the same reason.",
    "lesson": "One chunk was an outlier with an unusually verbose whole-chunk extraction. A single measurement was used to argue for restructuring the study."
@@ -287,28 +287,25 @@
    "source": "measured by the chunking research on the pre-existing scheme"
   },
   "power_control": {
-   "why": "0.00% at both budgets was too clean to accept. A severance test that cannot detect severance would report 0% for a broken chunker too, so the detector was run against schemes known to sever.",
-   "naive_char_scheme_no_overlap": {
-    "1024tok": {
-     "span_pct": 4.86,
-     "query_pct": 13.41
+   "method": "same detector run against naive character chunkers known to sever",
+   "results": {
+    "256tok_no_overlap": {
+     "span_pct": 15.15,
+     "query_pct": 36.88
     },
-    "512tok": {
+    "512tok_no_overlap": {
      "span_pct": 7.73,
      "query_pct": 20.84
     },
-    "256tok": {
-     "span_pct": 15.15,
-     "query_pct": 36.88
+    "1024tok_no_overlap": {
+     "span_pct": 4.86,
+     "query_pct": 13.41
+    },
+    "1024tok_128ov": {
+     "span_pct": 0.0,
+     "query_pct": 0.0
     }
-   },
-   "naive_1024_with_128tok_overlap": {
-    "span_pct": 0.0,
-    "query_pct": 0.0
-   },
-   "conclusion": "The detector has power: severance rises monotonically as chunks shrink. It reports 0% for the overlapped naive scheme because 512 chars of overlap recovers spans whose median length is 185 chars.",
-   "the_finding": "Sentence alignment achieves at ZERO overlap what the naive scheme needs 512 chars of overlap to achieve: 0.00% evidence severance. Overlap costs ~12.5% more chunks and, for the graph arm, ~20% more LLM calls plus duplicate entities. Sentence alignment costs nothing at index time.",
-   "vs_prediction": "Research predicted 0.5-2% residual from 6 multi-sentence gold spans and pySBD boundary error. Measured 0.00% on 4,243 spans. MultiHop-RAG's `fact` fields appear to be sentence-aligned by construction. Note the span counts differ from the research's 981 \u2014 this counts every (query, evidence) pair, not unique spans."
+   }
   }
  },
  "e0_e2e3": {
@@ -356,7 +353,7 @@
    "e0_verdict": "FAIL on truncation, PASS on thinking. 0 of 189 calls emitted thinking tokens, so `think:false` works and the cost model is not measuring reasoning. But 9 of 189 (4.8%) hit the 8,000-token cap and returned unparseable JSON. Truncation is a standing failure mode of local graph extraction at any fixed budget, not a nuisance to raise the cap past.",
    "cost_verdict": "Smaller chunks cost MORE, now bounded. 600-chunking takes 1.328x the wall clock (95% CI 1.164-1.498) and emits 1.353x the tokens (CI 1.189-1.523) of 1200-chunking on the same articles. Both CIs exclude 1.0. This closes the superlinearity claim made from n=1, which had the sign inverted.",
    "edge_verdict": {
-    "claim": "Overlap, the standard mitigation, addresses only 4% of the edges that chunking costs you.",
+    "claim": "Overlap, the standard mitigation, addresses the boundary-severed class: 4.1% of the loss where classification succeeded, bounded above by 32.4% if every unclassified edge were severed.",
     "of_413_edges_present_at_1200_and_absent_at_600": {
      "boundary_severed_pct": 4.1,
      "within_chunk_unemitted_pct": 67.6,
@@ -545,7 +542,7 @@
    "cause": "253 articles produce 694-1,214 chunks. Retrieving 10 of them is 0.8-1.4% of the corpus, and the queries were written from those very articles. Any competent embedder clears it.",
    "consequence_for_the_study": "The pre-registered headline \u2014 that chunk size moves the primary metric more than architecture does \u2014 CANNOT be tested with Hits@10 on this subset. Measured chunk-size effect on the dense arm is 0.20-0.59 points, against the 16.1 points the research projected for the hybrid arm across 150-1200. Either the projection does not transfer to dense retrieval, or the ceiling is hiding it. Both require a harder primary metric before Stage 1.",
    "options_in_preference_order": [
-    "Harder metric: strict all-evidence-retrieved (every gold doc for a query in top-k), or Hits@1. MRR@10 already shows 4x the spread of Hits@10 (0.031 vs 0.0059).",
+    "Harder metric: strict all-evidence-retrieved (every gold doc for a query in top-k), or Hits@1. MRR@10 already shows 5.3x the spread of Hits@10 (0.0310 vs 0.0059).",
     "Full 609-article corpus rather than the tech+business subset \u2014 2.4x the distractors, and it costs graph index hours proportionally.",
     "Both."
    ],
@@ -564,6 +561,26 @@
     "temporal": 97.18,
     "note": "comparison is the hardest stratum by 3 points even at the ceiling."
    }
+  }
+ },
+ "e1_chunker_integrity": {
+  "at_600": {
+   "chunks": 1214,
+   "sentences_lost": 0,
+   "sentences_duplicated": 0,
+   "over_budget": 0,
+   "manifest_sha256": "b6c62cee1ce76d3d",
+   "dropped_articles_title_over_budget": 0,
+   "pass": true
+  },
+  "at_1200": {
+   "chunks": 694,
+   "sentences_lost": 0,
+   "sentences_duplicated": 0,
+   "over_budget": 0,
+   "manifest_sha256": "5978e31f19c653b7",
+   "dropped_articles_title_over_budget": 0,
+   "pass": true
   }
  }
 }

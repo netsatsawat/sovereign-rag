@@ -122,8 +122,55 @@ def main() -> None:
         "source": "measured by the chunking research on the pre-existing scheme",
     }
 
+    # Power control: a severance detector that reports 0% must be shown able
+    # to detect severance at all, so it is run against naive character
+    # chunkers known to sever. Computed here so the committed block has a
+    # committed producer.
+    import unicodedata
+    corpus = [r for r in pq.read_table(ROOT / "data" / "multihoprag_corpus.parquet").to_pylist()
+              if r.get("category") in CATEGORIES]
+
+    def naive(body, chunk_chars, ov_chars):
+        body = re.sub(r"\s+", " ", unicodedata.normalize("NFKC", body or "")).strip()
+        step = chunk_chars - ov_chars
+        return [body[i:i + chunk_chars] for i in range(0, max(len(body) - ov_chars, 1), step)
+                if len(body[i:i + chunk_chars]) >= 200]
+
+    power = {}
+    for label, cc, ov in (("256tok_no_overlap", 1024, 0), ("512tok_no_overlap", 2048, 0),
+                          ("1024tok_no_overlap", 4096, 0), ("1024tok_128ov", 4096, 512)):
+        by_doc = defaultdict(list)
+        for a in corpus:
+            for c in naive(a.get("body"), cc, ov):
+                by_doc[a["url"]].append(norm(c))
+        docs2 = set(by_doc)
+        spans = sev = qs2 = qhit = 0
+        for r in rows:
+            ev = [e for e in (r.get("evidence_list") or []) if e.get("url") in docs2]
+            if not ev:
+                continue
+            qs2 += 1
+            hit = False
+            for e in ev:
+                f = norm(e.get("fact") or "")
+                if len(f) < 12:
+                    continue
+                spans += 1
+                if not any(f in ch for ch in by_doc[e["url"]]):
+                    sev += 1
+                    hit = True
+            if hit:
+                qhit += 1
+        power[label] = {"span_pct": round(100 * sev / spans, 2),
+                        "query_pct": round(100 * qhit / qs2, 2)}
+        print(f"  power {label:20} spans {power[label]['span_pct']}%  queries {power[label]['query_pct']}%")
+    results["power_control"] = {
+        "method": "same detector run against naive character chunkers known to sever",
+        "results": power,
+    }
+
     d = json.loads(OUT.read_text()) if OUT.exists() else {}
-    d["e1b_severance"] = results
+    d["e1b_severance"] = results   # merge into the shared report, never overwrite it
     OUT.write_text(json.dumps(d, indent=1))
     print(f"\nwrote {OUT}")
 
