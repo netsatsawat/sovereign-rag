@@ -1,0 +1,76 @@
+{
+ "n": 100,
+ "arms": {
+  "a0": {
+   "containment": 37.0,
+   "em": 36.0,
+   "abstained_pct": 48.0,
+   "mean_wall_s": 0.6
+  },
+  "plain": {
+   "containment": 59.0,
+   "em": 57.0,
+   "abstained_pct": 34.0,
+   "mean_wall_s": 13.3
+  },
+  "graph": {
+   "containment": 45.0,
+   "em": 44.0,
+   "abstained_pct": 49.0,
+   "mean_wall_s": 12.5
+  }
+ },
+ "pi_d": {
+  "plain_vs_a0": {
+   "pi_d": 0.3,
+   "plain_wins": 26,
+   "a0_wins": 4
+  },
+  "plain_vs_graph": {
+   "pi_d": 0.22,
+   "plain_wins": 18,
+   "graph_wins": 4
+  },
+  "graph_vs_a0": {
+   "pi_d": 0.3,
+   "graph_wins": 19,
+   "a0_wins": 11
+  }
+ },
+ "metric": "normalised containment (pilot-grade, labelled)",
+ "note": "gold in generated answer after NFKC/casefold/punct-strip",
+ "mcnemar_exact": {
+  "plain_vs_a0": {
+   "discordant": 30,
+   "split": [
+    26,
+    4
+   ],
+   "p_exact": 6e-05,
+   "significant_05": true
+  },
+  "plain_vs_graph": {
+   "discordant": 22,
+   "split": [
+    18,
+    4
+   ],
+   "p_exact": 0.00434,
+   "significant_05": true
+  },
+  "graph_vs_a0": {
+   "discordant": 30,
+   "split": [
+    19,
+    11
+   ],
+   "p_exact": 0.20049,
+   "significant_05": false
+  }
+ },
+ "grid_decision": {
+  "pi_d_observed": "0.22-0.30 vs the 0.10 planning assumption",
+  "full_grid_cost_h": 10.1,
+  "decision": "run ALL 1,381 queries in one overnight (~10h): pilot already decides the headline contrasts, the full grid buys per-stratum precision and the graph-vs-a0 question, which n=100 could NOT decide (p=0.2)"
+ }
+}

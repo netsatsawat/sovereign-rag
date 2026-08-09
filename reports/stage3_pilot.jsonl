@@ -4,3 +4,297 @@
 {"qi": 3, "arm": "a0", "type": "comparison_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 0.5, "prompt_tokens": 82, "gen_tokens": 5, "done_reason": "stop"}
 {"qi": 3, "arm": "plain", "type": "comparison_query", "gold": "Yes", "answer": "Yes.", "wall_s": 11.7, "prompt_tokens": 5026, "gen_tokens": 3, "done_reason": "stop"}
 {"qi": 3, "arm": "graph", "type": "comparison_query", "gold": "Yes", "answer": "Yes.", "wall_s": 11.5, "prompt_tokens": 4933, "gen_tokens": 3, "done_reason": "stop"}
+{"qi": 8, "arm": "a0", "type": "temporal_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 0.6, "prompt_tokens": 116, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 8, "arm": "plain", "type": "temporal_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 12.3, "prompt_tokens": 5417, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 8, "arm": "graph", "type": "temporal_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 11.5, "prompt_tokens": 4939, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 33, "arm": "a0", "type": "inference_query", "gold": "Sam Bankman-Fried", "answer": "insufficient information.", "wall_s": 0.6, "prompt_tokens": 125, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 33, "arm": "plain", "type": "inference_query", "gold": "Sam Bankman-Fried", "answer": "Sam Bankman-Fried", "wall_s": 13.8, "prompt_tokens": 5683, "gen_tokens": 6, "done_reason": "stop"}
+{"qi": 33, "arm": "graph", "type": "inference_query", "gold": "Sam Bankman-Fried", "answer": "Sam Bankman-Fried", "wall_s": 13.5, "prompt_tokens": 5427, "gen_tokens": 6, "done_reason": "stop"}
+{"qi": 42, "arm": "a0", "type": "comparison_query", "gold": "no", "answer": "insufficient information.", "wall_s": 0.6, "prompt_tokens": 113, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 42, "arm": "plain", "type": "comparison_query", "gold": "no", "answer": "The article from Wired suggests that Sony headphones offer good value during the Walmart Cyber Monday Deals, while the article from Music Business Worldwide indicates that artists are seeking deals that offer more control and better economics. Both articles suggest a common trend in seeking value and control in their respective fields.", "wall_s": 14.0, "prompt_tokens": 4772, "gen_tokens": 56, "done_reason": "stop"}
+{"qi": 42, "arm": "graph", "type": "comparison_query", "gold": "no", "answer": "The article from Wired does not mention Sony headphones in the context of Walmart Cyber Monday Deals. The article from Music Business Worldwide discusses artists seeking deals with more control, transparency, and better economics. Therefore, the context does not provide enough information to determine if there is a common trend in seeking value and control in their respective fields", "wall_s": 14.5, "prompt_tokens": 4876, "gen_tokens": 64, "done_reason": "length"}
+{"qi": 54, "arm": "a0", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 0.5, "prompt_tokens": 101, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 54, "arm": "plain", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 13.2, "prompt_tokens": 5554, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 54, "arm": "graph", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 13.5, "prompt_tokens": 5575, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 66, "arm": "a0", "type": "temporal_query", "gold": "no", "answer": "No.", "wall_s": 0.6, "prompt_tokens": 123, "gen_tokens": 3, "done_reason": "stop"}
+{"qi": 66, "arm": "plain", "type": "temporal_query", "gold": "no", "answer": "no", "wall_s": 13.1, "prompt_tokens": 5526, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 66, "arm": "graph", "type": "temporal_query", "gold": "no", "answer": "insufficient information", "wall_s": 11.9, "prompt_tokens": 5325, "gen_tokens": 4, "done_reason": "stop"}
+{"qi": 76, "arm": "a0", "type": "inference_query", "gold": "Donald Trump", "answer": "Donald Trump", "wall_s": 0.6, "prompt_tokens": 102, "gen_tokens": 3, "done_reason": "stop"}
+{"qi": 76, "arm": "plain", "type": "inference_query", "gold": "Donald Trump", "answer": "Donald Trump", "wall_s": 12.5, "prompt_tokens": 5384, "gen_tokens": 3, "done_reason": "stop"}
+{"qi": 76, "arm": "graph", "type": "inference_query", "gold": "Donald Trump", "answer": "Donald Trump", "wall_s": 12.0, "prompt_tokens": 5590, "gen_tokens": 3, "done_reason": "stop"}
+{"qi": 90, "arm": "a0", "type": "comparison_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 0.8, "prompt_tokens": 113, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 90, "arm": "plain", "type": "comparison_query", "gold": "Yes", "answer": "The Music Business Worldwide article suggests a collaborative approach across creative industries to address AI concerns, while the National Music Publishers Association emphasizes proactive protections and licensing for human creators. TechCrunch reports that Spotify both removed AI-crafted songs and introduced an AI-powered DJ, showing a mixed approach.", "wall_s": 14.7, "prompt_tokens": 5244, "gen_tokens": 57, "done_reason": "stop"}
+{"qi": 90, "arm": "graph", "type": "comparison_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 11.2, "prompt_tokens": 4789, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 114, "arm": "a0", "type": "inference_query", "gold": "Sam Bankman-Fried", "answer": "Sam Bankman-Fried", "wall_s": 0.6, "prompt_tokens": 135, "gen_tokens": 6, "done_reason": "stop"}
+{"qi": 114, "arm": "plain", "type": "inference_query", "gold": "Sam Bankman-Fried", "answer": "Sam Bankman-Fried", "wall_s": 12.2, "prompt_tokens": 5263, "gen_tokens": 6, "done_reason": "stop"}
+{"qi": 114, "arm": "graph", "type": "inference_query", "gold": "Sam Bankman-Fried", "answer": "Sam Bankman-Fried", "wall_s": 11.3, "prompt_tokens": 4666, "gen_tokens": 6, "done_reason": "stop"}
+{"qi": 116, "arm": "a0", "type": "temporal_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 1.0, "prompt_tokens": 117, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 116, "arm": "plain", "type": "temporal_query", "gold": "Yes", "answer": "No.", "wall_s": 11.8, "prompt_tokens": 5144, "gen_tokens": 3, "done_reason": "stop"}
+{"qi": 116, "arm": "graph", "type": "temporal_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 12.2, "prompt_tokens": 5231, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 131, "arm": "a0", "type": "comparison_query", "gold": "no", "answer": "insufficient information.", "wall_s": 0.7, "prompt_tokens": 88, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 131, "arm": "plain", "type": "comparison_query", "gold": "no", "answer": "insufficient information.", "wall_s": 13.0, "prompt_tokens": 5570, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 131, "arm": "graph", "type": "comparison_query", "gold": "no", "answer": "insufficient information.", "wall_s": 11.3, "prompt_tokens": 4415, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 137, "arm": "a0", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 0.4, "prompt_tokens": 124, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 137, "arm": "plain", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 12.0, "prompt_tokens": 5287, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 137, "arm": "graph", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 13.0, "prompt_tokens": 5245, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 157, "arm": "a0", "type": "inference_query", "gold": "Sam Bankman-Fried", "answer": "Sam Bankman-Fried", "wall_s": 0.8, "prompt_tokens": 134, "gen_tokens": 6, "done_reason": "stop"}
+{"qi": 157, "arm": "plain", "type": "inference_query", "gold": "Sam Bankman-Fried", "answer": "Sam Bankman-Fried", "wall_s": 12.6, "prompt_tokens": 5416, "gen_tokens": 6, "done_reason": "stop"}
+{"qi": 157, "arm": "graph", "type": "inference_query", "gold": "Sam Bankman-Fried", "answer": "insufficient information.", "wall_s": 14.0, "prompt_tokens": 5816, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 178, "arm": "a0", "type": "comparison_query", "gold": "no", "answer": "No.", "wall_s": 0.9, "prompt_tokens": 137, "gen_tokens": 3, "done_reason": "stop"}
+{"qi": 178, "arm": "plain", "type": "comparison_query", "gold": "no", "answer": "insufficient information", "wall_s": 12.6, "prompt_tokens": 5404, "gen_tokens": 4, "done_reason": "stop"}
+{"qi": 178, "arm": "graph", "type": "comparison_query", "gold": "no", "answer": "insufficient information", "wall_s": 10.2, "prompt_tokens": 4420, "gen_tokens": 4, "done_reason": "stop"}
+{"qi": 183, "arm": "a0", "type": "temporal_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 0.6, "prompt_tokens": 129, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 183, "arm": "plain", "type": "temporal_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 12.0, "prompt_tokens": 5223, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 183, "arm": "graph", "type": "temporal_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 10.7, "prompt_tokens": 5150, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 188, "arm": "a0", "type": "inference_query", "gold": "Sam Bankman-Fried", "answer": "insufficient information.", "wall_s": 0.5, "prompt_tokens": 108, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 188, "arm": "plain", "type": "inference_query", "gold": "Sam Bankman-Fried", "answer": "Sam Bankman-Fried", "wall_s": 13.2, "prompt_tokens": 5631, "gen_tokens": 6, "done_reason": "stop"}
+{"qi": 188, "arm": "graph", "type": "inference_query", "gold": "Sam Bankman-Fried", "answer": "Sam Bankman-Fried", "wall_s": 13.4, "prompt_tokens": 5618, "gen_tokens": 6, "done_reason": "stop"}
+{"qi": 216, "arm": "a0", "type": "inference_query", "gold": "Google", "answer": "insufficient information.", "wall_s": 0.7, "prompt_tokens": 127, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 216, "arm": "plain", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 11.8, "prompt_tokens": 5196, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 216, "arm": "graph", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 12.2, "prompt_tokens": 5323, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 217, "arm": "a0", "type": "comparison_query", "gold": "no", "answer": "insufficient information.", "wall_s": 0.6, "prompt_tokens": 128, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 217, "arm": "plain", "type": "comparison_query", "gold": "no", "answer": "insufficient information.", "wall_s": 13.5, "prompt_tokens": 5714, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 217, "arm": "graph", "type": "comparison_query", "gold": "no", "answer": "insufficient information.", "wall_s": 10.4, "prompt_tokens": 4538, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 245, "arm": "a0", "type": "inference_query", "gold": "Sam Bankman-Fried", "answer": "Scott Banfield", "wall_s": 0.5, "prompt_tokens": 117, "gen_tokens": 4, "done_reason": "stop"}
+{"qi": 245, "arm": "plain", "type": "inference_query", "gold": "Sam Bankman-Fried", "answer": "Sam Bankman-Fried", "wall_s": 12.3, "prompt_tokens": 5292, "gen_tokens": 6, "done_reason": "stop"}
+{"qi": 245, "arm": "graph", "type": "inference_query", "gold": "Sam Bankman-Fried", "answer": "Sam Bankman-Fried", "wall_s": 10.6, "prompt_tokens": 5032, "gen_tokens": 6, "done_reason": "stop"}
+{"qi": 248, "arm": "a0", "type": "comparison_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 0.6, "prompt_tokens": 102, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 248, "arm": "plain", "type": "comparison_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 12.4, "prompt_tokens": 5372, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 248, "arm": "graph", "type": "comparison_query", "gold": "Yes", "answer": "insufficient information", "wall_s": 9.3, "prompt_tokens": 4060, "gen_tokens": 4, "done_reason": "stop"}
+{"qi": 256, "arm": "a0", "type": "temporal_query", "gold": "Consistent", "answer": "insufficient information.", "wall_s": 0.5, "prompt_tokens": 139, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 256, "arm": "plain", "type": "temporal_query", "gold": "Consistent", "answer": "insufficient information", "wall_s": 12.6, "prompt_tokens": 5467, "gen_tokens": 4, "done_reason": "stop"}
+{"qi": 256, "arm": "graph", "type": "temporal_query", "gold": "Consistent", "answer": "insufficient information", "wall_s": 10.3, "prompt_tokens": 4590, "gen_tokens": 4, "done_reason": "stop"}
+{"qi": 266, "arm": "a0", "type": "inference_query", "gold": "Uber", "answer": "Uber", "wall_s": 0.4, "prompt_tokens": 81, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 266, "arm": "plain", "type": "inference_query", "gold": "Uber", "answer": "Uber", "wall_s": 12.5, "prompt_tokens": 5467, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 266, "arm": "graph", "type": "inference_query", "gold": "Uber", "answer": "Tada", "wall_s": 11.7, "prompt_tokens": 5126, "gen_tokens": 3, "done_reason": "stop"}
+{"qi": 291, "arm": "a0", "type": "comparison_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 0.5, "prompt_tokens": 101, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 291, "arm": "plain", "type": "comparison_query", "gold": "Yes", "answer": "Yes.", "wall_s": 12.3, "prompt_tokens": 5371, "gen_tokens": 3, "done_reason": "stop"}
+{"qi": 291, "arm": "graph", "type": "comparison_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 9.6, "prompt_tokens": 4288, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 298, "arm": "a0", "type": "inference_query", "gold": "Sam Bankman-Fried", "answer": "Sam Bankman-Fried", "wall_s": 0.6, "prompt_tokens": 111, "gen_tokens": 6, "done_reason": "stop"}
+{"qi": 298, "arm": "plain", "type": "inference_query", "gold": "Sam Bankman-Fried", "answer": "Sam Bankman-Fried", "wall_s": 13.1, "prompt_tokens": 5637, "gen_tokens": 6, "done_reason": "stop"}
+{"qi": 298, "arm": "graph", "type": "inference_query", "gold": "Sam Bankman-Fried", "answer": "Sam Bankman-Fried", "wall_s": 12.7, "prompt_tokens": 5269, "gen_tokens": 6, "done_reason": "stop"}
+{"qi": 315, "arm": "a0", "type": "temporal_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 0.6, "prompt_tokens": 107, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 315, "arm": "plain", "type": "temporal_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 12.1, "prompt_tokens": 5269, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 315, "arm": "graph", "type": "temporal_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 9.3, "prompt_tokens": 4074, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 328, "arm": "a0", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 0.4, "prompt_tokens": 97, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 328, "arm": "plain", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 12.4, "prompt_tokens": 5424, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 328, "arm": "graph", "type": "inference_query", "gold": "Google", "answer": "insufficient information.", "wall_s": 13.5, "prompt_tokens": 5609, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 344, "arm": "a0", "type": "comparison_query", "gold": "no", "answer": "insufficient information.", "wall_s": 0.8, "prompt_tokens": 102, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 344, "arm": "plain", "type": "comparison_query", "gold": "no", "answer": "insufficient information", "wall_s": 12.6, "prompt_tokens": 5251, "gen_tokens": 4, "done_reason": "stop"}
+{"qi": 344, "arm": "graph", "type": "comparison_query", "gold": "no", "answer": "insufficient information", "wall_s": 13.7, "prompt_tokens": 5031, "gen_tokens": 4, "done_reason": "stop"}
+{"qi": 348, "arm": "a0", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 1.6, "prompt_tokens": 106, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 348, "arm": "plain", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 14.2, "prompt_tokens": 5558, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 348, "arm": "graph", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 13.5, "prompt_tokens": 5443, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 370, "arm": "a0", "type": "inference_query", "gold": "Google", "answer": "Meta", "wall_s": 0.6, "prompt_tokens": 110, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 370, "arm": "plain", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 13.3, "prompt_tokens": 5225, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 370, "arm": "graph", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 15.4, "prompt_tokens": 5152, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 376, "arm": "a0", "type": "temporal_query", "gold": "no", "answer": "insufficient information.", "wall_s": 1.7, "prompt_tokens": 111, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 376, "arm": "plain", "type": "temporal_query", "gold": "no", "answer": "insufficient information.", "wall_s": 15.0, "prompt_tokens": 5706, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 376, "arm": "graph", "type": "temporal_query", "gold": "no", "answer": "insufficient information.", "wall_s": 11.5, "prompt_tokens": 4580, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 395, "arm": "a0", "type": "inference_query", "gold": "Google", "answer": "Meta", "wall_s": 3.1, "prompt_tokens": 103, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 395, "arm": "plain", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 13.3, "prompt_tokens": 5306, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 395, "arm": "graph", "type": "inference_query", "gold": "Google", "answer": "insufficient information", "wall_s": 15.6, "prompt_tokens": 5363, "gen_tokens": 4, "done_reason": "stop"}
+{"qi": 411, "arm": "a0", "type": "comparison_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 0.7, "prompt_tokens": 94, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 411, "arm": "plain", "type": "comparison_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 14.7, "prompt_tokens": 5643, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 411, "arm": "graph", "type": "comparison_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 8.3, "prompt_tokens": 3877, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 417, "arm": "a0", "type": "temporal_query", "gold": "Consistent", "answer": "inconsistent", "wall_s": 0.5, "prompt_tokens": 159, "gen_tokens": 3, "done_reason": "stop"}
+{"qi": 417, "arm": "plain", "type": "temporal_query", "gold": "Consistent", "answer": "inconsistent", "wall_s": 14.1, "prompt_tokens": 5518, "gen_tokens": 3, "done_reason": "stop"}
+{"qi": 417, "arm": "graph", "type": "temporal_query", "gold": "Consistent", "answer": "insufficient information.", "wall_s": 11.6, "prompt_tokens": 4610, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 422, "arm": "a0", "type": "inference_query", "gold": "Meta", "answer": "Meta", "wall_s": 0.7, "prompt_tokens": 113, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 422, "arm": "plain", "type": "inference_query", "gold": "Meta", "answer": "Meta", "wall_s": 13.0, "prompt_tokens": 5154, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 422, "arm": "graph", "type": "inference_query", "gold": "Meta", "answer": "Meta", "wall_s": 12.8, "prompt_tokens": 5425, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 448, "arm": "a0", "type": "inference_query", "gold": "Sam Bankman-Fried", "answer": "insufficient information.", "wall_s": 0.7, "prompt_tokens": 111, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 448, "arm": "plain", "type": "inference_query", "gold": "Sam Bankman-Fried", "answer": "Sam Bankman-Fried", "wall_s": 13.4, "prompt_tokens": 5307, "gen_tokens": 6, "done_reason": "stop"}
+{"qi": 448, "arm": "graph", "type": "inference_query", "gold": "Sam Bankman-Fried", "answer": "Sam Bankman-Fried", "wall_s": 13.1, "prompt_tokens": 5138, "gen_tokens": 6, "done_reason": "stop"}
+{"qi": 458, "arm": "a0", "type": "comparison_query", "gold": "no", "answer": "No.", "wall_s": 0.5, "prompt_tokens": 104, "gen_tokens": 3, "done_reason": "stop"}
+{"qi": 458, "arm": "plain", "type": "comparison_query", "gold": "no", "answer": "insufficient information.", "wall_s": 14.6, "prompt_tokens": 5758, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 458, "arm": "graph", "type": "comparison_query", "gold": "no", "answer": "insufficient information.", "wall_s": 12.7, "prompt_tokens": 4996, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 473, "arm": "a0", "type": "temporal_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 0.6, "prompt_tokens": 129, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 473, "arm": "plain", "type": "temporal_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 14.1, "prompt_tokens": 5576, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 473, "arm": "graph", "type": "temporal_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 11.0, "prompt_tokens": 4914, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 478, "arm": "a0", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 0.5, "prompt_tokens": 101, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 478, "arm": "plain", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 12.9, "prompt_tokens": 5240, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 478, "arm": "graph", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 14.2, "prompt_tokens": 5559, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 495, "arm": "a0", "type": "comparison_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 0.6, "prompt_tokens": 92, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 495, "arm": "plain", "type": "comparison_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 14.6, "prompt_tokens": 5750, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 495, "arm": "graph", "type": "comparison_query", "gold": "Yes", "answer": "The article from The Verge does not directly compare Sam Bankman-Fried's perceived trustworthiness in the cryptocurrency industry to the allegations of fraud and conspiracy from TechCrunch. However, it does mention that he was seen as a figure of trust and influence within the industry, which contrasts with the allegations of fraud and", "wall_s": 14.0, "prompt_tokens": 4543, "gen_tokens": 64, "done_reason": "length"}
+{"qi": 504, "arm": "a0", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 0.4, "prompt_tokens": 115, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 504, "arm": "plain", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 13.2, "prompt_tokens": 5299, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 504, "arm": "graph", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 12.0, "prompt_tokens": 4876, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 527, "arm": "a0", "type": "inference_query", "gold": "Sam Altman", "answer": "Dario Amodei", "wall_s": 0.8, "prompt_tokens": 123, "gen_tokens": 6, "done_reason": "stop"}
+{"qi": 527, "arm": "plain", "type": "inference_query", "gold": "Sam Altman", "answer": "Sam Altman", "wall_s": 13.6, "prompt_tokens": 5466, "gen_tokens": 4, "done_reason": "stop"}
+{"qi": 527, "arm": "graph", "type": "inference_query", "gold": "Sam Altman", "answer": "Sam Altman", "wall_s": 13.5, "prompt_tokens": 5295, "gen_tokens": 4, "done_reason": "stop"}
+{"qi": 530, "arm": "a0", "type": "temporal_query", "gold": "No", "answer": "Yes.", "wall_s": 0.5, "prompt_tokens": 118, "gen_tokens": 3, "done_reason": "stop"}
+{"qi": 530, "arm": "plain", "type": "temporal_query", "gold": "No", "answer": "Yes.", "wall_s": 13.2, "prompt_tokens": 5376, "gen_tokens": 3, "done_reason": "stop"}
+{"qi": 530, "arm": "graph", "type": "temporal_query", "gold": "No", "answer": "No.", "wall_s": 13.1, "prompt_tokens": 5094, "gen_tokens": 3, "done_reason": "stop"}
+{"qi": 553, "arm": "a0", "type": "comparison_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 0.6, "prompt_tokens": 111, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 553, "arm": "plain", "type": "comparison_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 13.2, "prompt_tokens": 5258, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 553, "arm": "graph", "type": "comparison_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 13.3, "prompt_tokens": 5204, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 561, "arm": "a0", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 0.5, "prompt_tokens": 115, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 561, "arm": "plain", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 12.8, "prompt_tokens": 5151, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 561, "arm": "graph", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 13.0, "prompt_tokens": 5211, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 570, "arm": "a0", "type": "temporal_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 0.5, "prompt_tokens": 90, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 570, "arm": "plain", "type": "temporal_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 14.0, "prompt_tokens": 5557, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 570, "arm": "graph", "type": "temporal_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 13.5, "prompt_tokens": 5066, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 582, "arm": "a0", "type": "inference_query", "gold": "Sam Bankman-Fried", "answer": "Sam Bankman-Fried", "wall_s": 0.6, "prompt_tokens": 100, "gen_tokens": 6, "done_reason": "stop"}
+{"qi": 582, "arm": "plain", "type": "inference_query", "gold": "Sam Bankman-Fried", "answer": "Sam Bankman-Fried", "wall_s": 13.3, "prompt_tokens": 5344, "gen_tokens": 6, "done_reason": "stop"}
+{"qi": 582, "arm": "graph", "type": "inference_query", "gold": "Sam Bankman-Fried", "answer": "Sam Bankman-Fried", "wall_s": 11.6, "prompt_tokens": 4674, "gen_tokens": 6, "done_reason": "stop"}
+{"qi": 594, "arm": "a0", "type": "comparison_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 0.6, "prompt_tokens": 113, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 594, "arm": "plain", "type": "comparison_query", "gold": "Yes", "answer": "Yes.", "wall_s": 13.1, "prompt_tokens": 5262, "gen_tokens": 3, "done_reason": "stop"}
+{"qi": 594, "arm": "graph", "type": "comparison_query", "gold": "Yes", "answer": "The TechCrunch article discussing microblogging and public discourse platforms lists a broader range of platforms including startups and new applications from larger tech companies compared to the TechCrunch article that mentions the homogenization of content on Social media platforms (TikTok, Instagram, Snapchat, Facebook, YouTube, and X).", "wall_s": 15.9, "prompt_tokens": 5085, "gen_tokens": 64, "done_reason": "stop"}
+{"qi": 605, "arm": "a0", "type": "inference_query", "gold": "Sam Altman", "answer": "Elon Musk", "wall_s": 0.5, "prompt_tokens": 83, "gen_tokens": 4, "done_reason": "stop"}
+{"qi": 605, "arm": "plain", "type": "inference_query", "gold": "Sam Altman", "answer": "Sam Altman", "wall_s": 14.5, "prompt_tokens": 5707, "gen_tokens": 4, "done_reason": "stop"}
+{"qi": 605, "arm": "graph", "type": "inference_query", "gold": "Sam Altman", "answer": "insufficient information.", "wall_s": 14.2, "prompt_tokens": 5641, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 636, "arm": "a0", "type": "comparison_query", "gold": "no", "answer": "insufficient information.", "wall_s": 0.7, "prompt_tokens": 105, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 636, "arm": "plain", "type": "comparison_query", "gold": "no", "answer": "insufficient information.", "wall_s": 13.0, "prompt_tokens": 5306, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 636, "arm": "graph", "type": "comparison_query", "gold": "no", "answer": "insufficient information", "wall_s": 10.3, "prompt_tokens": 4356, "gen_tokens": 4, "done_reason": "stop"}
+{"qi": 638, "arm": "a0", "type": "inference_query", "gold": "Uber", "answer": "Uber", "wall_s": 0.4, "prompt_tokens": 145, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 638, "arm": "plain", "type": "inference_query", "gold": "Uber", "answer": "Uber", "wall_s": 13.2, "prompt_tokens": 5352, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 638, "arm": "graph", "type": "inference_query", "gold": "Uber", "answer": "Uber", "wall_s": 11.8, "prompt_tokens": 4899, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 643, "arm": "a0", "type": "temporal_query", "gold": "Consistent", "answer": "Consistent.", "wall_s": 0.5, "prompt_tokens": 137, "gen_tokens": 4, "done_reason": "stop"}
+{"qi": 643, "arm": "plain", "type": "temporal_query", "gold": "Consistent", "answer": "Consistent", "wall_s": 13.3, "prompt_tokens": 5329, "gen_tokens": 3, "done_reason": "stop"}
+{"qi": 643, "arm": "graph", "type": "temporal_query", "gold": "Consistent", "answer": "Consistent", "wall_s": 12.1, "prompt_tokens": 4804, "gen_tokens": 3, "done_reason": "stop"}
+{"qi": 670, "arm": "a0", "type": "comparison_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 0.6, "prompt_tokens": 93, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 670, "arm": "plain", "type": "comparison_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 13.5, "prompt_tokens": 5331, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 670, "arm": "graph", "type": "comparison_query", "gold": "Yes", "answer": "Yes.", "wall_s": 9.2, "prompt_tokens": 3880, "gen_tokens": 3, "done_reason": "stop"}
+{"qi": 673, "arm": "a0", "type": "inference_query", "gold": "Federal Reserve", "answer": "Federal Reserve", "wall_s": 0.5, "prompt_tokens": 107, "gen_tokens": 3, "done_reason": "stop"}
+{"qi": 673, "arm": "plain", "type": "inference_query", "gold": "Federal Reserve", "answer": "Federal Reserve", "wall_s": 14.5, "prompt_tokens": 5724, "gen_tokens": 3, "done_reason": "stop"}
+{"qi": 673, "arm": "graph", "type": "inference_query", "gold": "Federal Reserve", "answer": "Federal Reserve", "wall_s": 13.9, "prompt_tokens": 5471, "gen_tokens": 3, "done_reason": "stop"}
+{"qi": 686, "arm": "a0", "type": "temporal_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 0.6, "prompt_tokens": 119, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 686, "arm": "plain", "type": "temporal_query", "gold": "Yes", "answer": "Yes.", "wall_s": 12.8, "prompt_tokens": 5168, "gen_tokens": 3, "done_reason": "stop"}
+{"qi": 686, "arm": "graph", "type": "temporal_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 12.2, "prompt_tokens": 5264, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 700, "arm": "a0", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 0.4, "prompt_tokens": 101, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 700, "arm": "plain", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 14.0, "prompt_tokens": 5560, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 700, "arm": "graph", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 14.2, "prompt_tokens": 5575, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 726, "arm": "a0", "type": "inference_query", "gold": "Sam Bankman-Fried", "answer": "insufficient information.", "wall_s": 0.7, "prompt_tokens": 127, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 726, "arm": "plain", "type": "inference_query", "gold": "Sam Bankman-Fried", "answer": "insufficient information.", "wall_s": 13.6, "prompt_tokens": 5473, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 726, "arm": "graph", "type": "inference_query", "gold": "Sam Bankman-Fried", "answer": "Sam Bankman-Fried", "wall_s": 13.8, "prompt_tokens": 5333, "gen_tokens": 6, "done_reason": "stop"}
+{"qi": 730, "arm": "a0", "type": "comparison_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 0.6, "prompt_tokens": 111, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 730, "arm": "plain", "type": "comparison_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 13.7, "prompt_tokens": 5391, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 730, "arm": "graph", "type": "comparison_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 12.5, "prompt_tokens": 5249, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 733, "arm": "a0", "type": "temporal_query", "gold": "no", "answer": "insufficient information.", "wall_s": 0.6, "prompt_tokens": 100, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 733, "arm": "plain", "type": "temporal_query", "gold": "no", "answer": "insufficient information.", "wall_s": 13.3, "prompt_tokens": 5280, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 733, "arm": "graph", "type": "temporal_query", "gold": "no", "answer": "insufficient information.", "wall_s": 14.4, "prompt_tokens": 5623, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 749, "arm": "a0", "type": "inference_query", "gold": "Sam Altman", "answer": "Dario Amodei", "wall_s": 0.7, "prompt_tokens": 104, "gen_tokens": 6, "done_reason": "stop"}
+{"qi": 749, "arm": "plain", "type": "inference_query", "gold": "Sam Altman", "answer": "Sam Altman", "wall_s": 13.9, "prompt_tokens": 5505, "gen_tokens": 4, "done_reason": "stop"}
+{"qi": 749, "arm": "graph", "type": "inference_query", "gold": "Sam Altman", "answer": "Dario Amodei", "wall_s": 13.1, "prompt_tokens": 5223, "gen_tokens": 6, "done_reason": "stop"}
+{"qi": 770, "arm": "a0", "type": "comparison_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 0.6, "prompt_tokens": 98, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 770, "arm": "plain", "type": "comparison_query", "gold": "Yes", "answer": "insufficient information", "wall_s": 14.4, "prompt_tokens": 5752, "gen_tokens": 4, "done_reason": "stop"}
+{"qi": 770, "arm": "graph", "type": "comparison_query", "gold": "Yes", "answer": "insufficient information", "wall_s": 13.2, "prompt_tokens": 5501, "gen_tokens": 4, "done_reason": "stop"}
+{"qi": 774, "arm": "a0", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 0.4, "prompt_tokens": 106, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 774, "arm": "plain", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 12.8, "prompt_tokens": 5158, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 774, "arm": "graph", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 13.4, "prompt_tokens": 5366, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 800, "arm": "a0", "type": "inference_query", "gold": "Apple", "answer": "Mozilla", "wall_s": 0.4, "prompt_tokens": 103, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 800, "arm": "plain", "type": "inference_query", "gold": "Apple", "answer": "Apple", "wall_s": 12.6, "prompt_tokens": 5085, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 800, "arm": "graph", "type": "inference_query", "gold": "Apple", "answer": "Apple", "wall_s": 12.9, "prompt_tokens": 5217, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 802, "arm": "a0", "type": "temporal_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 0.6, "prompt_tokens": 95, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 802, "arm": "plain", "type": "temporal_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 13.8, "prompt_tokens": 5484, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 802, "arm": "graph", "type": "temporal_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 11.5, "prompt_tokens": 5463, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 825, "arm": "a0", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 0.5, "prompt_tokens": 150, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 825, "arm": "plain", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 13.3, "prompt_tokens": 5352, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 825, "arm": "graph", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 14.0, "prompt_tokens": 5588, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 827, "arm": "a0", "type": "comparison_query", "gold": "no", "answer": "insufficient information.", "wall_s": 0.7, "prompt_tokens": 106, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 827, "arm": "plain", "type": "comparison_query", "gold": "no", "answer": "insufficient information.", "wall_s": 14.5, "prompt_tokens": 5661, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 827, "arm": "graph", "type": "comparison_query", "gold": "no", "answer": "insufficient information.", "wall_s": 11.2, "prompt_tokens": 4557, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 847, "arm": "a0", "type": "inference_query", "gold": "Google", "answer": "Meta", "wall_s": 0.4, "prompt_tokens": 104, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 847, "arm": "plain", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 12.9, "prompt_tokens": 5214, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 847, "arm": "graph", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 13.0, "prompt_tokens": 5246, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 869, "arm": "a0", "type": "inference_query", "gold": "Sam Bankman-Fried", "answer": "Sam Bankman-Fried", "wall_s": 0.6, "prompt_tokens": 94, "gen_tokens": 6, "done_reason": "stop"}
+{"qi": 869, "arm": "plain", "type": "inference_query", "gold": "Sam Bankman-Fried", "answer": "Sam Bankman-Fried", "wall_s": 13.1, "prompt_tokens": 5158, "gen_tokens": 6, "done_reason": "stop"}
+{"qi": 869, "arm": "graph", "type": "inference_query", "gold": "Sam Bankman-Fried", "answer": "Sam Bankman-Fried", "wall_s": 13.2, "prompt_tokens": 5115, "gen_tokens": 6, "done_reason": "stop"}
+{"qi": 875, "arm": "a0", "type": "comparison_query", "gold": "Yes", "answer": "Yes.", "wall_s": 0.5, "prompt_tokens": 102, "gen_tokens": 3, "done_reason": "stop"}
+{"qi": 875, "arm": "plain", "type": "comparison_query", "gold": "Yes", "answer": "No.", "wall_s": 14.2, "prompt_tokens": 5637, "gen_tokens": 3, "done_reason": "stop"}
+{"qi": 875, "arm": "graph", "type": "comparison_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 10.8, "prompt_tokens": 4417, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 886, "arm": "a0", "type": "temporal_query", "gold": "no", "answer": "insufficient information.", "wall_s": 0.8, "prompt_tokens": 122, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 886, "arm": "plain", "type": "temporal_query", "gold": "no", "answer": "insufficient information.", "wall_s": 14.3, "prompt_tokens": 5651, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 886, "arm": "graph", "type": "temporal_query", "gold": "no", "answer": "insufficient information.", "wall_s": 11.4, "prompt_tokens": 4573, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 897, "arm": "a0", "type": "inference_query", "gold": "The Federal Reserve", "answer": "Federal Reserve System", "wall_s": 0.5, "prompt_tokens": 85, "gen_tokens": 4, "done_reason": "stop"}
+{"qi": 897, "arm": "plain", "type": "inference_query", "gold": "The Federal Reserve", "answer": "Federal Reserve", "wall_s": 14.0, "prompt_tokens": 5590, "gen_tokens": 3, "done_reason": "stop"}
+{"qi": 897, "arm": "graph", "type": "inference_query", "gold": "The Federal Reserve", "answer": "Federal Reserve System", "wall_s": 12.0, "prompt_tokens": 4901, "gen_tokens": 4, "done_reason": "stop"}
+{"qi": 914, "arm": "a0", "type": "comparison_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 0.5, "prompt_tokens": 87, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 914, "arm": "plain", "type": "comparison_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 12.8, "prompt_tokens": 5055, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 914, "arm": "graph", "type": "comparison_query", "gold": "Yes", "answer": "insufficient information", "wall_s": 12.0, "prompt_tokens": 4865, "gen_tokens": 4, "done_reason": "stop"}
+{"qi": 927, "arm": "a0", "type": "inference_query", "gold": "Google", "answer": "Meta", "wall_s": 0.4, "prompt_tokens": 97, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 927, "arm": "plain", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 13.1, "prompt_tokens": 5267, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 927, "arm": "graph", "type": "inference_query", "gold": "Google", "answer": "insufficient information.", "wall_s": 14.6, "prompt_tokens": 5676, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 939, "arm": "a0", "type": "temporal_query", "gold": "Yes", "answer": "Yes.", "wall_s": 0.7, "prompt_tokens": 111, "gen_tokens": 3, "done_reason": "stop"}
+{"qi": 939, "arm": "plain", "type": "temporal_query", "gold": "Yes", "answer": "Yes.", "wall_s": 12.7, "prompt_tokens": 5213, "gen_tokens": 3, "done_reason": "stop"}
+{"qi": 939, "arm": "graph", "type": "temporal_query", "gold": "Yes", "answer": "Yes.", "wall_s": 12.5, "prompt_tokens": 4996, "gen_tokens": 3, "done_reason": "stop"}
+{"qi": 952, "arm": "a0", "type": "inference_query", "gold": "Sam Bankman-Fried", "answer": "Elon Musk", "wall_s": 0.5, "prompt_tokens": 118, "gen_tokens": 4, "done_reason": "stop"}
+{"qi": 952, "arm": "plain", "type": "inference_query", "gold": "Sam Bankman-Fried", "answer": "Sam Bankman-Fried", "wall_s": 13.5, "prompt_tokens": 5347, "gen_tokens": 6, "done_reason": "stop"}
+{"qi": 952, "arm": "graph", "type": "inference_query", "gold": "Sam Bankman-Fried", "answer": "Sam Bankman-Fried", "wall_s": 13.7, "prompt_tokens": 5374, "gen_tokens": 6, "done_reason": "stop"}
+{"qi": 958, "arm": "a0", "type": "comparison_query", "gold": "Yes", "answer": "Yes.", "wall_s": 0.5, "prompt_tokens": 108, "gen_tokens": 3, "done_reason": "stop"}
+{"qi": 958, "arm": "plain", "type": "comparison_query", "gold": "Yes", "answer": "The TechCrunch article on GPT-4 does not mention anything about susceptibility to producing toxic text compared to other models. The article on the European Commission's probe into X focuses on illegal content and disinformation, not on AI models' susceptibility to generating toxic text. Therefore, the two articles address different contexts.", "wall_s": 15.5, "prompt_tokens": 5102, "gen_tokens": 64, "done_reason": "stop"}
+{"qi": 958, "arm": "graph", "type": "comparison_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 12.6, "prompt_tokens": 4929, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 981, "arm": "a0", "type": "inference_query", "gold": "Sam Altman", "answer": "Dario Amodei", "wall_s": 0.7, "prompt_tokens": 119, "gen_tokens": 6, "done_reason": "stop"}
+{"qi": 981, "arm": "plain", "type": "inference_query", "gold": "Sam Altman", "answer": "Sam Altman", "wall_s": 13.9, "prompt_tokens": 5541, "gen_tokens": 4, "done_reason": "stop"}
+{"qi": 981, "arm": "graph", "type": "inference_query", "gold": "Sam Altman", "answer": "Sam Altman", "wall_s": 13.7, "prompt_tokens": 5313, "gen_tokens": 4, "done_reason": "stop"}
+{"qi": 991, "arm": "a0", "type": "comparison_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 0.7, "prompt_tokens": 97, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 991, "arm": "plain", "type": "comparison_query", "gold": "Yes", "answer": "Yes.", "wall_s": 13.5, "prompt_tokens": 5392, "gen_tokens": 3, "done_reason": "stop"}
+{"qi": 991, "arm": "graph", "type": "comparison_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 12.5, "prompt_tokens": 4979, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 995, "arm": "a0", "type": "temporal_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 0.7, "prompt_tokens": 114, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 995, "arm": "plain", "type": "temporal_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 12.8, "prompt_tokens": 5192, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 995, "arm": "graph", "type": "temporal_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 12.9, "prompt_tokens": 5253, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 1019, "arm": "a0", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 0.4, "prompt_tokens": 104, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 1019, "arm": "plain", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 14.1, "prompt_tokens": 5628, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 1019, "arm": "graph", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 13.5, "prompt_tokens": 5347, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 1025, "arm": "a0", "type": "comparison_query", "gold": "Yes", "answer": "Yes.", "wall_s": 0.4, "prompt_tokens": 99, "gen_tokens": 3, "done_reason": "stop"}
+{"qi": 1025, "arm": "plain", "type": "comparison_query", "gold": "Yes", "answer": "Yes.", "wall_s": 13.2, "prompt_tokens": 5258, "gen_tokens": 3, "done_reason": "stop"}
+{"qi": 1025, "arm": "graph", "type": "comparison_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 13.3, "prompt_tokens": 5289, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 1043, "arm": "a0", "type": "inference_query", "gold": "Sam Bankman-Fried", "answer": "insufficient information.", "wall_s": 0.7, "prompt_tokens": 108, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 1043, "arm": "plain", "type": "inference_query", "gold": "Sam Bankman-Fried", "answer": "Sam Bankman-Fried", "wall_s": 12.5, "prompt_tokens": 4884, "gen_tokens": 6, "done_reason": "stop"}
+{"qi": 1043, "arm": "graph", "type": "inference_query", "gold": "Sam Bankman-Fried", "answer": "Sam Bankman-Fried", "wall_s": 11.4, "prompt_tokens": 4536, "gen_tokens": 6, "done_reason": "stop"}
+{"qi": 1061, "arm": "a0", "type": "temporal_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 0.6, "prompt_tokens": 130, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 1061, "arm": "plain", "type": "temporal_query", "gold": "Yes", "answer": "insufficient information", "wall_s": 13.2, "prompt_tokens": 5347, "gen_tokens": 4, "done_reason": "stop"}
+{"qi": 1061, "arm": "graph", "type": "temporal_query", "gold": "Yes", "answer": "insufficient information", "wall_s": 10.6, "prompt_tokens": 5316, "gen_tokens": 4, "done_reason": "stop"}
+{"qi": 1066, "arm": "a0", "type": "comparison_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 0.6, "prompt_tokens": 117, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 1066, "arm": "plain", "type": "comparison_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 14.6, "prompt_tokens": 5701, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 1066, "arm": "graph", "type": "comparison_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 11.7, "prompt_tokens": 4717, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 1075, "arm": "a0", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 0.4, "prompt_tokens": 110, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 1075, "arm": "plain", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 13.1, "prompt_tokens": 5277, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 1075, "arm": "graph", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 9.8, "prompt_tokens": 5060, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 1094, "arm": "a0", "type": "comparison_query", "gold": "no", "answer": "insufficient information.", "wall_s": 0.5, "prompt_tokens": 89, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 1094, "arm": "plain", "type": "comparison_query", "gold": "no", "answer": "insufficient information.", "wall_s": 13.5, "prompt_tokens": 5381, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 1094, "arm": "graph", "type": "comparison_query", "gold": "no", "answer": "insufficient information.", "wall_s": 12.9, "prompt_tokens": 5127, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 1105, "arm": "a0", "type": "temporal_query", "gold": "no", "answer": "insufficient information.", "wall_s": 0.6, "prompt_tokens": 107, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 1105, "arm": "plain", "type": "temporal_query", "gold": "no", "answer": "No.", "wall_s": 12.6, "prompt_tokens": 5116, "gen_tokens": 3, "done_reason": "stop"}
+{"qi": 1105, "arm": "graph", "type": "temporal_query", "gold": "no", "answer": "insufficient information.", "wall_s": 12.3, "prompt_tokens": 4999, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 1115, "arm": "a0", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 0.4, "prompt_tokens": 126, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 1115, "arm": "plain", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 12.8, "prompt_tokens": 5220, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 1115, "arm": "graph", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 10.8, "prompt_tokens": 5296, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 1141, "arm": "a0", "type": "inference_query", "gold": "Sam Altman", "answer": "Sam Altman", "wall_s": 0.5, "prompt_tokens": 98, "gen_tokens": 4, "done_reason": "stop"}
+{"qi": 1141, "arm": "plain", "type": "inference_query", "gold": "Sam Altman", "answer": "Sam Altman", "wall_s": 13.6, "prompt_tokens": 5434, "gen_tokens": 4, "done_reason": "stop"}
+{"qi": 1141, "arm": "graph", "type": "inference_query", "gold": "Sam Altman", "answer": "Sam Altman", "wall_s": 13.2, "prompt_tokens": 5236, "gen_tokens": 4, "done_reason": "stop"}
+{"qi": 1151, "arm": "a0", "type": "temporal_query", "gold": "no", "answer": "insufficient information.", "wall_s": 0.6, "prompt_tokens": 109, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 1151, "arm": "plain", "type": "temporal_query", "gold": "no", "answer": "insufficient information.", "wall_s": 13.0, "prompt_tokens": 5215, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 1151, "arm": "graph", "type": "temporal_query", "gold": "no", "answer": "insufficient information.", "wall_s": 13.2, "prompt_tokens": 5233, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 1161, "arm": "a0", "type": "inference_query", "gold": "OpenAI", "answer": "Microsoft", "wall_s": 0.4, "prompt_tokens": 99, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 1161, "arm": "plain", "type": "inference_query", "gold": "OpenAI", "answer": "OpenAI", "wall_s": 14.0, "prompt_tokens": 5544, "gen_tokens": 3, "done_reason": "stop"}
+{"qi": 1161, "arm": "graph", "type": "inference_query", "gold": "OpenAI", "answer": "OpenAI", "wall_s": 12.6, "prompt_tokens": 5444, "gen_tokens": 3, "done_reason": "stop"}
+{"qi": 1163, "arm": "a0", "type": "comparison_query", "gold": "No", "answer": "insufficient information.", "wall_s": 0.6, "prompt_tokens": 100, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 1163, "arm": "plain", "type": "comparison_query", "gold": "No", "answer": "insufficient information.", "wall_s": 13.9, "prompt_tokens": 5568, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 1163, "arm": "graph", "type": "comparison_query", "gold": "No", "answer": "insufficient information.", "wall_s": 13.5, "prompt_tokens": 5347, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 1187, "arm": "a0", "type": "inference_query", "gold": "Epic Games", "answer": "Epic Games", "wall_s": 0.5, "prompt_tokens": 103, "gen_tokens": 4, "done_reason": "stop"}
+{"qi": 1187, "arm": "plain", "type": "inference_query", "gold": "Epic Games", "answer": "Epic Games", "wall_s": 13.7, "prompt_tokens": 5395, "gen_tokens": 4, "done_reason": "stop"}
+{"qi": 1187, "arm": "graph", "type": "inference_query", "gold": "Epic Games", "answer": "Epic Games", "wall_s": 13.2, "prompt_tokens": 5245, "gen_tokens": 4, "done_reason": "stop"}
+{"qi": 1205, "arm": "a0", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 0.4, "prompt_tokens": 109, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 1205, "arm": "plain", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 14.1, "prompt_tokens": 5566, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 1205, "arm": "graph", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 12.0, "prompt_tokens": 5238, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 1219, "arm": "a0", "type": "comparison_query", "gold": "Yes", "answer": "Yes.", "wall_s": 0.5, "prompt_tokens": 109, "gen_tokens": 3, "done_reason": "stop"}
+{"qi": 1219, "arm": "plain", "type": "comparison_query", "gold": "Yes", "answer": "Yes.", "wall_s": 12.9, "prompt_tokens": 5208, "gen_tokens": 3, "done_reason": "stop"}
+{"qi": 1219, "arm": "graph", "type": "comparison_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 13.9, "prompt_tokens": 5489, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 1220, "arm": "a0", "type": "temporal_query", "gold": "no", "answer": "insufficient information.", "wall_s": 1.4, "prompt_tokens": 137, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 1220, "arm": "plain", "type": "temporal_query", "gold": "no", "answer": "insufficient information", "wall_s": 12.8, "prompt_tokens": 5197, "gen_tokens": 4, "done_reason": "stop"}
+{"qi": 1220, "arm": "graph", "type": "temporal_query", "gold": "no", "answer": "No.", "wall_s": 12.3, "prompt_tokens": 5044, "gen_tokens": 3, "done_reason": "stop"}
+{"qi": 1227, "arm": "a0", "type": "inference_query", "gold": "Sam Bankman-Fried", "answer": "insufficient information.", "wall_s": 0.6, "prompt_tokens": 131, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 1227, "arm": "plain", "type": "inference_query", "gold": "Sam Bankman-Fried", "answer": "Sam Bankman-Fried", "wall_s": 14.7, "prompt_tokens": 5665, "gen_tokens": 6, "done_reason": "stop"}
+{"qi": 1227, "arm": "graph", "type": "inference_query", "gold": "Sam Bankman-Fried", "answer": "insufficient information.", "wall_s": 12.7, "prompt_tokens": 4952, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 1251, "arm": "a0", "type": "inference_query", "gold": "Flexport", "answer": "UPS", "wall_s": 0.4, "prompt_tokens": 114, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 1251, "arm": "plain", "type": "inference_query", "gold": "Flexport", "answer": "Amazon", "wall_s": 13.6, "prompt_tokens": 5478, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 1251, "arm": "graph", "type": "inference_query", "gold": "Flexport", "answer": "Uber", "wall_s": 13.5, "prompt_tokens": 5474, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 1272, "arm": "a0", "type": "temporal_query", "gold": "no", "answer": "insufficient information.", "wall_s": 0.7, "prompt_tokens": 138, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 1272, "arm": "plain", "type": "temporal_query", "gold": "no", "answer": "insufficient information.", "wall_s": 13.9, "prompt_tokens": 5531, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 1272, "arm": "graph", "type": "temporal_query", "gold": "no", "answer": "insufficient information.", "wall_s": 14.0, "prompt_tokens": 5504, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 1275, "arm": "a0", "type": "inference_query", "gold": "Sam Altman", "answer": "insufficient information.", "wall_s": 0.7, "prompt_tokens": 115, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 1275, "arm": "plain", "type": "inference_query", "gold": "Sam Altman", "answer": "Sam Altman", "wall_s": 14.0, "prompt_tokens": 5523, "gen_tokens": 4, "done_reason": "stop"}
+{"qi": 1275, "arm": "graph", "type": "inference_query", "gold": "Sam Altman", "answer": "insufficient information.", "wall_s": 14.5, "prompt_tokens": 5604, "gen_tokens": 5, "done_reason": "stop"}
