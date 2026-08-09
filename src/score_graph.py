@@ -115,9 +115,12 @@ def main() -> None:
         print(f"    {t:22} n={v['n']:4}  strict {v['strict']:6.2f}")
 
     if not g["partial"]:
+        # merge per-k, never overwrite the sibling k's result
         out = ROOT / "reports" / "stage2_graph.json"
-        out.write_text(json.dumps(cfg, indent=1))
-        print(f"wrote {out}")
+        d = json.loads(out.read_text()) if out.exists() else {}
+        d[f"k{args.k}"] = cfg
+        out.write_text(json.dumps(d, indent=1))
+        print(f"wrote {out} [k{args.k}]")
 
 
 if __name__ == "__main__":
