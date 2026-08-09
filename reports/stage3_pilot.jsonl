@@ -1,0 +1,6 @@
+{"qi": 0, "arm": "a0", "type": "inference_query", "gold": "Sam Bankman-Fried", "answer": "Sam Bankman-Fried", "wall_s": 2.3, "prompt_tokens": 92, "gen_tokens": 6, "done_reason": "stop"}
+{"qi": 0, "arm": "plain", "type": "inference_query", "gold": "Sam Bankman-Fried", "answer": "Sam Bankman-Fried", "wall_s": 11.6, "prompt_tokens": 5085, "gen_tokens": 6, "done_reason": "stop"}
+{"qi": 0, "arm": "graph", "type": "inference_query", "gold": "Sam Bankman-Fried", "answer": "Sam Bankman-Fried", "wall_s": 13.0, "prompt_tokens": 5631, "gen_tokens": 6, "done_reason": "stop"}
+{"qi": 3, "arm": "a0", "type": "comparison_query", "gold": "Yes", "answer": "insufficient information.", "wall_s": 0.5, "prompt_tokens": 82, "gen_tokens": 5, "done_reason": "stop"}
+{"qi": 3, "arm": "plain", "type": "comparison_query", "gold": "Yes", "answer": "Yes.", "wall_s": 11.7, "prompt_tokens": 5026, "gen_tokens": 3, "done_reason": "stop"}
+{"qi": 3, "arm": "graph", "type": "comparison_query", "gold": "Yes", "answer": "Yes.", "wall_s": 11.5, "prompt_tokens": 4933, "gen_tokens": 3, "done_reason": "stop"}
