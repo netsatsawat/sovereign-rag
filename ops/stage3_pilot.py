@@ -92,7 +92,7 @@ def generate(prompt: str) -> tuple[str, dict]:
     req = urllib.request.Request("http://localhost:11434/api/generate", data=body,
                                  headers={"Content-Type": "application/json"})
     t0 = time.time()
-    with urllib.request.urlopen(req, timeout=600) as r:
+    with urllib.request.urlopen(req, timeout=1800) as r:
         d = json.loads(r.read())
     meta = {"wall_s": round(time.time() - t0, 1),
             "prompt_tokens": d.get("prompt_eval_count", 0),
@@ -175,7 +175,15 @@ def main() -> None:
                         else graph_topk(q["query"], K)
                     ctx = "\n\n".join(chunks[i]["text"] for i in top)
                     prompt = PROMPT_RAG.format(context=ctx, q=q["query"])
-                ans, meta = generate(prompt)
+                try:
+                    ans, meta = generate(prompt)
+                except Exception as ex:
+                    # A hung or failed call is a recorded outcome, not a dead
+                    # run: the first full-grid attempt died at query ~493 when
+                    # one call blew the client timeout.
+                    ans, meta = "", {"wall_s": None, "prompt_tokens": 0,
+                                     "gen_tokens": 0,
+                                     "done_reason": f"error:{type(ex).__name__}"}
                 fh.write(json.dumps({"qi": qi, "arm": arm, "type": q["type"],
                                      "gold": q["answer"], "answer": ans, **meta}) + "\n")
                 fh.flush()
