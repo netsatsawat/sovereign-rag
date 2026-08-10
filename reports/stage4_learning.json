@@ -1,0 +1,206 @@
+{
+ "k": 10,
+ "eps": 0.1,
+ "lambda": 1.0,
+ "seeds": 5,
+ "stream_frac": 0.6,
+ "ipw": "clipped at 50, declared",
+ "per_seed": [
+  {
+   "seed": 0,
+   "stream": 828,
+   "n1": 541,
+   "n2": 12,
+   "credited_docs": 181,
+   "n1_base_strict": 37.89,
+   "n1_base_hits": 98.34,
+   "n1_learned_strict": 36.41,
+   "n1_learned_hits": 97.97,
+   "n1_popularity_strict": 10.72,
+   "n1_popularity_hits": 84.84,
+   "n1_shuffled_strict": 41.04,
+   "n1_shuffled_hits": 98.34,
+   "n2_base_strict": 91.67,
+   "n2_base_hits": 91.67,
+   "n2_learned_strict": 91.67,
+   "n2_learned_hits": 91.67,
+   "n2_popularity_strict": 0.0,
+   "n2_popularity_hits": 0.0,
+   "n2_shuffled_strict": 91.67,
+   "n2_shuffled_hits": 91.67
+  },
+  {
+   "seed": 1,
+   "stream": 828,
+   "n1": 542,
+   "n2": 11,
+   "credited_docs": 190,
+   "n1_base_strict": 34.32,
+   "n1_base_hits": 98.15,
+   "n1_learned_strict": 32.84,
+   "n1_learned_hits": 97.79,
+   "n1_popularity_strict": 11.44,
+   "n1_popularity_hits": 81.55,
+   "n1_shuffled_strict": 33.95,
+   "n1_shuffled_hits": 97.79,
+   "n2_base_strict": 81.82,
+   "n2_base_hits": 90.91,
+   "n2_learned_strict": 81.82,
+   "n2_learned_hits": 90.91,
+   "n2_popularity_strict": 0.0,
+   "n2_popularity_hits": 0.0,
+   "n2_shuffled_strict": 81.82,
+   "n2_shuffled_hits": 90.91
+  },
+  {
+   "seed": 2,
+   "stream": 828,
+   "n1": 546,
+   "n2": 7,
+   "credited_docs": 198,
+   "n1_base_strict": 36.08,
+   "n1_base_hits": 98.72,
+   "n1_learned_strict": 34.25,
+   "n1_learned_hits": 98.35,
+   "n1_popularity_strict": 10.44,
+   "n1_popularity_hits": 85.9,
+   "n1_shuffled_strict": 32.97,
+   "n1_shuffled_hits": 94.87,
+   "n2_base_strict": 71.43,
+   "n2_base_hits": 85.71,
+   "n2_learned_strict": 71.43,
+   "n2_learned_hits": 85.71,
+   "n2_popularity_strict": 0.0,
+   "n2_popularity_hits": 0.0,
+   "n2_shuffled_strict": 71.43,
+   "n2_shuffled_hits": 85.71
+  },
+  {
+   "seed": 3,
+   "stream": 828,
+   "n1": 542,
+   "n2": 11,
+   "credited_docs": 187,
+   "n1_base_strict": 38.19,
+   "n1_base_hits": 98.71,
+   "n1_learned_strict": 37.08,
+   "n1_learned_hits": 97.97,
+   "n1_popularity_strict": 14.21,
+   "n1_popularity_hits": 84.69,
+   "n1_shuffled_strict": 37.27,
+   "n1_shuffled_hits": 98.71,
+   "n2_base_strict": 81.82,
+   "n2_base_hits": 90.91,
+   "n2_learned_strict": 81.82,
+   "n2_learned_hits": 90.91,
+   "n2_popularity_strict": 0.0,
+   "n2_popularity_hits": 0.0,
+   "n2_shuffled_strict": 81.82,
+   "n2_shuffled_hits": 90.91
+  },
+  {
+   "seed": 4,
+   "stream": 828,
+   "n1": 548,
+   "n2": 5,
+   "credited_docs": 198,
+   "n1_base_strict": 37.41,
+   "n1_base_hits": 98.91,
+   "n1_learned_strict": 36.31,
+   "n1_learned_hits": 98.36,
+   "n1_popularity_strict": 6.39,
+   "n1_popularity_hits": 80.47,
+   "n1_shuffled_strict": 33.76,
+   "n1_shuffled_hits": 98.54,
+   "n2_base_strict": 80.0,
+   "n2_base_hits": 80.0,
+   "n2_learned_strict": 80.0,
+   "n2_learned_hits": 80.0,
+   "n2_popularity_strict": 0.0,
+   "n2_popularity_hits": 0.0,
+   "n2_shuffled_strict": 80.0,
+   "n2_shuffled_hits": 80.0
+  }
+ ],
+ "deltas": {
+  "n1_learned_vs_base_strict": {
+   "delta_pts": -1.4,
+   "ci95": [
+    -2.43,
+    -0.33
+   ],
+   "p_boot": 0.0106,
+   "pairs": 2719
+  },
+  "n1_learned_vs_popularity_strict": {
+   "delta_pts": 24.75,
+   "ci95": [
+    22.77,
+    26.74
+   ],
+   "p_boot": 0.0001,
+   "pairs": 2719
+  },
+  "n1_learned_vs_shuffled_strict": {
+   "delta_pts": -0.4,
+   "ci95": [
+    -1.54,
+    0.74
+   ],
+   "p_boot": 0.4924,
+   "pairs": 2719
+  },
+  "n1_popularity_vs_base_strict": {
+   "delta_pts": -26.15,
+   "ci95": [
+    -28.25,
+    -24.09
+   ],
+   "p_boot": 0.0001,
+   "pairs": 2719
+  },
+  "n2_learned_vs_base_strict": {
+   "delta_pts": 0.0,
+   "ci95": [
+    0.0,
+    0.0
+   ],
+   "p_boot": 1.0,
+   "pairs": 46
+  },
+  "n2_learned_vs_popularity_strict": {
+   "delta_pts": 82.61,
+   "ci95": [
+    71.74,
+    93.48
+   ],
+   "p_boot": 0.0001,
+   "pairs": 46
+  },
+  "n2_learned_vs_shuffled_strict": {
+   "delta_pts": 0.0,
+   "ci95": [
+    0.0,
+    0.0
+   ],
+   "p_boot": 1.0,
+   "pairs": 46
+  },
+  "n2_popularity_vs_base_strict": {
+   "delta_pts": -82.61,
+   "ci95": [
+    -93.48,
+    -71.74
+   ],
+   "p_boot": 0.0001,
+   "pairs": 46
+  }
+ },
+ "gates": {
+  "g1_better_on_similar": false,
+  "g2_not_worse_on_novel": true,
+  "g3_beats_popularity_counter": true,
+  "g4_not_structural": false,
+  "verdict": "PRE-REGISTERED NEGATIVE: the learning claim may not be made"
+ }
+}
