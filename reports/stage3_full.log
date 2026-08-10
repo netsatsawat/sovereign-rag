@@ -1,0 +1,123 @@
+  10/1381 queries · 3m elapsed
+  20/1381 queries · 8m elapsed
+  30/1381 queries · 13m elapsed
+  40/1381 queries · 17m elapsed
+  50/1381 queries · 21m elapsed
+  60/1381 queries · 25m elapsed
+  70/1381 queries · 29m elapsed
+  80/1381 queries · 33m elapsed
+  90/1381 queries · 37m elapsed
+  100/1381 queries · 42m elapsed
+  110/1381 queries · 47m elapsed
+  120/1381 queries · 50m elapsed
+  130/1381 queries · 55m elapsed
+  140/1381 queries · 58m elapsed
+  150/1381 queries · 63m elapsed
+  160/1381 queries · 67m elapsed
+  170/1381 queries · 72m elapsed
+  180/1381 queries · 76m elapsed
+  190/1381 queries · 80m elapsed
+  200/1381 queries · 84m elapsed
+  210/1381 queries · 89m elapsed
+  220/1381 queries · 93m elapsed
+  230/1381 queries · 97m elapsed
+  240/1381 queries · 102m elapsed
+  250/1381 queries · 105m elapsed
+  260/1381 queries · 109m elapsed
+  270/1381 queries · 113m elapsed
+  280/1381 queries · 118m elapsed
+  290/1381 queries · 122m elapsed
+  300/1381 queries · 126m elapsed
+  310/1381 queries · 130m elapsed
+  320/1381 queries · 134m elapsed
+  330/1381 queries · 138m elapsed
+  340/1381 queries · 143m elapsed
+  350/1381 queries · 146m elapsed
+  360/1381 queries · 151m elapsed
+  370/1381 queries · 156m elapsed
+  380/1381 queries · 159m elapsed
+  390/1381 queries · 164m elapsed
+  400/1381 queries · 168m elapsed
+  410/1381 queries · 172m elapsed
+  420/1381 queries · 176m elapsed
+Traceback (most recent call last):
+  File "/Users/net/Documents/001-personal-projects/sovereign-rag/ops/stage3_pilot.py", line 189, in <module>
+    main()
+  File "/Users/net/Documents/001-personal-projects/sovereign-rag/ops/stage3_pilot.py", line 178, in main
+    ans, meta = generate(prompt)
+                ^^^^^^^^^^^^^^^^
+  File "/Users/net/Documents/001-personal-projects/sovereign-rag/ops/stage3_pilot.py", line 95, in generate
+    with urllib.request.urlopen(req, timeout=600) as r:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/net/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/urllib/request.py", line 216, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/net/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/urllib/request.py", line 519, in open
+    response = self._open(req, data)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/net/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/urllib/request.py", line 536, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/net/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/urllib/request.py", line 496, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/Users/net/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/urllib/request.py", line 1377, in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/net/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/urllib/request.py", line 1352, in do_open
+    r = h.getresponse()
+        ^^^^^^^^^^^^^^^
+  File "/Users/net/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/http/client.py", line 1415, in getresponse
+    response.begin()
+  File "/Users/net/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/http/client.py", line 330, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "/Users/net/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/http/client.py", line 291, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/net/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/lib/python3.11/socket.py", line 718, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: timed out
+  10/1381 queries · 0m elapsed
+  20/1381 queries · 0m elapsed
+  30/1381 queries · 0m elapsed
+  40/1381 queries · 0m elapsed
+  50/1381 queries · 0m elapsed
+  60/1381 queries · 0m elapsed
+  70/1381 queries · 0m elapsed
+  80/1381 queries · 0m elapsed
+  90/1381 queries · 0m elapsed
+  100/1381 queries · 0m elapsed
+  110/1381 queries · 0m elapsed
+  120/1381 queries · 0m elapsed
+  130/1381 queries · 0m elapsed
+  140/1381 queries · 0m elapsed
+  150/1381 queries · 0m elapsed
+  160/1381 queries · 0m elapsed
+  170/1381 queries · 0m elapsed
+  180/1381 queries · 0m elapsed
+  190/1381 queries · 0m elapsed
+  200/1381 queries · 0m elapsed
+  210/1381 queries · 0m elapsed
+  220/1381 queries · 0m elapsed
+  230/1381 queries · 0m elapsed
+  240/1381 queries · 0m elapsed
+  250/1381 queries · 0m elapsed
+  260/1381 queries · 0m elapsed
+  270/1381 queries · 0m elapsed
+  280/1381 queries · 0m elapsed
+  290/1381 queries · 0m elapsed
+  300/1381 queries · 0m elapsed
+  310/1381 queries · 0m elapsed
+  320/1381 queries · 0m elapsed
+  330/1381 queries · 0m elapsed
+  340/1381 queries · 0m elapsed
+  350/1381 queries · 0m elapsed
+  360/1381 queries · 0m elapsed
+  370/1381 queries · 0m elapsed
+  380/1381 queries · 0m elapsed
+  390/1381 queries · 0m elapsed
+  400/1381 queries · 0m elapsed
+  410/1381 queries · 0m elapsed
+  420/1381 queries · 0m elapsed
