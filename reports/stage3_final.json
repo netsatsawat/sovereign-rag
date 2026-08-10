@@ -1,0 +1,207 @@
+{
+ "n": 1381,
+ "metric": "normalised containment; abstention text tracked",
+ "arms": {
+  "a0": {
+   "containment": 39.54,
+   "wilson95": [
+    36.99,
+    42.14
+   ],
+   "abstained_pct": 44.6,
+   "by_type": {
+    "comparison_query": {
+     "n": 391,
+     "containment": 22.51,
+     "wilson95": [
+      18.65,
+      26.9
+     ]
+    },
+    "inference_query": {
+     "n": 671,
+     "containment": 57.68,
+     "wilson95": [
+      53.9,
+      61.36
+     ]
+    },
+    "temporal_query": {
+     "n": 319,
+     "containment": 22.26,
+     "wilson95": [
+      18.04,
+      27.14
+     ]
+    }
+   }
+  },
+  "plain": {
+   "containment": 63.07,
+   "wilson95": [
+    60.49,
+    65.58
+   ],
+   "abstained_pct": 30.9,
+   "by_type": {
+    "comparison_query": {
+     "n": 391,
+     "containment": 36.06,
+     "wilson95": [
+      31.46,
+      40.94
+     ]
+    },
+    "inference_query": {
+     "n": 671,
+     "containment": 95.23,
+     "wilson95": [
+      93.35,
+      96.6
+     ]
+    },
+    "temporal_query": {
+     "n": 319,
+     "containment": 28.53,
+     "wilson95": [
+      23.85,
+      33.71
+     ]
+    }
+   }
+  },
+  "graph": {
+   "containment": 46.56,
+   "wilson95": [
+    43.94,
+    49.2
+   ],
+   "abstained_pct": 47.3,
+   "by_type": {
+    "comparison_query": {
+     "n": 391,
+     "containment": 22.25,
+     "wilson95": [
+      18.41,
+      26.63
+     ]
+    },
+    "inference_query": {
+     "n": 671,
+     "containment": 72.43,
+     "wilson95": [
+      68.93,
+      75.68
+     ]
+    },
+    "temporal_query": {
+     "n": 319,
+     "containment": 21.94,
+     "wilson95": [
+      17.75,
+      26.8
+     ]
+    }
+   }
+  }
+ },
+ "mcnemar": {
+  "plain_vs_a0": {
+   "n": 1381,
+   "plain_wins": 399,
+   "a0_wins": 74,
+   "pi_d": 0.343,
+   "p_exact": 0.0,
+   "significant_holm": true
+  },
+  "plain_vs_a0_comparison_query": {
+   "n": 391,
+   "plain_wins": 95,
+   "a0_wins": 42,
+   "pi_d": 0.35,
+   "p_exact": 7e-06,
+   "significant_holm": true
+  },
+  "plain_vs_a0_inference_query": {
+   "n": 671,
+   "plain_wins": 261,
+   "a0_wins": 9,
+   "pi_d": 0.402,
+   "p_exact": 0.0,
+   "significant_holm": true
+  },
+  "plain_vs_a0_temporal_query": {
+   "n": 319,
+   "plain_wins": 43,
+   "a0_wins": 23,
+   "pi_d": 0.207,
+   "p_exact": 0.018657,
+   "significant_holm": false
+  },
+  "plain_vs_graph": {
+   "n": 1381,
+   "plain_wins": 273,
+   "graph_wins": 45,
+   "pi_d": 0.23,
+   "p_exact": 0.0,
+   "significant_holm": true
+  },
+  "plain_vs_graph_comparison_query": {
+   "n": 391,
+   "plain_wins": 74,
+   "graph_wins": 20,
+   "pi_d": 0.24,
+   "p_exact": 0.0,
+   "significant_holm": true
+  },
+  "plain_vs_graph_inference_query": {
+   "n": 671,
+   "plain_wins": 160,
+   "graph_wins": 7,
+   "pi_d": 0.249,
+   "p_exact": 0.0,
+   "significant_holm": true
+  },
+  "plain_vs_graph_temporal_query": {
+   "n": 319,
+   "plain_wins": 39,
+   "graph_wins": 18,
+   "pi_d": 0.179,
+   "p_exact": 0.007508,
+   "significant_holm": true
+  },
+  "graph_vs_a0": {
+   "n": 1381,
+   "graph_wins": 248,
+   "a0_wins": 151,
+   "pi_d": 0.289,
+   "p_exact": 1e-06,
+   "significant_holm": true
+  },
+  "graph_vs_a0_comparison_query": {
+   "n": 391,
+   "graph_wins": 56,
+   "a0_wins": 57,
+   "pi_d": 0.289,
+   "p_exact": 1.0,
+   "significant_holm": false
+  },
+  "graph_vs_a0_inference_query": {
+   "n": 671,
+   "graph_wins": 162,
+   "a0_wins": 63,
+   "pi_d": 0.335,
+   "p_exact": 0.0,
+   "significant_holm": true
+  },
+  "graph_vs_a0_temporal_query": {
+   "n": 319,
+   "graph_wins": 30,
+   "a0_wins": 31,
+   "pi_d": 0.191,
+   "p_exact": 1.0,
+   "significant_holm": false
+  }
+ },
+ "family": "Holm-Bonferroni across all 12 pairwise tests"
+}
