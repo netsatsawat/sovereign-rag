@@ -1,0 +1,49 @@
+{
+ "comparison_query": {
+  "n": 120,
+  "a0_8b": 21.7,
+  "rag_8b": 34.2,
+  "a0_27b": 13.3,
+  "rag_27b": 20.0,
+  "rag27_vs_rag8_split": [
+   5,
+   22
+  ],
+  "p_exact": 0.00151
+ },
+ "temporal_query": {
+  "n": 60,
+  "a0_8b": 20.0,
+  "rag_8b": 28.3,
+  "a0_27b": 21.7,
+  "rag_27b": 5.0,
+  "rag27_vs_rag8_split": [
+   1,
+   15
+  ],
+  "p_exact": 0.00052
+ },
+ "verdict": {
+  "headline": "CONFOUNDED \u2014 the 27B does not test synthesis; it tests abstention. Under the strict grounding instruction the 27B abstains 84% on RAG (8B: ~31%), and loses 22:5 (comparison) and 15:1 (temporal) to the 8B on containment. Scale made caution worse, not synthesis better.",
+  "abstention_rates": {
+   "a0_27b": 0.79,
+   "plain_27b": 0.84
+  },
+  "consequence": "The synthesis-bottleneck claim as originally framed is NOT causally validated and must be revised: comparison/temporal errors are dominated by abstention on binary verification questions, interacting with a containment metric that cannot credit a cautious non-answer."
+ },
+ "benchmark_anatomy": {
+  "gold_shape": {
+   "comparison": "96% yes/no",
+   "temporal": "90% yes/no",
+   "inference": "99% short entity"
+  },
+  "question_form": "comparison/temporal questions are META-questions about articles ('do the TechCrunch article and the Hacker News article both report X'), not questions about the world; the natural join key is the ARTICLE, not a world entity",
+  "graph_bridging": {
+   "comparison": 95.1,
+   "inference": 100.0,
+   "temporal": 99.1,
+   "note": "gold doc pairs ARE bridged in the graph (shared entity or edge) 95-100% of the time \u2014 connectivity was never the graph's problem"
+  },
+  "extraction_quality": "the 8B extractor builds metadata triangles \u2014 headlines typed as EVENT, outlet domains as LOCATION, dates as EVENT, edges like headline->outlet strength 10 \u2014 a CITATION graph, not a knowledge graph; hubs are outlets and dates, which explains both hub domination and why bridges are semantically empty"
+ }
+}
