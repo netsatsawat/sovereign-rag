@@ -157,7 +157,8 @@ def main() -> None:
         for line in OUT.open():
             try:
                 r = json.loads(line)
-                done.add((r["arm"], r["qi"]))
+                if not str(r.get("done_reason", "")).startswith("error"):
+                    done.add((r["arm"], r["qi"]))
             except Exception:
                 pass
 

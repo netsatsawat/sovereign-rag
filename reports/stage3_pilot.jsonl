@@ -1477,3 +1477,6 @@
 {"qi": 427, "arm": "a0", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 0.4, "prompt_tokens": 103, "gen_tokens": 2, "done_reason": "stop"}
 {"qi": 427, "arm": "plain", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 12.9, "prompt_tokens": 5265, "gen_tokens": 2, "done_reason": "stop"}
 {"qi": 427, "arm": "graph", "type": "inference_query", "gold": "Google", "answer": "Google", "wall_s": 12.8, "prompt_tokens": 5207, "gen_tokens": 2, "done_reason": "stop"}
+{"qi": 428, "arm": "a0", "type": "comparison_query", "gold": "Yes", "answer": "", "wall_s": null, "prompt_tokens": 0, "gen_tokens": 0, "done_reason": "error:TimeoutError"}
+{"qi": 428, "arm": "plain", "type": "comparison_query", "gold": "Yes", "answer": "", "wall_s": null, "prompt_tokens": 0, "gen_tokens": 0, "done_reason": "error:TimeoutError"}
+{"qi": 428, "arm": "graph", "type": "comparison_query", "gold": "Yes", "answer": "", "wall_s": null, "prompt_tokens": 0, "gen_tokens": 0, "done_reason": "error:TimeoutError"}
