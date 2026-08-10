@@ -206,7 +206,8 @@ def main() -> None:
                       for r in rows)
     chars = sum(len(clean(r.get("body") or "")) for r in rows)
 
-    out = OUT / f"chunks_{args.budget}.jsonl"
+    suffix = "_all" if args.all_categories else ""
+    out = OUT / f"chunks_{args.budget}{suffix}.jsonl"
     with out.open("w") as fh:
         for c in chunks:
             fh.write(json.dumps(c) + "\n")
@@ -233,7 +234,7 @@ def main() -> None:
             1 for a in rows if a.get("_dropped_title_over_budget")),
         "over_budget": sum(1 for c in chunks if c["n_tokens"] > args.budget),
     }
-    (OUT / f"chunks_{args.budget}.manifest.json").write_text(json.dumps(manifest, indent=1))
+    (OUT / f"chunks_{args.budget}{suffix}.manifest.json").write_text(json.dumps(manifest, indent=1))
 
     print(f"budget {args.budget}: {len(rows)} articles -> {len(chunks)} chunks")
     print(f"  tokens mean {manifest['tokens']['mean']} median {manifest['tokens']['median']} "
