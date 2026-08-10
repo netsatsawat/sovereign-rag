@@ -5773,5 +5773,36 @@
    "n": 319
   }
  },
- "note": "Deltas are paired over the identical query list (order preserved from score_retrieval.load_queries). No Holm here: these join the study family at final analysis; p_boot is reported raw and labelled as such."
+ "note": "Deltas are paired over the identical query list (order preserved from score_retrieval.load_queries). No Holm here: these join the study family at final analysis; p_boot is reported raw and labelled as such.",
+ "community_analysis": {
+  "communities": 346,
+  "modularity": 0.803,
+  "largest": [
+   1688,
+   1288,
+   880,
+   800,
+   552
+  ],
+  "multi_doc_queries_sharing_community_pct": 45.3,
+  "by_type": {
+   "comparison_query": {
+    "share_pct": 44.2,
+    "n": 391
+   },
+   "inference_query": {
+    "share_pct": 41.3,
+    "n": 671
+   },
+   "temporal_query": {
+    "share_pct": 54.9,
+    "n": 319
+   }
+  },
+  "community_boosted_strict10": 8.47,
+  "reference": {
+   "plain_graph": 13.32,
+   "bm25": 37.51
+  }
+ }
 }

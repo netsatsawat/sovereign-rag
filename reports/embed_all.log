@@ -1,0 +1,5 @@
+    chunks@600_all: 640/2976  66s
+    chunks@600_all: 1280/2976  131s
+    chunks@600_all: 1920/2976  197s
+    chunks@600_all: 2560/2976  262s
+chunks_600_all.jsonl: 2976 x 1024 in 303s -> /Users/net/Documents/001-personal-projects/sovereign-rag/data/emb_600_all.npy

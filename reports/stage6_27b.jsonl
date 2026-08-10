@@ -1,0 +1,1 @@
+{"qi": 3, "arm": "a0_27b", "type": "comparison_query", "gold": "Yes", "answer": "insufficient information", "wall_s": 17.5, "prompt_tokens": 80, "gen_tokens": 4, "done_reason": "stop"}
