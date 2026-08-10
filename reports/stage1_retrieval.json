@@ -36135,5 +36135,17 @@
   "inference_query",
   "comparison_query",
   "temporal_query"
- ]
+ ],
+ "outlet_strip_control": {
+  "outlets": 21,
+  "queries_affected_pct": 99.1,
+  "bm25_600_k10_strict_original": 37.51,
+  "bm25_600_k10_strict_stripped": 36.35,
+  "oracle_pts": 1.16,
+  "ci95": [
+   -0.07,
+   2.39
+  ],
+  "note": "queries stripped of verbatim corpus outlet names; chunks untouched; same index"
+ }
 }
