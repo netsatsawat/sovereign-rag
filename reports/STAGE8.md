@@ -37,6 +37,13 @@ Two deviations, both forced by the model and both documented in
   for this template; the model reasons unconditionally (probe: all 64 tokens
   to `reasoning_content`, content empty). "low" is Meta's documented control
   and halves the spend (~270 vs 664 gen tokens on the probe query).
+
+  Probe record (llama-server /v1/chat/completions, PROMPT_CLOSED with
+  "What is the capital of France?", temperature 0, max_tokens 64, server
+  launched with `--reasoning off`): `finish_reason: "length"`,
+  `content: ""`, `reasoning_content` ending `...So just "Paris". Probably
+  just Paris.\n\nNo` — 64/64 tokens spent deliberating, zero on the answer
+  channel.
 - **max_tokens 1024 vs the others' 64**, because reasoning and answer share
   the budget. Only the answer channel is scored, as in every other arm.
 
@@ -67,27 +74,36 @@ Glimmer's best comparison arm.
 
 ## The three findings
 
-**1. Instruction-following is the failure mode, made worse.** Glimmer
-abstains on 64.6% of RAG queries — between the 8B and the 27B's 84% — and
-crossing abstention with the Stage-1 strict@10 per-query vectors shows it is
-not calibration: **56.4% abstention on queries where every gold document is
-in the context** (vs 70.5% where evidence is incomplete). As a detector of
-genuinely-missing evidence, its abstention has precision 0.63 / recall 0.71
-against a 58% base rate. The 27B on the same split: 74.7% / 94.4%. The
-best-IFBench model in its class obeys the escape hatch hardest.
+**1. The loss travels through compliance.** Glimmer abstains on 64.6% of
+RAG queries — between the 8B and the 27B's 84% — and crossing abstention
+with the Stage-1 strict@10 per-query vectors shows it is not calibration:
+**56.4% abstention on queries where every gold document is in the context**
+(vs 70.5% where evidence is incomplete). As a detector of genuinely-missing
+evidence, its abstention has precision 0.63 / recall 0.71 against a 58%
+base rate. Anchors on the identical evidence-complete rows: the 8B abstains
+38.6%, the 27B 74.7%. When Glimmer does answer with complete evidence it is
+right 90.9% of the time (40/44) — the loss is delivered through the escape
+hatch, not through wrong answers. Note the cross-model ordering (27B: lower
+IFBench, more abstention) blocks any claim that IF-training *causes* the
+over-refusal; what is measured is that the failure expresses itself as
+literal compliance with the escape-hatch instruction.
 
 **2. Contamination has a floor and it is rising.** Closed-book, no context,
-Glimmer scores 96.67% on the inference stratum (8B: 57.68) — near-verbatim
-recall of late-2023 news entities (knowledge cutoff 2026-01-04). Retrieval
-*drops* it to 68.33% because grounding suppresses what it already knows. Net:
-RAG-over-closed-book is +6.25pp, p=0.067 — **no statistically significant
-retrieval benefit for this model on this corpus**. The benchmark aged into
-the training set; every new model raises the leakage floor.
+Glimmer scores 96.67% on the inference stratum. The 8B on the same 60
+questions: 51.67 (recomputed from stage3_pilot.jsonl; 57.68 is the full
+671-question stratum figure) — a 45pp rise in the memorization floor in one
+model generation. Near-verbatim recall of late-2023 news entities (knowledge
+cutoff 2026-01-04); for practical purposes the corpus is in the training
+set. Retrieval *drops* it to 68.33% because grounding suppresses what it
+already knows. Net: RAG-over-closed-book is +6.25pp, p=0.067 — **no
+statistically significant retrieval benefit for this model on this
+corpus**.
 
 **3. The reasoning tax is unconditional.** No off switch exists. At the
-lowest documented strength: mean 349 gen tokens per RAG answer (median 331,
-max 1020) vs ≤64 for both Qwens — ~5.5× per answer, before any accuracy
-difference.
+lowest documented strength: mean 349 gen tokens per RAG answer (median
+331.5, max 1020). The Qwens' actual means on the same questions under their
+64-token cap: 7.0 (8B) and 5.7 (27B) — roughly 50× the output tokens per
+answer.
 
 ## Artifacts
 
