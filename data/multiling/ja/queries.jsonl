@@ -1,0 +1,100 @@
+{"qi": 0, "question_id": "a1025052p0q0", "question": "日本のネットニュースサイト運営会社で、J-CASTニュースの運営と配信、eラーニングサービス事業、メディアサービス事業、Web制作事業などを行っているのは？", "gold_article": "a1025052p0", "golds": ["株式会社ジェイ・キャスト", "ジェイ・キャスト"]}
+{"qi": 1, "question_id": "a10717p10q3", "question": "西鉄が初のパ・リーグ優勝した年の日本シリーズの結果は？", "gold_article": "a10717p10", "golds": ["中日ドラゴンズに3勝4敗で敗れる", "敗れる", "3勝4敗"]}
+{"qi": 2, "question_id": "a10717p2q1", "question": "1948年には都市対抗野球で優勝したチームは？", "gold_article": "a10717p2", "golds": ["西鉄"]}
+{"qi": 3, "question_id": "a10717p29q2", "question": "球団は西武鉄道グループのどこに買収されることになったか？", "gold_article": "a10717p29", "golds": ["国土計画"]}
+{"qi": 4, "question_id": "a10717p39q2", "question": "2年連続のリーグ優勝を果たした年にドラフト1位で入団したのは誰", "gold_article": "a10717p39", "golds": ["清原和博"]}
+{"qi": 5, "question_id": "a10717p50q1", "question": "西武球場はドーム型の球場に工事をしたことで名前が何に変わりましたか？", "gold_article": "a10717p50", "golds": ["西武ドーム", "ドーム"]}
+{"qi": 6, "question_id": "a10717p61q1", "question": "埼玉西武ライオンズがBクラスになるのは何年ぶり？", "gold_article": "a10717p61", "golds": ["26年ぶり"]}
+{"qi": 7, "question_id": "a10717p72q0", "question": "ライオンズのマスコットキャラクターをデザインしたのは？", "gold_article": "a10717p72", "golds": ["手塚治虫"]}
+{"qi": 8, "question_id": "a10717p82q1", "question": "1990年代から2000年代にかけて作曲された地方専用応援歌を使用していた球団は", "gold_article": "a10717p82", "golds": ["埼玉西武ライオンズ"]}
+{"qi": 9, "question_id": "a10717p90q2", "question": "球団公式ファンクラブの入会受付をしている場所は？", "gold_article": "a10717p90", "golds": ["グッズショップや西武鉄道の主要駅"]}
+{"qi": 10, "question_id": "a11067p16q4", "question": "法華経は日本に伝わる前にどこで広く流布していたか", "gold_article": "a11067p16", "golds": ["ユーラシア大陸東部"]}
+{"qi": 11, "question_id": "a11067p25q2", "question": "法華宗各派の祖となったのは？", "gold_article": "a11067p25", "golds": ["日蓮"]}
+{"qi": 12, "question_id": "a11067p7q2", "question": "法華経は何品あるか？", "gold_article": "a11067p7", "golds": ["28品"]}
+{"qi": 13, "question_id": "a122107p2q0", "question": "日本において保護国の概念が最初に紹介されたのは？", "gold_article": "a122107p2", "golds": ["万国公法"]}
+{"qi": 14, "question_id": "a12606p1q2", "question": "蓮如以前の大坂の発音をカタカナで答えよ", "gold_article": "a12606p1", "golds": ["ヲサカ"]}
+{"qi": 15, "question_id": "a12606p2q2", "question": "蓮如以後、大坂をなんと読んだか", "gold_article": "a12606p2", "golds": ["おおざか"]}
+{"qi": 16, "question_id": "a13547p1q0", "question": "青野とは、現在のどこ？", "gold_article": "a13547p1", "golds": ["大垣市青野"]}
+{"qi": 17, "question_id": "a1431634p3q1", "question": "菅沼は水深がどんな湖沼であるか", "gold_article": "a1431634p3", "golds": ["深い", "水深の深い湖"]}
+{"qi": 18, "question_id": "a1668p10q2", "question": "第1回DebConfの開催年は？", "gold_article": "a1668p10", "golds": ["2000年", "2000"]}
+{"qi": 19, "question_id": "a1668p21q1", "question": "コードネームは？", "gold_article": "a1668p21", "golds": ["squeeze"]}
+{"qi": 20, "question_id": "a1668p31q1", "question": "現プロジェクトリーダーは誰？", "gold_article": "a1668p31", "golds": ["ステファノ・ザッキローリ"]}
+{"qi": 21, "question_id": "a1668p43q1", "question": "ユーザーランドは何の成果物に依存しているかアルファベット三文字で答えよ。", "gold_article": "a1668p43", "golds": ["GNU"]}
+{"qi": 22, "question_id": "a16896p10q2", "question": "藤原朝臣淳光宣の官職は？", "gold_article": "a16896p10", "golds": ["権大納言"]}
+{"qi": 23, "question_id": "a18693p1q3", "question": "訳語として使用されはじめたものは何処の言語", "gold_article": "a18693p1", "golds": ["ドイツ語"]}
+{"qi": 24, "question_id": "a197594p15q1", "question": "2016年に打ち上げられたアメリカの探査機は？", "gold_article": "a197594p15", "golds": ["オシリス・レックス"]}
+{"qi": 25, "question_id": "a197594p8q3", "question": "中華人民共和国の蛍火1号が打ち上げられたのはいつか？", "gold_article": "a197594p8", "golds": ["2011年11月9日"]}
+{"qi": 26, "question_id": "a24296p14q1", "question": "薬剤師も将来は医師の処方を補助する専門家にもなるべきであると結論を出している機関の名前は？", "gold_article": "a24296p14", "golds": ["日本学術会議"]}
+{"qi": 27, "question_id": "a24296p25q3", "question": "新卒薬剤師の初任給はいくらですか。", "gold_article": "a24296p25", "golds": ["22万1088円である。", "22万1088円"]}
+{"qi": 28, "question_id": "a24296p5q0", "question": "薬学部卒業時にどんな資格が与えられるか", "gold_article": "a24296p5", "golds": ["受験資格"]}
+{"qi": 29, "question_id": "a257159p13q0", "question": "Yahoo!は2009年7月29日にどこの検索エンジンを使用する契約を発表したか", "gold_article": "a257159p13", "golds": ["マイクロソフト", "マイクロソフトのプロジェクト"]}
+{"qi": 30, "question_id": "a257159p21q1", "question": "2019年11月4日、解散・清算手続きが行われ、2020年10月株主に清算分配を行なった会社は?", "gold_article": "a257159p21", "golds": ["アルタバ"]}
+{"qi": 31, "question_id": "a2602915p0q0", "question": "「わいせつ行為及びセクシュアル・ハラスメント」で2016年度に懲戒処分を受けた教育職員は何人でしょうか？", "gold_article": "a2602915p0", "golds": ["226人"]}
+{"qi": 32, "question_id": "a2602915p19q2", "question": "セクハラの正式名称", "gold_article": "a2602915p19", "golds": ["セクシャルハラスメント"]}
+{"qi": 33, "question_id": "a2602915p31q0", "question": "2009年、自殺した韓国人女優は", "gold_article": "a2602915p31", "golds": ["チャン・ジャヨン"]}
+{"qi": 34, "question_id": "a2602915p5q2", "question": "晴野まゆみ氏がセクシャルハラスメント裁判で全面勝訴したのは何年か。", "gold_article": "a2602915p5", "golds": ["1992年"]}
+{"qi": 35, "question_id": "a27572p16q3", "question": "山口県の中心的都市は？", "gold_article": "a27572p16", "golds": ["下関市"]}
+{"qi": 36, "question_id": "a27572p3q1", "question": "下関市の降雪量は多い？少ない？", "gold_article": "a27572p3", "golds": ["少ない"]}
+{"qi": 37, "question_id": "a295155p0q2", "question": "東京都千代田区神田神保町に本社を置く一ツ橋グループの一企業。教育サービス事業、キャラクターライセンス事業、映像番組の企画・制作を業務の主体とする企業は", "gold_article": "a295155p0", "golds": ["小学館集英社プロダクション", "株式会社小学館集英社プロダクション"]}
+{"qi": 38, "question_id": "a30327p18q0", "question": "国際児童図書評議会（IBBY）はどこで開催した？", "gold_article": "a30327p18", "golds": ["インド・ニューデリー", "スイス・バーゼル"]}
+{"qi": 39, "question_id": "a30327p4q2", "question": "上皇后美智子が当時皇太子だった明仁親王と出会った場所はどこか？", "gold_article": "a30327p4", "golds": ["軽井沢会テニスコート", "長野県の軽井沢会テニスコート"]}
+{"qi": 40, "question_id": "a307318p0q1", "question": "投手が打者を欺いて不利にする行為", "gold_article": "a307318p0", "golds": ["ボーク"]}
+{"qi": 41, "question_id": "a307318p20q1", "question": "2017年の全国高等学校野球選手権徳島大会の1回戦は城東高対何高か。", "gold_article": "a307318p20", "golds": ["阿波高", "城東高対阿波高"]}
+{"qi": 42, "question_id": "a31397p10q1", "question": "ベトナム八月革命にて、ベトナム独立宣言を読み上げ、ベトナム共和国の誕生を国民と世界に向けて宣言した人物を答えよ。", "gold_article": "a31397p10", "golds": ["ホー・チ・ミン"]}
+{"qi": 43, "question_id": "a31397p8q3", "question": "ベトナムがフランスの植民地となったのはいつか？", "gold_article": "a31397p8", "golds": ["1887年", "1887年 - 1945年"]}
+{"qi": 44, "question_id": "a3177p2q1", "question": "果物はさまざまな栄養素を含んでいる。人体に必要な糖分やカリウムと何が豊富？", "gold_article": "a3177p2", "golds": ["ビタミン"]}
+{"qi": 45, "question_id": "a32686p15q1", "question": "アルバニアやトルコなどでは何が廃止された？", "gold_article": "a32686p15", "golds": ["シャリーア"]}
+{"qi": 46, "question_id": "a32686p24q3", "question": "ズィンミーが信仰の内面的保持（内心の自由）を完全に保障されている一方、きびしい制限があるのはどのようなことか？", "gold_article": "a32686p24", "golds": ["信仰の表明（宗教的な表現・結社の自由）", "信仰の表明", "信仰の自由"]}
+{"qi": 47, "question_id": "a32686p9q0", "question": "マレーシアでムスリムが飲酒するとどうなるか", "gold_article": "a32686p9", "golds": ["罰金と鞭打ち刑", "罰金と鞭打ち刑が科される。", "罰金と鞭打ち刑が科される"]}
+{"qi": 48, "question_id": "a374236p4q3", "question": "母数に対応する十分統計量は、母集団の確率分布が何である場合に存在する？", "gold_article": "a374236p4", "golds": ["指数型分布族"]}
+{"qi": 49, "question_id": "a3837p14q2", "question": "1453年時点、東ローマ帝国の首都はどこ？", "gold_article": "a3837p14", "golds": ["コンスタンティノープル"]}
+{"qi": 50, "question_id": "a3837p27q1", "question": "1541年10月、カール5世が親征してやめさせた行為は？", "gold_article": "a3837p27", "golds": ["キリスト教徒への海賊行為"]}
+{"qi": 51, "question_id": "a3837p36q0", "question": "納税の義務をおっていたのは", "gold_article": "a3837p36", "golds": ["レアヤー"]}
+{"qi": 52, "question_id": "a3837p48q0", "question": "1876年にオスマン帝国憲法が公布されたときの大宰相は誰ですか？", "gold_article": "a3837p48", "golds": ["ミドハト・パシャ"]}
+{"qi": 53, "question_id": "a3837p57q1", "question": "皇帝を頂点に君主専制・中央集権を実現した国家体制に結実したことを何という？", "gold_article": "a3837p57", "golds": ["古典オスマン体制"]}
+{"qi": 54, "question_id": "a3837p67q1", "question": "オスマン帝国で書記官長は外務大臣改組された、大宰相用人は何に改組された", "gold_article": "a3837p67", "golds": ["内務大臣", "首相"]}
+{"qi": 55, "question_id": "a3837p78q2", "question": "アルバニアではアルバニア語を母語とするアルバニア人らが存在したが、15世紀にその多くが改宗したのは？", "gold_article": "a3837p78", "golds": ["イスラム教"]}
+{"qi": 56, "question_id": "a3837p91q3", "question": "16世紀の1683年、どの皇帝の治世の元、オスマン帝国は勢力的に最大版図を築いたか？", "gold_article": "a3837p91", "golds": ["メフメト4世"]}
+{"qi": 57, "question_id": "a38603p18q1", "question": "リオデジャネイロはブラジルの何の中心地ですか？", "gold_article": "a38603p18", "golds": ["文化", "流行"]}
+{"qi": 58, "question_id": "a38603p4q3", "question": "1960年にブラジリアに遷都するまではブラジルの首都であった、ではそれまで首都であった都市名を答えなさい。", "gold_article": "a38603p4", "golds": ["リオデジャネイロ"]}
+{"qi": 59, "question_id": "a38638p15q1", "question": "再婚者が司祭になる事は認められるか、禁止されるか", "gold_article": "a38638p15", "golds": ["禁止される"]}
+{"qi": 60, "question_id": "a38638p9q1", "question": "牧師は英語でなんという。", "gold_article": "a38638p9", "golds": ["Pastor", "Rector, Vicar"]}
+{"qi": 61, "question_id": "a41156p16q1", "question": "ポンプジェットの特性は？", "gold_article": "a41156p16", "golds": ["高速性、静粛性", "高速性、静粛性において優れていたものの、推進効率に関しては従来のスクリューよりも劣る", "は高速性、静粛性において優れていたものの、推進効率に関しては従来のスクリューよりも劣る"]}
+{"qi": 62, "question_id": "a41156p26q2", "question": "防衛庁に「防衛力の在り方検討会議」が設置されたのはいつ？", "gold_article": "a41156p26", "golds": ["平成13年9月"]}
+{"qi": 63, "question_id": "a4126p13q0", "question": "外国に投資するということはその国の通貨建ての何を持つということか。", "gold_article": "a4126p13", "golds": ["資産"]}
+{"qi": 64, "question_id": "a4126p23q2", "question": "自国通貨を減価させると、増加するのは?", "gold_article": "a4126p23", "golds": ["輸出"]}
+{"qi": 65, "question_id": "a413479p0q0", "question": "英語版ウィキべディアが設立されたのはいつか？", "gold_article": "a413479p0", "golds": ["2001年1月15日"]}
+{"qi": 66, "question_id": "a413479p4q2", "question": "英語版ウィキペディアに文章ファイル以外に保存されているファイルは何か", "gold_article": "a413479p4", "golds": ["画像や音声", "コモンズ", "画像や音声のファイル"]}
+{"qi": 67, "question_id": "a44310p3q4", "question": "保養所は何湖の近くにあるか？", "gold_article": "a44310p3", "golds": ["照月湖"]}
+{"qi": 68, "question_id": "a450p16q1", "question": "和歌山県は何王国と呼ばれていますか？", "gold_article": "a450p16", "golds": ["果樹王国"]}
+{"qi": 69, "question_id": "a450p6q0", "question": "全国日照時間が長く台風銀座と言われてる県は？", "gold_article": "a450p6", "golds": ["和歌山県"]}
+{"qi": 70, "question_id": "a53330p1q2", "question": "風土記の書体は？", "gold_article": "a53330p1", "golds": ["漢文体"]}
+{"qi": 71, "question_id": "a58672p15q0", "question": "「アーサー」は何という鳥をモチーフにしたキャラクターか。", "gold_article": "a58672p15", "golds": ["ケツァール"]}
+{"qi": 72, "question_id": "a58672p9q2", "question": "製作局の表記のないものはどこ制作か？", "gold_article": "a58672p9", "golds": ["テレビ朝日"]}
+{"qi": 73, "question_id": "a6163p1q1", "question": "1920年に中性子の発見を予想したのは？", "gold_article": "a6163p1", "golds": ["アーネスト・ラザフォード"]}
+{"qi": 74, "question_id": "a6163p7q3", "question": "中性子を制御するのが難しいのはなぜか", "gold_article": "a6163p7", "golds": ["電気的に中性である為"]}
+{"qi": 75, "question_id": "a63861p10q1", "question": "FBIの階級はどのようなものか", "gold_article": "a63861p10", "golds": ["階級制度は存在しない", "存在しない"]}
+{"qi": 76, "question_id": "a63861p3q1", "question": "連邦捜査局はどこの国？", "gold_article": "a63861p3", "golds": ["アメリカ合衆国"]}
+{"qi": 77, "question_id": "a63869p16q2", "question": "全ての事業者において最大の発電方法は？", "gold_article": "a63869p16", "golds": ["火力発電"]}
+{"qi": 78, "question_id": "a63869p8q0", "question": "一般送配電事業を営むには、電気事業法第3条の規定によりどこの許可が必要であるか。", "gold_article": "a63869p8", "golds": ["経済産業大臣"]}
+{"qi": 79, "question_id": "a68240p5q1", "question": "労働組合に関して登記すべき事項で、第三者に対抗することができないは登記したのちかどうか。", "gold_article": "a68240p5", "golds": ["登記した後", "登記した後でなければ第三者に対抗することができない"]}
+{"qi": 80, "question_id": "a873932p102q2", "question": "ド・ゴールの辞任後、5月5日に行われた議会選挙において、第一党となったのは？", "gold_article": "a873932p102", "golds": ["人民共和党"]}
+{"qi": 81, "question_id": "a873932p112q3", "question": "学生運動を発端とする五月危機がおこったのは何年か。", "gold_article": "a873932p112", "golds": ["1966年"]}
+{"qi": 82, "question_id": "a873932p121q0", "question": "大統領与党と首相与党がねじれる状態を何という", "gold_article": "a873932p121", "golds": ["コアビタシオン", "コアビタシオン（保革共存）"]}
+{"qi": 83, "question_id": "a873932p132q1", "question": "パリ同時多発テロ事件やシャルリー・エブド襲撃事件はいつか。", "gold_article": "a873932p132", "golds": ["2015年"]}
+{"qi": 84, "question_id": "a873932p18q3", "question": "現在のアルファベットの小文字の元となった、シャルルマーニュが宮廷で用いていた字体は？", "gold_article": "a873932p18", "golds": ["カロリング小字体"]}
+{"qi": 85, "question_id": "a873932p27q2", "question": "シャルル8世はイタリアへの勢力拡大を図ってイタリア戦争を引き起こしたのは何時か？", "gold_article": "a873932p27", "golds": ["1498年"]}
+{"qi": 86, "question_id": "a873932p35q3", "question": "アシエント権を漢字で言うと", "gold_article": "a873932p35", "golds": ["奴隷貿易独占権"]}
+{"qi": 87, "question_id": "a873932p44q3", "question": "1830年7月、自由主義者として知られたのは誰", "gold_article": "a873932p44", "golds": ["ルイ・フィリップ", "オルレアン家のルイ・フィリップ"]}
+{"qi": 88, "question_id": "a873932p53q3", "question": "クリミア戦争が勃発したのはいつ?", "gold_article": "a873932p53", "golds": ["1853年10月"]}
+{"qi": 89, "question_id": "a873932p62q4", "question": "パリ・コミューンは何と呼ばれるか", "gold_article": "a873932p62", "golds": ["史上初の社会主義革命"]}
+{"qi": 90, "question_id": "a873932p72q4", "question": "カイヨー政権が崩壊したのはいつ？", "gold_article": "a873932p72", "golds": ["1912年1月"]}
+{"qi": 91, "question_id": "a873932p80q3", "question": "ドイツ革命の発端は？", "gold_article": "a873932p80", "golds": ["キール軍港での水兵の反乱"]}
+{"qi": 92, "question_id": "a873932p9q0", "question": "紀元前1世紀半ばにローマ皇帝になったクラウディウス出身地は？", "gold_article": "a873932p9", "golds": ["ガリアの都市リヨン", "リヨン"]}
+{"qi": 93, "question_id": "a89716p0q1", "question": "ヨーロッパ人による最初の開拓が始まった年は？", "gold_article": "a89716p0", "golds": ["1604年"]}
+{"qi": 94, "question_id": "a89716p2q1", "question": "メイン州の名前の由来についてはっきりとした根拠はあるか", "gold_article": "a89716p2", "golds": ["無い"]}
+{"qi": 95, "question_id": "a89716p31q3", "question": "ブルーベリーのアメリカ最大の輸出州はどこ？", "gold_article": "a89716p31", "golds": ["メイン州"]}
+{"qi": 96, "question_id": "a89716p41q0", "question": "アメリカ連邦政府が公式に認定し、保留地 (Reservation) を領有する部族はいくつあるか", "gold_article": "a89716p41", "golds": ["4つ", "4"]}
+{"qi": 97, "question_id": "a89716p52q1", "question": "ボウディン大学やコルビー大学のあるアメリカの州は？", "gold_article": "a89716p52", "golds": ["メイン州"]}
+{"qi": 98, "question_id": "a92432p11q0", "question": "1860年に台湾が対外的に開港後の輸出品目は。", "gold_article": "a92432p11", "golds": ["茶葉、砂糖、樟脳", "砂糖"]}
+{"qi": 99, "question_id": "a92432p20q2", "question": "台南市における最大の従業者数を誇る産業は何か", "gold_article": "a92432p20", "golds": ["サービス業"]}

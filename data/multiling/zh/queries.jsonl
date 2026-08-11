@@ -1,0 +1,100 @@
+{"qi": 0, "question_id": "DEV_0_QUERY_0", "question": "《战国无双3》是由哪两个公司合作开发的？", "gold_article": "DEV_0", "golds": ["光荣和ω-force"]}
+{"qi": 1, "question_id": "DEV_9_QUERY_0", "question": "尚恩·菲南是哪个组合的主音？", "gold_article": "DEV_9", "golds": ["西城男孩"]}
+{"qi": 2, "question_id": "DEV_18_QUERY_0", "question": "龙烟铁路位于哪里？", "gold_article": "DEV_18", "golds": ["胶东半岛北侧海岸"]}
+{"qi": 3, "question_id": "DEV_28_QUERY_2", "question": "沼鹿的生活习性是什么样的？", "gold_article": "DEV_28", "golds": ["牠们在早上及晚上觅食。牠们较水鹿少在夜间活动。当受到骚扰时，牠们会发出尖锐的叫声。", "在北方邦，牠们只栖息在沼泽。在中央邦，牠们栖息在近森林的草原。牠们在早上及晚上觅食。牠们较水鹿少在夜间活动。当受到骚扰时，牠们会发出尖锐的叫声。"]}
+{"qi": 4, "question_id": "DEV_36_QUERY_1", "question": "宗座华盖在现代是什么的标志？", "gold_article": "DEV_36", "golds": ["罗马天主教会和教宗权威"]}
+{"qi": 5, "question_id": "DEV_45_QUERY_3", "question": "班杰的兴趣爱好是什么？", "gold_article": "DEV_45", "golds": ["功夫和创意绘画以及料理和音乐"]}
+{"qi": 6, "question_id": "DEV_53_QUERY_4", "question": "什么原因导致了前往杭州的海宁市民出行不便？", "gold_article": "DEV_53", "golds": ["当时杭州东站尚未完工，所有海宁站的普速列车除了停靠杭州站仅有的4班列车外，所有列车全部停靠位于萧山区的杭州南站", "当时杭州东站尚未完工，所有海宁站的普速列车除了停靠杭州站仅有的4班列车外，所有列车全部停靠位于萧山区的杭州南站。"]}
+{"qi": 7, "question_id": "DEV_61_QUERY_4", "question": "公园内许多景点为什么都要在工作人员的陪同下参观？", "gold_article": "DEV_61", "golds": ["由于岩画的历史价值，特别是在美洲印第安人中的地位", "由于岩画的历史价值，特别是在美洲印第安人中的地位。"]}
+{"qi": 8, "question_id": "DEV_70_QUERY_0", "question": "操场的定义是什么？", "gold_article": "DEV_70", "golds": ["用以进行步操、阅兵、集会的场地", "指用以进行步操、阅兵、集会的场地。"]}
+{"qi": 9, "question_id": "DEV_80_QUERY_1", "question": "一个结果要满足什么条件才算精准？", "gold_article": "DEV_80", "golds": ["必须要同时符合准确与精密这两个条件", "必须要同时符合准确与精密这两个条件。"]}
+{"qi": 10, "question_id": "DEV_92_QUERY_3", "question": "侯活·韦比在2011年新年因在足球上的贡献而被授勋了什么？", "gold_article": "DEV_92", "golds": ["员佐勋章", "员佐勋章 （MBE）"]}
+{"qi": 11, "question_id": "DEV_105_QUERY_0", "question": "上海轨道交通18号线的编号为多少？", "gold_article": "DEV_105", "golds": ["L5"]}
+{"qi": 12, "question_id": "DEV_112_QUERY_2", "question": "真君大帝本名叫什么？", "gold_article": "DEV_112", "golds": ["吴刚厚"]}
+{"qi": 13, "question_id": "DEV_120_QUERY_0", "question": "原冈瓦那大陆的意思是什么？", "gold_article": "DEV_120", "golds": ["最初的冈瓦那大陆"]}
+{"qi": 14, "question_id": "DEV_132_QUERY_3", "question": "2007年，佩特里奇加盟哪个球队？", "gold_article": "DEV_132", "golds": ["德甲多特蒙德队"]}
+{"qi": 15, "question_id": "DEV_146_QUERY_2", "question": "黑褐新箭雀鲷生活在水深多少的海域？", "gold_article": "DEV_146", "golds": ["2至23公尺"]}
+{"qi": 16, "question_id": "DEV_155_QUERY_4", "question": "吴沃尧写这本小说的目的是什么？", "gold_article": "DEV_155", "golds": ["攻击当日黑暗地狱中的贪官污吏"]}
+{"qi": 17, "question_id": "DEV_163_QUERY_2", "question": "矢井田瞳属于哪个唱片公司？", "gold_article": "DEV_163", "golds": ["青空唱片"]}
+{"qi": 18, "question_id": "DEV_172_QUERY_1", "question": "皇后全氏是谁的妻子？", "gold_article": "DEV_172", "golds": ["孙亮"]}
+{"qi": 19, "question_id": "DEV_183_QUERY_1", "question": "大卫·佩特鲁齐是哪国人？", "gold_article": "DEV_183", "golds": ["意大利"]}
+{"qi": 20, "question_id": "DEV_191_QUERY_1", "question": "强劲的射球为彼得·柏德力·罗利马赢得了什么绰号？", "gold_article": "DEV_191", "golds": ["特快列车（\"HotShot\"）和雷电射（\"Thunderboots\"）等", "特快列车（\"HotShot\"）和雷电射（\"Thunderboots\"）"]}
+{"qi": 21, "question_id": "DEV_200_QUERY_3", "question": "AM最后把Ted改造成什么样了？", "gold_article": "DEV_200", "golds": ["大型的软体气泡", "一个大型的软体气泡"]}
+{"qi": 22, "question_id": "DEV_210_QUERY_2", "question": "《最游记外传》连载完结时一共有多少话？", "gold_article": "DEV_210", "golds": ["33话", "共33话"]}
+{"qi": 23, "question_id": "DEV_221_QUERY_1", "question": "派西·卫斯理在家里排第几？", "gold_article": "DEV_221", "golds": ["第三"]}
+{"qi": 24, "question_id": "DEV_232_QUERY_0", "question": "《唐文粹》是由谁编著的？", "gold_article": "DEV_232", "golds": ["姚铉"]}
+{"qi": 25, "question_id": "DEV_243_QUERY_1", "question": "隆柯龙类是哪一类的一个演化支？", "gold_article": "DEV_243", "golds": ["泰坦巨龙类"]}
+{"qi": 26, "question_id": "DEV_255_QUERY_1", "question": "魂斗罗 Force原计划在日本用什么名字发售？", "gold_article": "DEV_255", "golds": ["《Arc Hound》"]}
+{"qi": 27, "question_id": "DEV_265_QUERY_2", "question": "20英呎货柜的体积是多少？", "gold_article": "DEV_265", "golds": ["1360立方英呎（39 m³）"]}
+{"qi": 28, "question_id": "DEV_277_QUERY_1", "question": "首届欧盟－拉美国家首脑会议在哪儿举行？", "gold_article": "DEV_277", "golds": ["巴西里约热内卢"]}
+{"qi": 29, "question_id": "DEV_287_QUERY_0", "question": "北上车站的地址是哪里?", "gold_article": "DEV_287", "golds": ["日本岩手县北上市大通1丁目1番地"]}
+{"qi": 30, "question_id": "DEV_298_QUERY_1", "question": "张舒雅是什么公司旗下的模特？", "gold_article": "DEV_298", "golds": ["Jam Cast"]}
+{"qi": 31, "question_id": "DEV_307_QUERY_2", "question": "朱常浩的封地是哪里？", "gold_article": "DEV_307", "golds": ["汉中"]}
+{"qi": 32, "question_id": "DEV_317_QUERY_0", "question": "浪花鱼的分布在什么地区？", "gold_article": "DEV_317", "golds": ["西北太平洋"]}
+{"qi": 33, "question_id": "DEV_327_QUERY_0", "question": "堰塞湖形成的原因是什么？", "gold_article": "DEV_327", "golds": ["通常为地震、风灾、火山爆发等自然原因所造成，也有人为因素所造就出的堰塞湖"]}
+{"qi": 34, "question_id": "DEV_336_QUERY_0", "question": "出家人一词最早源于什么？", "gold_article": "DEV_336", "golds": ["古印度吠陀诸宗教与沙门传统"]}
+{"qi": 35, "question_id": "DEV_344_QUERY_1", "question": "海翠商场后面改成了什么名字？", "gold_article": "DEV_344", "golds": ["海趣坊", "海翠商场"]}
+{"qi": 36, "question_id": "DEV_353_QUERY_1", "question": "阿兹特克神圣历是怎么划分时间的？", "gold_article": "DEV_353", "golds": ["将一年分为20旬，一旬13日；每旬各有其守护神。神圣历与另外一套历法──太阳历──互相搭配，形成一个52年的周期；每52年，阿兹特克人就举行一次新火典礼。", "将一年分为20旬，一旬13日；每旬各有其守护神。神圣历与另外一套历法──太阳历──互相搭配，形成一个52年的周期；"]}
+{"qi": 37, "question_id": "DEV_362_QUERY_0", "question": "吴少阳的籍贯是哪里？", "gold_article": "DEV_362", "golds": ["沧州清池"]}
+{"qi": 38, "question_id": "DEV_370_QUERY_2", "question": "自洪武六年到永乐十五年近50年内，先后共计从山西移民了多少次？", "gold_article": "DEV_370", "golds": ["18次"]}
+{"qi": 39, "question_id": "DEV_379_QUERY_0", "question": "柴郡是哪个国家西北部的郡？", "gold_article": "DEV_379", "golds": ["英国", "英国英格兰"]}
+{"qi": 40, "question_id": "DEV_388_QUERY_1", "question": "田泽湖车站JR东日本所属的哪条地方交通线沿线的车站之一？", "gold_article": "DEV_388", "golds": ["田泽湖线"]}
+{"qi": 41, "question_id": "DEV_398_QUERY_2", "question": "大约是哪一年日落大道由霍恩大道（）至海文赫斯特大道（）之间的路段铺设为柏油路？", "gold_article": "DEV_398", "golds": ["1931年", "1931年左右"]}
+{"qi": 42, "question_id": "DEV_408_QUERY_0", "question": "雨润集团在中国的地位是怎样的？", "gold_article": "DEV_408", "golds": ["中国最大的肉制品生产企业之一"]}
+{"qi": 43, "question_id": "DEV_417_QUERY_2", "question": "哪部作品是《金刀情侠》的原著？", "gold_article": "DEV_417", "golds": ["《九月鹰飞》"]}
+{"qi": 44, "question_id": "DEV_427_QUERY_0", "question": "《康健杂志》创刊于哪一年？", "gold_article": "DEV_427", "golds": ["1998年"]}
+{"qi": 45, "question_id": "DEV_438_QUERY_2", "question": "国际会议由谁来起草会议计划？", "gold_article": "DEV_438", "golds": ["海因里希·冯·施特凡", "海因里希·冯·施特凡（Heinrich von Stephan）"]}
+{"qi": 46, "question_id": "DEV_448_QUERY_2", "question": "龙马被暗杀时，阿龙得到了谁的帮助？", "gold_article": "DEV_448", "golds": ["伊藤助太夫", "豪商伊藤助太夫"]}
+{"qi": 47, "question_id": "DEV_458_QUERY_2", "question": "梁诚为什么被认为是清华之父？", "gold_article": "DEV_458", "golds": ["其当年所设的游美肄业馆，后改称清华学堂（清华大学前身）", "其当年所设的游美肄业馆，后改称清华学堂（清华大学前身）。"]}
+{"qi": 48, "question_id": "DEV_468_QUERY_3", "question": "《掌故王》主要播放在哪一段时期？", "gold_article": "DEV_468", "golds": ["2009年3月30日至5月14日"]}
+{"qi": 49, "question_id": "DEV_477_QUERY_0", "question": "Antichrist Superstar是谁的个人专辑?", "gold_article": "DEV_477", "golds": ["玛丽莲·曼森"]}
+{"qi": 50, "question_id": "DEV_486_QUERY_0", "question": "铺轨（Making Tracks）是由什么人演出的美国音乐剧？", "gold_article": "DEV_486", "golds": ["亚洲人"]}
+{"qi": 51, "question_id": "DEV_494_QUERY_2", "question": "什么时候宣布了停战？", "gold_article": "DEV_494", "golds": ["1814年3月30日"]}
+{"qi": 52, "question_id": "DEV_504_QUERY_3", "question": "城巴曾今计划将城巴12M线与城巴12线合并的原因是什么？", "gold_article": "DEV_504", "golds": ["初期客量欠佳"]}
+{"qi": 53, "question_id": "DEV_511_QUERY_0", "question": "三元桥站是哪两条线路的换乘站？", "gold_article": "DEV_511", "golds": ["北京地铁10号线与机场线"]}
+{"qi": 54, "question_id": "DEV_518_QUERY_3", "question": "加拿大广场有什么外形特征？", "gold_article": "DEV_518", "golds": ["大楼顶部有五组由玻璃纤维制成的白帆", "大楼顶部有五组由玻璃纤维制成的白帆，是温哥华最主要的地标之一，其设计也与悉尼歌剧院和丹佛国际机场的外部有所相似。"]}
+{"qi": 55, "question_id": "DEV_527_QUERY_4", "question": "如何获得更高的分辨率？", "gold_article": "DEV_527", "golds": ["在电子显微镜中使用具有小得多的波长的电子束", "在电子显微镜中使用具有小得多的波长的电子束。"]}
+{"qi": 56, "question_id": "DEV_536_QUERY_1", "question": "安哥拉匡撒是从什么时候发行的？", "gold_article": "DEV_536", "golds": ["1977年"]}
+{"qi": 57, "question_id": "DEV_544_QUERY_3", "question": "香港杜鹃的花期是在什么时候？", "gold_article": "DEV_544", "golds": ["3－4月"]}
+{"qi": 58, "question_id": "DEV_552_QUERY_1", "question": "开始型雌鱼在外形上有什么特征？", "gold_article": "DEV_552", "golds": ["体棕红色，各鳞片具淡色缘。身体布有蓝色小斑点，尤其颊部更具有小斑点结合成蓝色短斑纹", "体棕红色，各鳞片具淡色缘。身体布有蓝色小斑点，尤其颊部更具有小斑点结合成蓝色短斑纹。"]}
+{"qi": 59, "question_id": "DEV_560_QUERY_1", "question": "纽康的太阳表的全称是什么？", "gold_article": "DEV_560", "golds": ["地球在自转轴上环绕太阳运动的表"]}
+{"qi": 60, "question_id": "DEV_569_QUERY_3", "question": "利东邨道最大型的商场叫什么？", "gold_article": "DEV_569", "golds": ["利东商场"]}
+{"qi": 61, "question_id": "DEV_579_QUERY_0", "question": "谢尔吉耶夫镇位于哪里？", "gold_article": "DEV_579", "golds": ["俄罗斯莫斯科州东北部", "位于莫斯科东北偏北71公里。"]}
+{"qi": 62, "question_id": "DEV_587_QUERY_0", "question": "刘国勋是哪个组织的成员？", "gold_article": "DEV_587", "golds": ["民建联"]}
+{"qi": 63, "question_id": "DEV_596_QUERY_2", "question": "泰国皇家军队的主要职责是什么？", "gold_article": "DEV_596", "golds": ["保护泰王国的主权和领土完整，以及对抗来自国内外对泰国君主政体的威胁。"]}
+{"qi": 64, "question_id": "DEV_604_QUERY_0", "question": "截尾鹦嘴鱼又可以叫什么？", "gold_article": "DEV_604", "golds": ["杂纹鹦哥鱼"]}
+{"qi": 65, "question_id": "DEV_611_QUERY_3", "question": "怎么解释静电感应是可逆的？", "gold_article": "DEV_611", "golds": ["如果外界的电荷被移走了，那么由于物体上正电荷和负电荷之间的吸引，它们将重新搀和起来", "如果外界的电荷被移走了，那么由于物体上正电荷和负电荷之间的吸引，它们将重新搀和起来。"]}
+{"qi": 66, "question_id": "DEV_621_QUERY_2", "question": "为什么要兴建康王路？", "gold_article": "DEV_621", "golds": ["为了解决荔湾区没有一条贯穿南北的主干道带来的交通问题"]}
+{"qi": 67, "question_id": "DEV_628_QUERY_2", "question": "2008–09年香港甲组足球联赛的大部分赛事都被安排在哪里？", "gold_article": "DEV_628", "golds": ["旺角大球场"]}
+{"qi": 68, "question_id": "DEV_635_QUERY_1", "question": "苏联时代的国旗在哪里比较流行？", "gold_article": "DEV_635", "golds": ["德涅斯特河沿岸地区"]}
+{"qi": 69, "question_id": "DEV_1002_QUERY_2", "question": "小灰头稚冠雉成鸟头部和颈部是什么颜色？", "gold_article": "DEV_1002", "golds": ["灰色"]}
+{"qi": 70, "question_id": "DEV_1010_QUERY_3", "question": "穆尔兰的最高点叫什么？", "gold_article": "DEV_1010", "golds": ["高威尔海斯（High Willhays）"]}
+{"qi": 71, "question_id": "DEV_1024_QUERY_0", "question": "《白之春》在什么电视台上播放？", "gold_article": "DEV_1024", "golds": ["关西电视台"]}
+{"qi": 72, "question_id": "DEV_1032_QUERY_2", "question": "2008年10月Playfish获得了多少融资？", "gold_article": "DEV_1032", "golds": ["170万美元"]}
+{"qi": 73, "question_id": "DEV_1043_QUERY_1", "question": "当地居民称火山喷发的火山灰厚度约为多少？", "gold_article": "DEV_1043", "golds": ["1厘米"]}
+{"qi": 74, "question_id": "DEV_1056_QUERY_0", "question": "《抓鬼天狗帮》的作者是谁？", "gold_article": "DEV_1056", "golds": ["木下樱与东山和子"]}
+{"qi": 75, "question_id": "DEV_1065_QUERY_2", "question": "亚麻适宜生活在什么气候？", "gold_article": "DEV_1065", "golds": ["凉爽湿润气候"]}
+{"qi": 76, "question_id": "DEV_1077_QUERY_2", "question": "黑额鸣冠雉的体长是多少？", "gold_article": "DEV_1077", "golds": ["63-74厘米"]}
+{"qi": 77, "question_id": "DEV_1088_QUERY_1", "question": "吉格梅·多吉·旺楚克鼓励使用什么来帮助本地农民？", "gold_article": "DEV_1088", "golds": ["现代工具"]}
+{"qi": 78, "question_id": "DEV_1100_QUERY_0", "question": "象鼩属于哪个目？", "gold_article": "DEV_1100", "golds": ["象鼩目", "象鼩目（Macroscelidea）"]}
+{"qi": 79, "question_id": "DEV_1108_QUERY_2", "question": "莫洛托夫计划的目标是什么？", "gold_article": "DEV_1108", "golds": ["提供重建物资援助给东欧国家，协助东欧各国重建经济，务求令其卫星国在政治及经济上与苏联看齐。"]}
+{"qi": 80, "question_id": "DEV_1117_QUERY_1", "question": "《大神一郎奋斗记》在哪个家用主机上被推出？", "gold_article": "DEV_1117", "golds": ["Dreamcast"]}
+{"qi": 81, "question_id": "DEV_1130_QUERY_0", "question": "喀山红宝石足球俱乐部是哪国的职业足球俱乐部？", "gold_article": "DEV_1130", "golds": ["俄罗斯"]}
+{"qi": 82, "question_id": "DEV_1144_QUERY_0", "question": "小孤岛大医生又名什么？、", "gold_article": "DEV_1144", "golds": ["《离岛大夫日志》、《五岛医生诊疗所》"]}
+{"qi": 83, "question_id": "DEV_1156_QUERY_0", "question": "大雄宝殿在日本被称为什么？", "gold_article": "DEV_1156", "golds": ["金堂、本堂"]}
+{"qi": 84, "question_id": "DEV_1164_QUERY_4", "question": "澉浦在什么朝代曾设立市舶司？", "gold_article": "DEV_1164", "golds": ["宋、元", "宋、元两代"]}
+{"qi": 85, "question_id": "DEV_1172_QUERY_3", "question": "哪条公路纵贯了王江泾镇？", "gold_article": "DEV_1172", "golds": ["苏嘉乍高速公路"]}
+{"qi": 86, "question_id": "DEV_1501_QUERY_3", "question": "澳门人日常生活更倾向以什么来对澳门作出分区？", "gold_article": "DEV_1501", "golds": ["该区的建筑物、建筑特色、土地用途、人口分布和实际的地理位置来对澳门作出分区。", "以该区的建筑物、建筑特色、土地用途、人口分布和实际的地理位置来对澳门作出分区。"]}
+{"qi": 87, "question_id": "DEV_1517_QUERY_3", "question": "笔名「林双不」的由来受什么事件的影响？", "gold_article": "DEV_1517", "golds": ["美丽岛事件"]}
+{"qi": 88, "question_id": "DEV_1536_QUERY_1", "question": "侏罗纪海岸哪一年入选联合国教科文组织世界遗产？", "gold_article": "DEV_1536", "golds": ["2001年"]}
+{"qi": 89, "question_id": "DEV_1564_QUERY_0", "question": "单线天竺鲷的俗名是什么？", "gold_article": "DEV_1564", "golds": ["外斑天竺鲷、大目侧仔", "天竺鲷、大目侧仔"]}
+{"qi": 90, "question_id": "DEV_1579_QUERY_2", "question": "在冷冻前食品制造商会通过什么方式来停止酶反应？", "gold_article": "DEV_1579", "golds": ["漂白食品或添加化学物"]}
+{"qi": 91, "question_id": "DEV_1599_QUERY_3", "question": "莫桂兰为什么关闭武馆？", "gold_article": "DEV_1599", "golds": ["因习武风潮日渐衰退", "习武风潮日渐衰退"]}
+{"qi": 92, "question_id": "DEV_1618_QUERY_1", "question": "交叉笛鲷的体侧有5条什么颜色的纵带？", "gold_article": "DEV_1618", "golds": ["暗褐色或红色"]}
+{"qi": 93, "question_id": "DEV_1644_QUERY_0", "question": "桑贾伊·甘地是谁的孩子？", "gold_article": "DEV_1644", "golds": ["前女印度总理英迪拉·甘地和政治人物费罗兹·甘地"]}
+{"qi": 94, "question_id": "DEV_1659_QUERY_4", "question": "世宗大学哪一年开始招收男学生？", "gold_article": "DEV_1659", "golds": ["1978年"]}
+{"qi": 95, "question_id": "DEV_1679_QUERY_0", "question": "原蹄兽生存在什么时候？", "gold_article": "DEV_1679", "golds": ["5500万年前的晚古新世至中始新世。", "5500万年前的晚古新世至中始新世"]}
+{"qi": 96, "question_id": "DEV_1738_QUERY_0", "question": "「下栏」是指什么？", "gold_article": "DEV_1738", "golds": ["在垃圾站内，回收物料会被分类，有价值的如金属、纸皮、二手衣服或者古董等，会由清洁工人抽起，交二手市场、收买者或回收商，作额外收入", "在垃圾站内，回收物料会被分类，有价值的如金属、纸皮、二手衣服或者古董等，会由清洁工人抽起，交二手市场、收买者或回收商，作额外收入。"]}
+{"qi": 97, "question_id": "DEV_1831_QUERY_1", "question": "集团合共有多少条生产线？", "gold_article": "DEV_1831", "golds": ["288条"]}
+{"qi": 98, "question_id": "DEV_1867_QUERY_0", "question": "张静美的代表作有哪两部？", "gold_article": "DEV_1867", "golds": ["《代战天使》、《青春小鸟》"]}
+{"qi": 99, "question_id": "DEV_1910_QUERY_0", "question": "玛丽亚·特蕾西亚广场的两面是哪两幢建筑物？", "gold_article": "DEV_1910", "golds": ["自然史博物馆（Naturhistorisches Museum）和艺术史博物馆（Kunsthistorisches Museum）", "自然史博物馆和艺术史博物馆"]}

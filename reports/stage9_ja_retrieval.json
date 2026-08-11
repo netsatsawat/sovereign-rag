@@ -1,0 +1,15 @@
+{
+ "lang": "ja",
+ "corpus_articles": 2500,
+ "n_queries": 100,
+ "bm25": {
+  "hits1": 87.0,
+  "hits5": 95.0,
+  "hits10": 98.0
+ },
+ "dense_qwen06b": {
+  "hits1": 72.0,
+  "hits5": 89.0,
+  "hits10": 93.0
+ }
+}
