@@ -7,3 +7,4 @@ data/*.jsonl
 data/qwen3_tokenizer.json
 .venv/
 __pycache__/
+models/
