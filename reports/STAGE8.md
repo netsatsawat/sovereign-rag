@@ -48,7 +48,11 @@ Two deviations, both forced by the model and both documented in
   the budget. Only the answer channel is scored, as in every other arm.
 
 A sensitivity armset at Meta's recommended sampling (T=1.0, top-p 0.95,
-top-k 64) runs as `--armset rec`.
+top-k 64) ran as `--armset rec`, complete at 480/480. Verdict: sampling is
+not the story. RAG containment 31.67 (primary 32.92; paired delta −1.25pp,
+p=0.68), abstention 66.2% vs 64.6%, closed-book 26.25 vs 26.67. Against the
+8B the rec arm loses −17.08pp (p<0.001); RAG-over-closed-book at rec is
++5.42pp, p=0.11 — still no significant retrieval benefit.
 
 ## Results (primary, temperature 0)
 
