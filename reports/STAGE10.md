@@ -14,7 +14,7 @@ PROMPT_RAG (`ops/stage10_hatch.py` hard-fails if the sentence drifts).
 
 | | containment | abstention |
 |---|---|---|
-| plain_glimmer (hatch, stage 8) | 33.75 | 64.6 |
+| plain_glimmer (hatch, stage 8) | 32.92 | 64.6 |
 | plain_glimmer_nohatch | **72.50** | **0.0** |
 
 Paired: +39.58pp, discordant 95:0 — no query got worse — p = 5.0e-29.
