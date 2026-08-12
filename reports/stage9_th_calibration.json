@@ -1,0 +1,16 @@
+{
+ "lang": "th",
+ "arm": "rag_glimmer",
+ "k": 5,
+ "n": 100,
+ "gold_retrieved": {
+  "n": 96,
+  "abstained": 8,
+  "abstain_pct": 8.3
+ },
+ "gold_missed": {
+  "n": 4,
+  "abstained": 2,
+  "abstain_pct": 50.0
+ }
+}

@@ -1,0 +1,16 @@
+{
+ "lang": "ja",
+ "arm": "rag_glimmer",
+ "k": 5,
+ "n": 100,
+ "gold_retrieved": {
+  "n": 95,
+  "abstained": 6,
+  "abstain_pct": 6.3
+ },
+ "gold_missed": {
+  "n": 5,
+  "abstained": 3,
+  "abstain_pct": 60.0
+ }
+}
