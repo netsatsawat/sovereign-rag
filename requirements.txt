@@ -2,3 +2,9 @@ numpy==2.4.6
 pyarrow==25.0.0
 pysbd==0.3.4
 tokenizers==0.23.1
+# stage-9 segmenters (versions are load-bearing: newmm dictionary / jieba
+# segmentation changes shift BM25 token boundaries, which the stage-9
+# hits@1 wins depend on)
+pythainlp==5.3.5
+janome==0.5.0
+jieba==0.42.1

@@ -72,6 +72,12 @@ gold article:
 | es | 7% (n=82) | 72% (n=18) |
 | vi | 7% (n=86) | 86% (n=14) |
 
+The 8B's same cross (recomputed from the same rows + deterministic index
+rebuild): found → 2/1/0/4/2%, missed → 50/20/100/39/50% (th/ja/zh/es/vi).
+It abstains less everywhere — including on the misses, where abstention is
+correct: 20 vs 60 (ja), 39 vs 72 (es), 50 vs 86 (vi). Glimmer's hatch
+discriminates better than the model that beat it in English.
+
 In English the same model's abstention was near-chance as an
 evidence-completeness detector (precision 0.63 / recall 0.71 vs a 58% base
 rate). On single-hop extractive tasks it is a good detector in all five
@@ -87,16 +93,94 @@ containment metric jointly produce.
 - Not cross-language paired: each language has its own 100 questions and
   its own corpus difficulty (es/vi retrieval is notably harder).
 - k=5 (not 10) and 2,500-char contexts, for the 8k window under CJK/Thai
-  token inflation.
+  token inflation. The truncation has a measured cost: th qi=51 and qi=88
+  lose their gold span to the trim (verified against the committed
+  corpus), so both models' Thai RAG ceiling is 98/100; paired deltas
+  unaffected.
 - Reasoning tax persists everywhere: glimmer mean gen tokens 161–371 per
   answer depending on language and arm (RAG arms 161–276; lowest zh,
   highest th) vs the 8B's actual means of 7–17 under its 64-token cap.
 
+## Reading the committed numbers
+
+- `mcnemar_p` is rounded to 4 dp, so values below 5e-5 appear as `0.0` —
+  a value an exact binomial test cannot produce. All ten
+  `*_rag_over_closed` pairings are in this bucket (true values
+  1e-15..3e-24). Quote them as p < 0.0001, never "p = 0.0".
+- Containment runs on separator-stripped text, so a purely numeric gold
+  can match inside a longer digit run. Exactly one committed row benefits:
+  ja closed-book 8B (qi=96, gold '4' matched inside '574族'), i.e. its
+  12.0% would be 11.0% with digit boundaries.
+- The same strip removes all combining marks, which for Thai deletes
+  vowels-above/below and tone marks from gold and answer alike — lenient
+  (one committed th RAG match rides on a dropped silent-letter mark) and
+  documented in `ops/stage9_lang.py`.
+- `abstained_pct` counts the PRESCRIBED escape phrase (plus the English
+  fallback), not refusal in general: three committed th rows refuse
+  free-form ('ไม่ทราบ') and are not counted. Read it as "answered with the
+  prescribed escape phrase", not "refused".
+- The per-arm summaries do not carry stage 8's `truncated_pct`, and five
+  glimmer closed-book rows hit the 1,024-token budget with the ENTIRE
+  budget consumed by reasoning (`done_reason: "length"`, gen_tokens 1024,
+  thinking 1,867–3,375 chars, answer ""): th qi=15,36 and ja qi=4,6,37.
+  They score as non-contained, non-abstained misses, indistinguishable in
+  the summary JSON from a confidently wrong answer — i.e. 2pp of th and
+  3pp of ja closed_glimmer's containment/abstention denominators are "the
+  answer channel never emitted a token". Footnote them when quoting th/ja
+  closed-book numbers. th closed_qwen8b additionally has six
+  `done_reason: "length"` rows at its 64-token cap, all with non-empty
+  truncated answers.
+
 ## Artifacts
 
-`ops/stage9_lang.py` (prep/retrieval/generation/analysis),
-`ops/run_multiling.sh` (driver), `data/multiling/{lang}/` (corpus + queries,
-committed), `reports/stage9_{lang}.jsonl` (400 rows each),
+`ops/stage9_lang.py` (retrieval/generation/analysis — NOT prep; see the
+provenance caveat below), `ops/run_multiling.sh` (driver; generation +
+analysis only), `data/multiling/{lang}/` (corpus + queries, committed),
+`reports/stage9_{lang}.jsonl` (400 rows each),
 `reports/stage9_{lang}.json`, `reports/stage9_{lang}_retrieval.json`,
-`reports/stage9_driver.log`. The calibration cross recomputes from the
-jsonl rows plus a rebuild of each LangBM25 index (deterministic).
+`reports/stage9_driver.log`. Generator/embedder provenance (GGUF sha256,
+ollama digests, ollama version) is in `models.manifest.json`. The
+calibration cross: `python ops/stage9_lang.py --lang $L --calibration`
+recomputes the reversal table from the jsonl rows plus a deterministic
+LangBM25 rebuild (no server needed), writing
+`reports/stage9_{lang}_calibration.json`; the table above rounds its
+percentages to integers.
+
+**Provenance caveat.** The corpora and queries are committed, so every
+downstream number recomputes from the repo — but the script that built
+`data/multiling/{lang}/corpus.jsonl` + `queries.jsonl` from the source
+datasets was not committed, and the upstream revision each language was
+pulled at was not recorded (contrast `ops/fetch_data.py` +
+`data/sources.manifest.json` for the English corpus).
+`data/multiling/sources.manifest.json` records what is verifiable today:
+per language, the upstream dataset's canonical location (corroborated by
+the id formats inside the committed files), the split and sampling
+expression from the table above, and sha256 hashes of the committed
+corpus/queries files. Until a prep script in the fetch_data.py pattern
+lands, treat the committed corpora as the ground truth of what was
+measured, not as verifiable derivations of the upstream datasets.
+Dense-retrieval caches are also unevenly committed (ja/th `emb.npy`
+tracked, es/vi/zh local-only). The tracked caches ship with the
+`emb.meta.json` corpus fingerprint that `--retrieval`'s stale-cache guard
+requires; the caches predate the guard, so the fingerprints were
+back-filled from the committed corpora — sound because each `corpus.jsonl`
+is unchanged in git since the commit that added its `emb.npy`, and the
+committed hits@k were computed from exactly these cache/corpus pairs.
+Deleting an `emb.npy` and re-running `--retrieval` regenerates it
+deterministically via ollama either way.
+
+## Reproduction
+
+No committed script starts the servers. Prerequisites:
+
+    # glimmer half: llama-server resident on :8095 (the stage-8 launch line)
+    models/llama-b10353/llama-server -m models/muse-glimmer-30B-kquant-17gb.gguf \
+        --port 8095 -c 8192 --jinja --reasoning off --reasoning-format deepseek
+
+    # qwen half + dense retrieval: ollama on :11434
+    ollama pull qwen3:8b && ollama pull qwen3-embedding:0.6b
+
+Per language: `--retrieval` (not run by the driver), the two `--model`
+arms (or `ops/run_multiling.sh` for all five), then `--analyze` — the
+command sequence in `ops/stage9_lang.py`'s docstring (`--calibration`
+there is optional and derived; it needs no server).

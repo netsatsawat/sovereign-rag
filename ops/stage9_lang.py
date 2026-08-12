@@ -18,9 +18,18 @@ Per-language machinery that has to differ, and why:
              accents, so even Spanish cannot reuse it).
   prompts    native-language RAG/closed prompts, same structure as
              PROMPT_RAG/PROMPT_CLOSED, native escape phrase.
-  scoring    containment and abstention on NFKC + casefold + [\\W_]-stripped
-             text, which is language-neutral (no internal spaces to
-             reproduce, accents preserved).
+  scoring    containment and abstention on NFKC + casefold text with every
+             [\\W_] character deleted. No internal spaces to reproduce, and
+             Latin precomposed accents survive (á/ñ are word characters) —
+             but the strip removes ALL combining marks, so Thai
+             vowels-above/below, tone marks and thanthakhat vanish from
+             gold and answer alike (NFKC first decomposes SARA AM:
+             norm('น้ำ') == 'นา'). One committed verdict rides on that
+             leniency — th rag_glimmer qi=28, where the model dropped a
+             silent-letter mark ('เซอรนัก' vs gold 'เซอร์นัก') and still
+             matches — and words differing only in tone marks collapse to
+             the same normed string, an accepted false-positive channel on
+             this single-gold extractive task.
 
 Constant across languages: k=5 retrieved contexts trimmed to 2,500 chars;
 glimmer via llama-server :8095 with "Reasoning strength: low" + 1024 tokens
@@ -32,14 +41,18 @@ checkpointed per (arm, qi); single-gold datasets so strict@k = hits@k.
     python ops/stage9_lang.py --lang th --model glimmer
     python ops/stage9_lang.py --lang th --model qwen8b
     python ops/stage9_lang.py --lang th --analyze
+    python ops/stage9_lang.py --lang th --calibration   # optional, derived:
+                                        # STAGE9.md's calibration-reversal row
 """
 
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import math
 import re
+import sys
 import time
 import unicodedata
 import urllib.request
@@ -130,8 +143,12 @@ def tokens(lang: str, text: str) -> list[str]:
 
 
 class LangBM25:
-    """src/bm25.py's scoring (k1=1.5, b=0.75) with a language-aware
-    tokeniser; the shared class's normalize() deletes non-Latin text."""
+    """src/bm25.py's scoring formula with a language-aware tokeniser (the
+    shared class's normalize() deletes non-Latin text) — but NOT its
+    parameters: b matches at 0.75, while k1 here is 1.5 vs src/bm25.py's
+    1.2. Every committed stage-9 retrieval and RAG number was produced at
+    k1=1.5, so the difference is recorded rather than repaired: stage-8 vs
+    stage-9 BM25 arms share the formula, not the parameterization."""
 
     K1, B = 1.5, 0.75
 
@@ -180,6 +197,12 @@ def embed(texts: list[str], batch: int = 32) -> np.ndarray:
 # ------------------------------------------------------------------ scoring
 
 def norm(s: str) -> str:
+    # Strips every separator, so a purely numeric gold can match inside a
+    # longer digit run: ja closed_qwen8b qi=96 (gold '4') was scored correct
+    # against '574族', the only committed row where this decides a verdict
+    # (ja closed-book 8B containment 12.0 vs 11.0 with digit boundaries).
+    # A boundary-aware fix would change committed numbers — do not alter
+    # without an explicit decision to re-run --analyze for every language.
     return re.sub(r"[\W_]+", "", unicodedata.normalize("NFKC", s or "").casefold())
 
 
@@ -189,6 +212,11 @@ def contained(golds: list[str], answer: str) -> bool:
 
 
 def abstained(lang: str, answer: str) -> bool:
+    # Counts use of the PRESCRIBED escape phrase (plus the English fallback),
+    # not refusal in general: free-form refusals such as th 'ไม่ทราบ' (three
+    # committed th rows) are NOT counted. Report abstained_pct as
+    # "answered with the prescribed escape phrase"; widening this list would
+    # change committed th numbers.
     na = norm(answer)
     hatches = [norm(e) for e in PROMPTS[lang]["escape"]] + ["insufficientinformation"]
     return any(h in na for h in hatches)
@@ -207,11 +235,45 @@ def run_retrieval(lang: str) -> None:
     bm_ranks = [bm.top_k(q["question"], 10) for q in queries]
     print(f"[{lang}] bm25 indexed+ranked in {time.time()-t0:.0f}s", flush=True)
 
+    def corpus_fingerprint() -> dict:
+        h = hashlib.sha256()
+        for c in corpus:
+            h.update((c["article_id"] + "\x00" + c["context"] + "\x01").encode())
+        return {"rows": len(corpus), "corpus_sha256": h.hexdigest()[:16]}
+
+    emb_meta = p["emb"].with_suffix(".meta.json")
     if p["emb"].exists():
+        # Guard against a stale cache: emb.npy is trusted blindly otherwise,
+        # and a regenerated corpus would map argsort indices to the wrong
+        # article_ids with no error. (raise, not assert, for all three
+        # checks below: asserts are stripped under python -O, which would
+        # silently disable exactly the defense they exist to provide.)
         dv = np.load(p["emb"])
+        if dv.shape[0] != len(corpus):
+            raise SystemExit(
+                f"emb.npy rows {dv.shape[0]} != corpus {len(corpus)} — stale "
+                f"embedding cache; delete {p['emb']} and re-run --retrieval")
+        # A missing fingerprint is a hard failure, not a skip: the shape
+        # assert alone cannot tell a regenerated corpus with the same
+        # article count from the one this cache was embedded from — and
+        # because the meta file is only written on a cache miss, skipping
+        # here would leave pre-guard caches unverified forever (the guard
+        # could never self-heal while emb.npy exists). Re-embedding is
+        # deterministic (temperature-free qwen3-embedding), so deleting the
+        # cache reproduces the committed hits@k.
+        if not emb_meta.exists():
+            raise SystemExit(
+                f"{p['emb']} has no {emb_meta.name} fingerprint, so the cache "
+                f"cannot be verified against the current corpus — stale "
+                f"embedding cache; delete {p['emb']} and re-run --retrieval")
+        if json.loads(emb_meta.read_text()) != corpus_fingerprint():
+            raise SystemExit(
+                f"{emb_meta} does not match the current corpus — stale "
+                f"embedding cache; delete {p['emb']} and re-run --retrieval")
     else:
         dv = embed([c["context"] for c in corpus])
         np.save(p["emb"], dv)
+        emb_meta.write_text(json.dumps(corpus_fingerprint()))
     qv = embed([q["question"] for q in queries])
     dense_ranks = [list(map(int, np.argsort(-(dv @ qv[i]))[:10]))
                    for i in range(len(queries))]
@@ -278,11 +340,24 @@ def run_generation(lang: str, model: str) -> None:
     corpus, queries = load(lang)
     bm = LangBM25(lang, [c["context"] for c in corpus])
 
+    # qi is only an index; question_id is the identity. Any existing row
+    # whose question_id disagrees with the current queries.jsonl means the
+    # query file changed under the checkpoint — resuming would silently mix
+    # answers to different questions under one qi. Hard-fail instead.
+    # (SystemExit deliberately escapes the except Exception below.)
+    qid_of = {q["qi"]: q["question_id"] for q in queries}
     done: set[tuple[str, int]] = set()
     if p["rows"].exists():
         for line in p["rows"].open():
             try:
                 r = json.loads(line)
+                if r.get("question_id") != qid_of.get(r.get("qi")):
+                    raise SystemExit(
+                        f"{p['rows']}: row (arm={r.get('arm')}, qi={r.get('qi')}) "
+                        f"has question_id {r.get('question_id')!r} but "
+                        f"queries.jsonl says {qid_of.get(r.get('qi'))!r} — "
+                        f"queries.jsonl changed under the checkpoint; resolve "
+                        f"before resuming")
                 if not str(r.get("done_reason", "")).startswith("error"):
                     done.add((r["arm"], r["qi"]))
             except Exception:
@@ -337,22 +412,56 @@ def mcnemar_exact(b: int, c: int) -> float:
     if n == 0:
         return 1.0
     p = sum(math.comb(n, i) for i in range(0, min(b, c) + 1)) / 2 ** n
+    # KNOWN DISPLAY DEFECT: rounding to 4 dp reports 0.0 whenever p < 5e-5,
+    # a value an exact binomial test cannot produce. All ten committed
+    # stage9 rag_over_closed pairings carry mcnemar_p = 0.0 this way (true
+    # values 1e-15..3e-24) — quote them as p < 0.0001, never "p = 0.0".
+    # Returning the unrounded value is the right fix but rewrites committed
+    # summary JSONs on the next --analyze; change only with that decision.
     return round(min(1.0, 2 * p), 4)
 
 
 def analyze(lang: str) -> None:
     p = paths(lang)
+    # Same identity guard as the resume path: every row's question_id must
+    # match what the CURRENT queries.jsonl says its qi means, or the paired
+    # stats would silently compare answers to different questions.
+    qid_of = {q["qi"]: q["question_id"]
+              for q in (json.loads(l) for l in p["queries"].open())}
     rows: dict[tuple[str, int], dict] = {}
     for line in p["rows"].open():
         try:
             r = json.loads(line)
         except Exception:
             continue
+        if r.get("question_id") != qid_of.get(r.get("qi")):
+            raise SystemExit(
+                f"{p['rows']}: row (arm={r.get('arm')}, qi={r.get('qi')}) has "
+                f"question_id {r.get('question_id')!r} but queries.jsonl says "
+                f"{qid_of.get(r.get('qi'))!r} — rows and queries.jsonl are out "
+                f"of sync; refusing to analyze")
         if not str(r.get("done_reason", "")).startswith("error"):
             rows[(r["arm"], r["qi"])] = r
 
     arms = sorted({a for (a, _q) in rows})
     qis = sorted({q for (_a, q) in rows})
+
+    # Completeness check: the qi universe above is whatever non-error rows
+    # exist, so an interrupted run yields a summary computed on the
+    # surviving subset — same shape as the committed artifact,
+    # distinguishable only by its small "n" fields. Warn loudly; stderr
+    # only, so the summary JSON stays byte-identical on complete data.
+    # (Rows for qi absent from queries.jsonl already hard-fail the
+    # question_id guard above, so only the incomplete direction is checked.)
+    expected = len(qid_of)
+    for arm in arms:
+        n_arm = sum(1 for (a, _q) in rows if a == arm)
+        if n_arm != expected:
+            print(f"WARNING: [{lang}] arm {arm} has {n_arm}/{expected} "
+                  f"scored rows — the summary is computed on an incomplete "
+                  f"run; treat every number in it as partial",
+                  file=sys.stderr)
+
     summary: dict = {"lang": lang, "n": len(qis), "arms": {}, "paired": {}}
     if p["retrieval"].exists():
         summary["retrieval"] = json.loads(p["retrieval"].read_text())
@@ -392,12 +501,57 @@ def analyze(lang: str) -> None:
     print(json.dumps(summary, indent=1, ensure_ascii=False))
 
 
+def calibration(lang: str) -> None:
+    """STAGE9.md's 'calibration reversal' table as a command, not a prose
+    spec: glimmer RAG abstention crossed with whether the BM25@5 arm
+    actually retrieved the gold article, recomputed from the committed
+    corpus/queries/rows via a deterministic LangBM25 rebuild (no server
+    needed). Purely derived — writes reports/stage9_{lang}_calibration.json
+    and touches nothing --analyze depends on."""
+    p = paths(lang)
+    corpus, queries = load(lang)
+    aid_of = [c["article_id"] for c in corpus]
+    bm = LangBM25(lang, [c["context"] for c in corpus])
+    hit5 = {q["qi"]: q["gold_article"] in {aid_of[i] for i in bm.top_k(q["question"], K)}
+            for q in queries}
+
+    # Same identity guard as analyze(): every row's question_id must match
+    # what the CURRENT queries.jsonl says its qi means.
+    qid_of = {q["qi"]: q["question_id"] for q in queries}
+    rows: dict[int, dict] = {}
+    for line in p["rows"].open():
+        try:
+            r = json.loads(line)
+        except Exception:
+            continue
+        if r.get("question_id") != qid_of.get(r.get("qi")):
+            raise SystemExit(
+                f"{p['rows']}: row (arm={r.get('arm')}, qi={r.get('qi')}) has "
+                f"question_id {r.get('question_id')!r} but queries.jsonl says "
+                f"{qid_of.get(r.get('qi'))!r} — rows and queries.jsonl are out "
+                f"of sync; refusing to compute the calibration cross")
+        if r.get("arm") == "rag_glimmer" and \
+                not str(r.get("done_reason", "")).startswith("error"):
+            rows[r["qi"]] = r
+
+    out: dict = {"lang": lang, "arm": "rag_glimmer", "k": K, "n": len(rows)}
+    for label, flag in (("gold_retrieved", True), ("gold_missed", False)):
+        qs = [qi for qi in rows if hit5[qi] == flag]
+        nab = sum(abstained(lang, rows[qi]["answer"]) for qi in qs)
+        out[label] = {"n": len(qs), "abstained": nab,
+                      "abstain_pct": round(100 * nab / len(qs), 1) if qs else None}
+    cal = ROOT / "reports" / f"stage9_{lang}_calibration.json"
+    cal.write_text(json.dumps(out, indent=1, ensure_ascii=False))
+    print(json.dumps(out, indent=1, ensure_ascii=False))
+
+
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--lang", required=True, choices=sorted(PROMPTS))
     ap.add_argument("--retrieval", action="store_true")
     ap.add_argument("--model", choices=["glimmer", "qwen8b"])
     ap.add_argument("--analyze", action="store_true")
+    ap.add_argument("--calibration", action="store_true")
     args = ap.parse_args()
     if args.retrieval:
         run_retrieval(args.lang)
@@ -405,5 +559,7 @@ if __name__ == "__main__":
         run_generation(args.lang, args.model)
     elif args.analyze:
         analyze(args.lang)
+    elif args.calibration:
+        calibration(args.lang)
     else:
-        ap.error("pick one of --retrieval / --model / --analyze")
+        ap.error("pick one of --retrieval / --model / --analyze / --calibration")

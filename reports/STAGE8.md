@@ -114,6 +114,17 @@ answer.
 `ops/stage8_glimmer.py` (run + analysis), `reports/stage8_glimmer.jsonl`
 (480 rows), `reports/stage8_glimmer.json` (summary), `reports/stage8.log`,
 `reports/llama_server.log`. Model: `models/muse-glimmer-30B-kquant-17gb.gguf`
-(sha not committed; models/ gitignored), server llama.cpp b10353
-(f8def7fe1). Calibration cross recomputes from stage8_glimmer.jsonl +
-stage1_retrieval.json per_query.600_k10.bm25.strict.
+(models/ gitignored; sha256, size and runtime pin recorded in
+`models.manifest.json`, alongside the ollama digests for qwen3:8b and
+qwen3-embedding:0.6b — the official download URL is still to be added
+there), server llama.cpp b10353 (f8def7fe1). Calibration cross: `python
+ops/stage8_glimmer.py --calibration` recomputes finding 1's numbers (the
+56.4/70.5 split, precision 0.63 / recall 0.71, the 38.6/74.7 anchors,
+40/44) and finding 2's paired-60 8B closed-book 51.67 from
+stage8_glimmer.jsonl + stage1_retrieval.json
+per_query.600_k10.bm25.strict + stage3_pilot.jsonl + stage6_27b.jsonl,
+writing `reports/stage8_calibration.json`.
+
+Reading the committed summary: `mcnemar_p` is rounded to 4 dp, so values
+below 5e-5 appear as `0.0` (three pairings here). An exact test never
+yields 0 — quote those as p < 0.0001.
