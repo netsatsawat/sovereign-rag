@@ -52,11 +52,12 @@ English (stage 8, multi-hop news): glimmer −15.83pp vs the same 8B,
 p<0.001. Outside English, Glimmer ties or wins everywhere, significantly in
 three of five.
 
-Closed-book is single digits in every language (glimmer 7–27, 8B 3–12): no
-contamination floor — these corpora test knowledge the models do not have,
-so RAG-over-closed-book is +54 to +79pp for glimmer (all p<0.001). The
-English "+6.25pp, p=0.067, retrieval useless" result was the contaminated
-corpus talking, not the architecture.
+Closed-book collapses in every language (glimmer 7–27, 8B 3–12 — single
+digits everywhere except Japanese's 27/12): no contamination floor — these
+corpora test knowledge the models do not have, so RAG-over-closed-book is
++54 to +79pp for glimmer (all p<0.001). The English "+6.25pp, p=0.067,
+retrieval useless" result was the contaminated entity stratum talking, not
+the architecture.
 
 ## The calibration reversal
 
@@ -87,8 +88,9 @@ containment metric jointly produce.
   its own corpus difficulty (es/vi retrieval is notably harder).
 - k=5 (not 10) and 2,500-char contexts, for the 8k window under CJK/Thai
   token inflation.
-- Reasoning tax persists everywhere: glimmer mean gen tokens 238–371 per
-  answer vs the 8B's ≤64 cap.
+- Reasoning tax persists everywhere: glimmer mean gen tokens 161–371 per
+  answer depending on language and arm (RAG arms 161–276; lowest zh,
+  highest th) vs the 8B's actual means of 7–17 under its 64-token cap.
 
 ## Artifacts
 
