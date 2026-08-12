@@ -1,0 +1,91 @@
+{
+ "lang": "ja",
+ "n": 100,
+ "arms": {
+  "closed_glimmer": {
+   "n": 100,
+   "containment": 27.0,
+   "wilson95": [
+    19.27,
+    36.43
+   ],
+   "abstained_pct": 32.0,
+   "mean_gen_tokens": 368.1
+  },
+  "closed_qwen8b": {
+   "n": 100,
+   "containment": 12.0,
+   "wilson95": [
+    7.0,
+    19.81
+   ],
+   "abstained_pct": 44.0,
+   "mean_gen_tokens": 8.0
+  },
+  "rag_glimmer": {
+   "n": 100,
+   "containment": 87.0,
+   "wilson95": [
+    79.02,
+    92.24
+   ],
+   "abstained_pct": 9.0,
+   "mean_gen_tokens": 275.7
+  },
+  "rag_qwen8b": {
+   "n": 100,
+   "containment": 87.0,
+   "wilson95": [
+    79.02,
+    92.24
+   ],
+   "abstained_pct": 2.0,
+   "mean_gen_tokens": 6.8
+  }
+ },
+ "paired": {
+  "rag_glimmer_vs_rag_8b": {
+   "n": 100,
+   "a_only": 5,
+   "b_only": 5,
+   "delta_pp": 0.0,
+   "mcnemar_p": 1.0
+  },
+  "closed_glimmer_vs_closed_8b": {
+   "n": 100,
+   "a_only": 17,
+   "b_only": 2,
+   "delta_pp": 15.0,
+   "mcnemar_p": 0.0007
+  },
+  "glimmer_rag_over_closed": {
+   "n": 100,
+   "a_only": 64,
+   "b_only": 4,
+   "delta_pp": 60.0,
+   "mcnemar_p": 0.0
+  },
+  "qwen8b_rag_over_closed": {
+   "n": 100,
+   "a_only": 75,
+   "b_only": 0,
+   "delta_pp": 75.0,
+   "mcnemar_p": 0.0
+  }
+ },
+ "retrieval": {
+  "lang": "ja",
+  "corpus_articles": 2500,
+  "n_queries": 100,
+  "bm25": {
+   "hits1": 87.0,
+   "hits5": 95.0,
+   "hits10": 98.0
+  },
+  "dense_qwen06b": {
+   "hits1": 72.0,
+   "hits5": 89.0,
+   "hits10": 93.0
+  }
+ }
+}

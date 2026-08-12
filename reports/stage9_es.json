@@ -1,0 +1,91 @@
+{
+ "lang": "es",
+ "n": 100,
+ "arms": {
+  "closed_glimmer": {
+   "n": 100,
+   "containment": 7.0,
+   "wilson95": [
+    3.43,
+    13.75
+   ],
+   "abstained_pct": 58.0,
+   "mean_gen_tokens": 246.0
+  },
+  "closed_qwen8b": {
+   "n": 100,
+   "containment": 3.0,
+   "wilson95": [
+    1.03,
+    8.45
+   ],
+   "abstained_pct": 56.0,
+   "mean_gen_tokens": 9.0
+  },
+  "rag_glimmer": {
+   "n": 100,
+   "containment": 61.0,
+   "wilson95": [
+    51.2,
+    69.98
+   ],
+   "abstained_pct": 19.0,
+   "mean_gen_tokens": 247.9
+  },
+  "rag_qwen8b": {
+   "n": 100,
+   "containment": 45.0,
+   "wilson95": [
+    35.61,
+    54.76
+   ],
+   "abstained_pct": 10.0,
+   "mean_gen_tokens": 10.2
+  }
+ },
+ "paired": {
+  "rag_glimmer_vs_rag_8b": {
+   "n": 100,
+   "a_only": 20,
+   "b_only": 4,
+   "delta_pp": 16.0,
+   "mcnemar_p": 0.0015
+  },
+  "closed_glimmer_vs_closed_8b": {
+   "n": 100,
+   "a_only": 5,
+   "b_only": 1,
+   "delta_pp": 4.0,
+   "mcnemar_p": 0.2188
+  },
+  "glimmer_rag_over_closed": {
+   "n": 100,
+   "a_only": 54,
+   "b_only": 0,
+   "delta_pp": 54.0,
+   "mcnemar_p": 0.0
+  },
+  "qwen8b_rag_over_closed": {
+   "n": 100,
+   "a_only": 42,
+   "b_only": 0,
+   "delta_pp": 42.0,
+   "mcnemar_p": 0.0
+  }
+ },
+ "retrieval": {
+  "lang": "es",
+  "corpus_articles": 2000,
+  "n_queries": 100,
+  "bm25": {
+   "hits1": 69.0,
+   "hits5": 82.0,
+   "hits10": 84.0
+  },
+  "dense_qwen06b": {
+   "hits1": 64.0,
+   "hits5": 77.0,
+   "hits10": 80.0
+  }
+ }
+}
