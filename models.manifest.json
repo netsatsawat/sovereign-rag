@@ -1,0 +1,31 @@
+{
+ "_note": "Provenance for the model binaries behind the generation and dense-retrieval arms. models/ and the ollama store are gitignored; these hashes are the reproducibility contract. Recorded 2026-08-12 from the machine that ran the study.",
+ "muse-glimmer-30B-kquant-17gb.gguf": {
+  "path": "models/muse-glimmer-30B-kquant-17gb.gguf",
+  "bytes": 16756681056,
+  "sha256": "7e9b74b7c8875e9e265695df9613bf6290f2392e479ce740495a129019c488d8",
+  "download_url": "https://huggingface.co/meta-models/Muse-Glimmer-30B-GGUF/resolve/main/muse-glimmer-30B-kquant-17gb.gguf",
+  "download_repo": "https://huggingface.co/meta-models/Muse-Glimmer-30B-GGUF",
+  "sha256_verified": "matches the Git LFS SHA256 published on the official meta-models repo's file page, checked 2026-08-12",
+  "runtime": "llama.cpp b10353 (f8def7fe1), models/llama-b10353/llama-server, port 8095, -c 8192 --jinja --reasoning off --reasoning-format deepseek",
+  "used_by": ["stage8 (all glimmer arms)", "stage9 (all glimmer arms)"]
+ },
+ "ollama": {
+  "version_stage9": "0.32.7",
+  "_version_note": "0.32.5 was upgraded to 0.32.7 on 2026-08-11 during the stage-8 MLX attempts (see reports/STAGE8.md); the stage-9 qwen8b and dense arms ran 2026-08-12 under 0.32.7. Digests below are from ~/.ollama/models/manifests on the study machine, 2026-08-12 (manifest_sha256 = sha256 of the local manifest file; model_layer = the weights blob).",
+  "models": {
+   "qwen3:8b": {
+    "manifest_sha256": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+    "model_layer_sha256": "a3de86cd1c132c822487ededd47a324c50491393e6565cd14bafa40d0b8e686f",
+    "model_layer_bytes": 5225374496,
+    "used_by": ["stage3 generation arms", "stage9 qwen8b arms"]
+   },
+   "qwen3-embedding:0.6b": {
+    "manifest_sha256": "ac6da0dfba84a81fdbfbaf330198c33cd77c4cdfc53e8bc50eb581914a15621d",
+    "model_layer_sha256": "06507c7b42688469c4e7298b0a1e16deff06caf291cf0a5b278c308249c3e439",
+    "model_layer_bytes": 639150592,
+    "used_by": ["dense retrieval arms (English stages and stage9 --retrieval)"]
+   }
+  }
+ }
+}

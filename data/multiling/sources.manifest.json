@@ -1,0 +1,87 @@
+{
+ "_note": "Provenance for data/multiling/{lang}/ (stage 9). The prep script that built corpus.jsonl + queries.jsonl was NOT committed, and the upstream revision each language was pulled at was not recorded at prep time (see the provenance caveat in reports/STAGE9.md) — so upstream_revision is null throughout, honestly. This manifest records what is verifiable today: the upstream dataset's canonical location (identified from the STAGE9.md datasets table and corroborated by the id formats inside the committed files), the eval split and sampling expression, and sha256 hashes of the committed files, which pin exactly what was measured. Until a prep script in the ops/fetch_data.py + data/sources.manifest.json pattern lands, treat the committed files as ground truth, not as re-derivable artifacts of the upstream datasets.",
+ "_recorded": "2026-08-12",
+ "th": {
+  "dataset": "iapp wiki QA (SQuAD format), Thai Wikipedia extractive QA",
+  "upstream": [
+   "https://huggingface.co/datasets/iapp/iapp_wiki_qa_squad",
+   "https://github.com/iapp-technology/iapp-wiki-qa-dataset"
+  ],
+  "upstream_revision": null,
+  "eval_split": "test",
+  "query_sampling": "test[::7][:100]",
+  "corpus_articles": 1912,
+  "n_queries": 100,
+  "id_format_evidence": "question_id '0fI5AjC5sb4CrqcHDvrX_000' = {article_id}_{nnn} over the dataset's base62 article ids",
+  "sha256": {
+   "corpus.jsonl": "409f49a106f17137cc40cb2ae9e26bc26f8217f1fcf674b52d7bb4a70fb55f7d",
+   "queries.jsonl": "c6eceae01a99df3ea12ae81b19080b0958b3c09c022b717d1dcda5ae89524d87"
+  }
+ },
+ "ja": {
+  "dataset": "JSQuAD v1.3 (JGLUE), Japanese Wikipedia extractive QA",
+  "upstream": [
+   "https://github.com/yahoojapan/JGLUE",
+   "https://huggingface.co/datasets/shunk031/JGLUE (config JSQuAD)"
+  ],
+  "upstream_revision": null,
+  "eval_split": "test",
+  "query_sampling": "test[::44][:100]",
+  "corpus_articles": 2500,
+  "n_queries": 100,
+  "id_format_evidence": "question_id 'a1025052p0q0' = JSQuAD's {article}p{paragraph}q{question} id format",
+  "sha256": {
+   "corpus.jsonl": "6cf00f9f46ea4ced705ad9aca9b752c0f9cc5abf15bdf0a6f0f5302ff5e0cbf4",
+   "queries.jsonl": "dcef6184856f35270f15a72fb5b1ebe7c14fa9cf927bbf6ca3602a7742de1da5"
+  }
+ },
+ "zh": {
+  "dataset": "CMRC 2018, Chinese Wikipedia extractive QA",
+  "upstream": [
+   "https://huggingface.co/datasets/hfl/cmrc2018",
+   "https://github.com/ymcui/cmrc2018"
+  ],
+  "upstream_revision": null,
+  "eval_split": "dev",
+  "query_sampling": "dev[::32][:100]",
+  "corpus_articles": 3000,
+  "n_queries": 100,
+  "id_format_evidence": "question_id 'DEV_0_QUERY_0' / article_id 'DEV_0' = CMRC 2018's dev-split id format",
+  "sha256": {
+   "corpus.jsonl": "612d4cd2fd90ce4cabfefee4cdb3ed51123908924f78127b2ea3db2bfb04421a",
+   "queries.jsonl": "b44f9a169a5a0c239335667668f269517af10adcb421878524d8cdfba37b1af0"
+  }
+ },
+ "es": {
+  "dataset": "SQAC (Spanish Question Answering Corpus), extractive QA",
+  "upstream": [
+   "https://huggingface.co/datasets/PlanTL-GOB-ES/SQAC"
+  ],
+  "upstream_revision": null,
+  "eval_split": "test",
+  "query_sampling": "test[::62][:100]",
+  "corpus_articles": 2000,
+  "n_queries": 100,
+  "id_format_evidence": "UUID question_ids + hex-digest article_ids, SQAC's id format",
+  "sha256": {
+   "corpus.jsonl": "76f28ff7d39b27e674a6947d41e883e5c66063ff598bbda255a599f79f1dbf92",
+   "queries.jsonl": "2be2aada7daed538d0a324b066ca86175b12b7af6e0f4336259157cffd596623"
+  }
+ },
+ "vi": {
+  "dataset": "UIT-ViQuAD 2.0 (VLSP 2021 MRC), Vietnamese Wikipedia extractive QA",
+  "upstream": [
+   "https://huggingface.co/datasets/taidng/UIT-ViQuAD2.0"
+  ],
+  "upstream_revision": null,
+  "eval_split": "validation (answerable questions only)",
+  "query_sampling": "validation (answerable)[::26][:100]",
+  "corpus_articles": 2500,
+  "n_queries": 100,
+  "id_format_evidence": "question_id 'uit_000001' = UIT-ViQuAD's id format",
+  "sha256": {
+   "corpus.jsonl": "0dffba61dc48f9494d9d286ff3ecb289feffad9febeb7d1ea621da7810882214",
+   "queries.jsonl": "52a44bcfce2fdf7c529f846f19499d5ecec95a654e6a2e1a1e67cf4355541627"
+  }
+ }
+}

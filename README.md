@@ -10,7 +10,44 @@ telcos, and governments (the organizations I've spent 16 years with) often can't
 perimeter, is instrumented for evaluation from day one, and improves itself against
 those evaluations instead of against vibes.
 
-**Status: scaffold.** Roadmap below is the build order.
+**Status:** the measurement study is complete — stages 0–9 done with
+committed artifacts (see [The study](#the-study) and `STATUS.md`). The
+productized reference architecture is the next track; the roadmap below is
+its build order.
+
+## The study
+
+Before building the product, this repo ran the measurements the companion
+articles are written from. Every number in those posts recomputes from
+artifacts committed here. Per-stage reports:
+
+- [Stage 0 — machine measurement](reports/STAGE0.md)
+- [Stage 1 — retrieval layer: BM25 / dense / hybrid](reports/STAGE1.md)
+- [Stage 2 — the graph arm](reports/STAGE2.md)
+- [Stage 3 — generation arms](reports/STAGE3.md)
+- [Stage 4 — the learning layer (pre-registered negative)](reports/STAGE4.md)
+- [Stage 6 — pushing on the claims](reports/STAGE6.md) (includes the
+  full-corpus replication, `reports/stage5_full_corpus.json`)
+- Stage 7 — HotpotQA transfer check: `reports/stage7_hotpot.json`
+- [Stage 8 — Muse Glimmer 30B, day one](reports/STAGE8.md)
+- [Stage 9 — the five-language replication](reports/STAGE9.md)
+
+Entry points for stages 8–9: `ops/stage8_glimmer.py` and
+`ops/stage9_lang.py` + `ops/run_multiling.sh` (driver — its header
+documents the llama-server/ollama prerequisites). Model binaries are not
+committed; `models.manifest.json` records their hashes and runtime pins.
+
+Regenerating from scratch (the `.gitignore` contract: large regenerable
+files are not committed, manifests carry their content hashes):
+
+1. `python ops/fetch_data.py` — source parquets + `data/sources.manifest.json`
+2. `python src/chunker.py --budget 600` — chunk files, sha-manifested
+3. `python src/embed_index.py --budget 600` — embeddings via local ollama
+4. stage scripts under `ops/` in stage order; each is checkpointed/resumable
+
+Known gap, stated rather than hidden: the stage-9 multilingual corpora are
+committed but their prep script is not — see the provenance caveat in
+[reports/STAGE9.md](reports/STAGE9.md).
 
 ## Three pillars
 
