@@ -66,6 +66,13 @@ K = 5
 CTX_TRIM = 2500
 
 PROMPTS = {
+    # en is the Stage-10 single-hop control: same language as stage 8, same
+    # task shape as stage 9, prompts phrased to mirror stage 3's English.
+    "en": {
+        "rag": "Answer the question using ONLY the context below. Be direct and brief: give the answer itself, no preamble. If the context does not contain the answer, reply exactly: insufficient information\n\nCONTEXT:\n{context}\n\nQUESTION: {q}\n\nANSWER:",
+        "closed": "Answer the question directly and briefly: the answer itself, no preamble. If you do not know, reply exactly: insufficient information\n\nQUESTION: {q}\n\nANSWER:",
+        "escape": ["insufficient information"],
+    },
     "th": {
         "rag": "จงตอบคำถามโดยใช้ข้อมูลจากบริบทด้านล่างเท่านั้น ตอบให้สั้นและตรงประเด็น: ให้ตอบเฉพาะคำตอบ ไม่ต้องมีคำอธิบายเพิ่ม หากบริบทไม่มีคำตอบ ให้ตอบว่า: ข้อมูลไม่เพียงพอ\n\nบริบท:\n{context}\n\nคำถาม: {q}\n\nคำตอบ:",
         "closed": "จงตอบคำถามให้สั้นและตรงประเด็น: ให้ตอบเฉพาะคำตอบ ไม่ต้องมีคำอธิบายเพิ่ม หากไม่ทราบคำตอบ ให้ตอบว่า: ข้อมูลไม่เพียงพอ\n\nคำถาม: {q}\n\nคำตอบ:",
