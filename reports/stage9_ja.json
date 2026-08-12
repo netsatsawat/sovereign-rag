@@ -56,21 +56,21 @@
    "a_only": 17,
    "b_only": 2,
    "delta_pp": 15.0,
-   "mcnemar_p": 0.0007
+   "mcnemar_p": 0.000728607177734375
   },
   "glimmer_rag_over_closed": {
    "n": 100,
    "a_only": 64,
    "b_only": 4,
    "delta_pp": 60.0,
-   "mcnemar_p": 0.0
+   "mcnemar_p": 5.873990530091966e-15
   },
   "qwen8b_rag_over_closed": {
    "n": 100,
    "a_only": 75,
    "b_only": 0,
    "delta_pp": 75.0,
-   "mcnemar_p": 0.0
+   "mcnemar_p": 5.293955920339377e-23
   }
  },
  "retrieval": {

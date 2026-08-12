@@ -103,10 +103,11 @@ containment metric jointly produce.
 
 ## Reading the committed numbers
 
-- `mcnemar_p` is rounded to 4 dp, so values below 5e-5 appear as `0.0` —
-  a value an exact binomial test cannot produce. All ten
-  `*_rag_over_closed` pairings are in this bucket (true values
-  1e-15..3e-24). Quote them as p < 0.0001, never "p = 0.0".
+- `mcnemar_p` is stored at full precision (fixed 2026-08-12; summaries
+  committed before that date rounded to 4 dp and could display an
+  impossible `0.0`). Prose follows the house numbers rule: two decimals
+  where the precision is load-bearing, otherwise round; values below
+  0.0001 quote as p < 0.0001.
 - Containment runs on separator-stripped text, so a purely numeric gold
   can match inside a longer digit run. Exactly one committed row benefits:
   ja closed-book 8B (qi=96, gold '4' matched inside '574族'), i.e. its

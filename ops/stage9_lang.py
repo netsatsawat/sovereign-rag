@@ -418,7 +418,7 @@ def mcnemar_exact(b: int, c: int) -> float:
     # values 1e-15..3e-24) — quote them as p < 0.0001, never "p = 0.0".
     # Returning the unrounded value is the right fix but rewrites committed
     # summary JSONs on the next --analyze; change only with that decision.
-    return round(min(1.0, 2 * p), 4)
+    return min(1.0, 2 * p)   # full precision; display rounding is prose's job
 
 
 def analyze(lang: str) -> None:

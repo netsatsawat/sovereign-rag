@@ -254,7 +254,7 @@ def mcnemar_exact(b: int, c: int) -> float:
     # 0.0 this way — quote them as p < 0.0001, never "p = 0.0". Returning
     # the unrounded value is the right fix but rewrites committed summary
     # JSONs on the next --analyze; change only with that decision.
-    return round(min(1.0, 2 * p), 4)
+    return min(1.0, 2 * p)   # full precision; display rounding is prose's job
 
 
 def latest_rows(path: Path, arms: tuple[str, ...]) -> dict[tuple[str, int], dict]:

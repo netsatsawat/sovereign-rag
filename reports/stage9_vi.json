@@ -49,28 +49,28 @@
    "a_only": 20,
    "b_only": 3,
    "delta_pp": 17.0,
-   "mcnemar_p": 0.0005
+   "mcnemar_p": 0.00048828125
   },
   "closed_glimmer_vs_closed_8b": {
    "n": 100,
    "a_only": 5,
    "b_only": 1,
    "delta_pp": 4.0,
-   "mcnemar_p": 0.2188
+   "mcnemar_p": 0.21875
   },
   "glimmer_rag_over_closed": {
    "n": 100,
    "a_only": 62,
    "b_only": 1,
    "delta_pp": 61.0,
-   "mcnemar_p": 0.0
+   "mcnemar_p": 1.3877787807814457e-17
   },
   "qwen8b_rag_over_closed": {
    "n": 100,
    "a_only": 48,
    "b_only": 0,
    "delta_pp": 48.0,
-   "mcnemar_p": 0.0
+   "mcnemar_p": 7.105427357601002e-15
   }
  },
  "retrieval": {
