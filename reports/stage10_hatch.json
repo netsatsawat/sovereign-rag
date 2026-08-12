@@ -1,0 +1,22 @@
+{
+ "arm": "plain_glimmer_nohatch",
+ "n": 240,
+ "containment": 72.5,
+ "wilson95": [
+  66.53,
+  77.76
+ ],
+ "abstained_pct": 0.0,
+ "paired_vs_hatch": {
+  "n": 240,
+  "nohatch_only": 95,
+  "hatch_only": 0,
+  "delta_pp": 39.58,
+  "mcnemar_p": 5.048709793414476e-29
+ },
+ "hatch_abstention_fates": {
+  "recovered": 94,
+  "exposed": 61,
+  "still_abstains": 0
+ }
+}
