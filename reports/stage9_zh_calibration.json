@@ -1,0 +1,16 @@
+{
+ "lang": "zh",
+ "arm": "rag_glimmer",
+ "k": 5,
+ "n": 100,
+ "gold_retrieved": {
+  "n": 99,
+  "abstained": 1,
+  "abstain_pct": 1.0
+ },
+ "gold_missed": {
+  "n": 1,
+  "abstained": 1,
+  "abstain_pct": 100.0
+ }
+}

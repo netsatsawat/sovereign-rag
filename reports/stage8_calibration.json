@@ -1,0 +1,33 @@
+{
+ "arm": "plain_glimmer",
+ "evidence_vector": "stage1_retrieval.json per_query.600_k10.bm25.strict",
+ "n": 240,
+ "evidence_complete": 101,
+ "evidence_incomplete": 139,
+ "abstain_pct_given_complete": 56.4,
+ "abstain_pct_given_incomplete": 70.5,
+ "abstention_as_missing_evidence_detector": {
+  "precision": 0.63,
+  "recall": 0.71,
+  "base_rate_incomplete_pct": 57.9
+ },
+ "anchors_abstain_pct_on_complete": {
+  "qwen8b_plain": {
+   "n": 101,
+   "abstain_pct": 38.6
+  },
+  "qwen27b_plain": {
+   "n": 91,
+   "abstain_pct": 74.7
+  }
+ },
+ "answered_when_complete": {
+  "contained": 40,
+  "n": 44,
+  "pct": 90.9
+ },
+ "qwen8b_closed_book_inference_same60": {
+  "n": 60,
+  "containment": 51.67
+ }
+}
