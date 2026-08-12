@@ -1,0 +1,41 @@
+{
+ "model": "qwen3.6:27b",
+ "stratum": "inference",
+ "n": 60,
+ "arms": {
+  "a0_27b_inf": {
+   "n": 60,
+   "containment": 88.33,
+   "wilson95": [
+    77.82,
+    94.23
+   ],
+   "abstained_pct": 0.0
+  },
+  "plain_27b_inf": {
+   "n": 60,
+   "containment": 80.0,
+   "wilson95": [
+    68.22,
+    88.17
+   ],
+   "abstained_pct": 18.3
+  }
+ },
+ "paired_closed_book": {
+  "vs_glimmer": {
+   "n": 60,
+   "only_27b": 1,
+   "only_ref": 6,
+   "delta_pp": -8.33,
+   "mcnemar_p": 0.125
+  },
+  "vs_8b": {
+   "n": 60,
+   "only_27b": 23,
+   "only_ref": 1,
+   "delta_pp": 36.67,
+   "mcnemar_p": 2.9802322387695312e-06
+  }
+ }
+}
