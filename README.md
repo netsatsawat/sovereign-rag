@@ -31,8 +31,9 @@ artifacts committed here. Per-stage reports:
 - Stage 7 — HotpotQA transfer check: `reports/stage7_hotpot.json`
 - [Stage 8 — Muse Glimmer 30B, day one](reports/STAGE8.md)
 - [Stage 9 — the five-language replication](reports/STAGE9.md)
+- [Stage 10 — the three confound-closers](reports/STAGE10.md): escape-hatch ablation, English single-hop control, 27B entity probe
 
-Entry points for stages 8–9: `ops/stage8_glimmer.py` and
+Entry points for stages 8–10: `ops/stage10_hatch.py`, `ops/stage10_27b_inf.py`, `ops/prep_en_squad.py`, `ops/stage8_glimmer.py` and
 `ops/stage9_lang.py` + `ops/run_multiling.sh` (driver — its header
 documents the llama-server/ollama prerequisites). Model binaries are not
 committed; `models.manifest.json` records their hashes and runtime pins.
