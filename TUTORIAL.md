@@ -17,7 +17,7 @@ What you get from one run:
 - the **constant-answer baseline** — what the most common gold answer
   scores with no model at all. Any slice where the constant wins is a
   slice your evaluation cannot see.
-- the **escape-hatch ablation** (one flag) — the same run with the
+- the **escape-hatch ablation** (one cell) — the same run with the
   "reply exactly: insufficient information" sentence deleted. In this
   study that single sentence moved one model forty points.
 
@@ -77,7 +77,7 @@ so abstention detection matches what you actually ship.)
 ## 4. Non-English corpora
 
 Thai, Japanese and Chinese write without spaces, and a whitespace BM25
-silently destroys itself on them. One flag fixes it:
+silently destroys itself on them. One line fixes it:
 
 ```python
 bm = LangBM25("th", ...)   # or "ja", "zh" — one line in the notebook
