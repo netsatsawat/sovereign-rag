@@ -17,6 +17,15 @@ its build order.
 
 ## The study
 
+## Try it on your data
+
+[TUTORIAL.md](TUTORIAL.md) walks through running the study's method on
+your own corpus in about fifteen minutes: closed-book arm, paired RAG
+lift, the calibration cross, the constant-answer baseline, and the
+escape-hatch ablation — one script
+([examples/minimal_eval.py](examples/minimal_eval.py)), one local model,
+a bundled sample dataset to smoke-test first.
+
 Before building the product, this repo ran the measurements the companion
 articles are written from. Every number in those posts recomputes from
 artifacts committed here. Per-stage reports:
@@ -28,7 +37,7 @@ artifacts committed here. Per-stage reports:
 - [Stage 4 — the learning layer (pre-registered negative)](reports/STAGE4.md)
 - [Stage 6 — pushing on the claims](reports/STAGE6.md) (includes the
   full-corpus replication, `reports/stage5_full_corpus.json`)
-- Stage 7 — HotpotQA transfer check: `reports/stage7_hotpot.json`
+- [Stage 7 — the cross-domain replication (HotpotQA)](reports/STAGE7.md): the winner flips, the metric lesson transfers
 - [Stage 8 — Muse Glimmer 30B, day one](reports/STAGE8.md)
 - [Stage 9 — the five-language replication](reports/STAGE9.md)
 - [Stage 10 — the three confound-closers](reports/STAGE10.md): escape-hatch ablation, English single-hop control, 27B entity probe
