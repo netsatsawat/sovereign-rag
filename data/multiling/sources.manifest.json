@@ -83,5 +83,17 @@
    "corpus.jsonl": "0dffba61dc48f9494d9d286ff3ecb289feffad9febeb7d1ea621da7810882214",
    "queries.jsonl": "52a44bcfce2fdf7c529f846f19499d5ecec95a654e6a2e1a1e67cf4355541627"
   }
+ },
+ "en": {
+  "dataset": "SQuAD v1.1 dev",
+  "source_url": "https://raw.githubusercontent.com/rajpurkar/SQuAD-explorer/master/dataset/dev-v1.1.json",
+  "source_sha256": "95aa6a52d5d6a735563366753ca50492a658031da74f301ac5238b03966972c9",
+  "native_or_translated": "native",
+  "sampling": "answerable flattened dev qas[::105][:100]",
+  "article_id": "wikipedia title + paragraph index",
+  "corpus_sha256": "59abf6994b575b0324d5cde5539fa9d2e58c76af3b274c0e40494f0fd04b2543",
+  "queries_sha256": "9572458240c07acec1ca84c8275ecf779688fc258434ca6adc10318e02229ae6",
+  "n_corpus": 2067,
+  "n_queries": 100
  }
 }
