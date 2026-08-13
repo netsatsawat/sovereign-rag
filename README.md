@@ -24,9 +24,10 @@ its build order.
 [TUTORIAL.md](TUTORIAL.md) walks through running the study's method on
 your own corpus in about fifteen minutes: closed-book arm, paired RAG
 lift, the calibration cross, the constant-answer baseline, and the
-escape-hatch ablation — one script
-([examples/minimal_eval.py](examples/minimal_eval.py)), one local model,
-a bundled sample dataset to smoke-test first.
+escape-hatch ablation — one notebook
+([examples/minimal_eval.ipynb](examples/minimal_eval.ipynb), committed
+with its outputs so it reads on GitHub), one local model, a bundled
+sample dataset to smoke-test first.
 
 Before building the product, this repo ran the measurements the companion
 articles are written from. Every number in those posts recomputes from

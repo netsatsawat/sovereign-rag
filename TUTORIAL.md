@@ -2,7 +2,7 @@
 
 The articles this repo accompanies end with three questions for your eval
 team. This tutorial is the fifteen-minute version of answering them on
-your own data, with one script and a local model.
+your own data, with one notebook and a local model.
 
 What you get from one run:
 
@@ -27,24 +27,22 @@ What you get from one run:
   (`ollama pull qwen3:8b` is a fine start)
 - this repo's Python env: `python -m venv .venv && .venv/bin/pip install -r requirements.txt`
 
-## 1. Smoke-run on the bundled sample
+## 1. Open the notebook
 
-Fifteen documents and six questions (a subset of SQuAD dev, CC BY-SA):
+The example is a notebook — [examples/minimal_eval.ipynb](examples/minimal_eval.ipynb) —
+committed **with its outputs**, so you can read the whole walkthrough on
+GitHub before running anything:
 
 ```bash
-python examples/minimal_eval.py \
-  --corpus examples/sample_data/corpus.jsonl \
-  --queries examples/sample_data/queries.jsonl \
-  --model qwen3:8b
+.venv/bin/jupyter lab examples/minimal_eval.ipynb
 ```
 
-Twelve model calls, a couple of minutes on a laptop-class machine. You
-get `results.json` plus a resumable per-row log. Read the output in this
-order: `arms.closed.containment_pct` first (the answerability floor),
-then `rag_over_closed` (the lift and its p-value), then
-`calibration_cross` (are the refusals where the retrieval failures are?),
-then `constant_answer_baseline` (is anything beating your model with no
-model?).
+It runs against the bundled sample (fifteen documents, six questions, a
+SQuAD-dev subset) in a few minutes on a laptop-class machine, in five
+movements: the closed-book floor, the paired RAG lift, the calibration
+cross, the constant-answer baseline, and the escape-hatch ablation.
+Read the outputs in that order — the floor first, the RAG number never
+alone.
 
 ## 2. Point it at your data
 
@@ -68,29 +66,21 @@ synthetic ones. That was this study's experience across six corpora.
 
 ## 3. The two runs that matter
 
-```bash
-# the real configuration
-python examples/minimal_eval.py --corpus my/corpus.jsonl \
-  --queries my/queries.jsonl --model qwen3:8b --out with_hatch.json
-
-# the ablation: identical, escape hatch deleted
-python examples/minimal_eval.py --corpus my/corpus.jsonl \
-  --queries my/queries.jsonl --model qwen3:8b --no-escape --out no_hatch.json
-```
-
-Compare `arms.rag.containment_pct` across the two files. If they differ
-by a lot, your escape-hatch sentence is a load-bearing part of your
-system's accuracy — a dial you are turning blind until you measure it.
-(If your production prompt uses a different phrase, pass it via
-`--escape "your exact phrase"` so abstention detection matches.)
+The notebook's final code cell is the ablation: it re-runs the RAG arm
+with the escape-hatch sentence deleted and prints both configurations
+side by side. If the two containment numbers differ by a lot, your
+escape-hatch sentence is a load-bearing part of your system's accuracy —
+a dial you are turning blind until you measure it. (If your production
+prompt uses a different phrase, change `ESCAPE_RAG` in the prompts cell
+so abstention detection matches what you actually ship.)
 
 ## 4. Non-English corpora
 
 Thai, Japanese and Chinese write without spaces, and a whitespace BM25
 silently destroys itself on them. One flag fixes it:
 
-```bash
-python examples/minimal_eval.py ... --tokenizer th   # or ja, zh
+```python
+bm = LangBM25("th", ...)   # or "ja", "zh" — one line in the notebook
 ```
 
 (needs `pythainlp`, `janome`, or `jieba` respectively — each is one pip
