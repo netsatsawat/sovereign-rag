@@ -17,6 +17,8 @@ its build order.
 
 ## The study
 
+![Architecture: corpora through chunking, three retrieval arms, paired generation, containment scoring and paired statistics, with the controls strip that caught every headline](docs/architecture.svg)
+
 ## Try it on your data
 
 [TUTORIAL.md](TUTORIAL.md) walks through running the study's method on
