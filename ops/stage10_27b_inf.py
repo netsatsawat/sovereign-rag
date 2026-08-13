@@ -2,9 +2,13 @@
 
 Glimmer's 96.7% closed-book on the 60 inference questions could come from
 being newer (more late-2023 news in training) or bigger (better recall of
-what both saw). The 27B — same generation as the 8B, three times the size —
-splits the difference: closed-book high like Glimmer -> scale; closed-book
-near the 8B's 51.7% -> recency/generation.
+what both saw). This arm was designed on the premise that qwen3.6:27b is
+the 8B's same-generation big sibling; that premise is WRONG — qwen3.6 is
+a newer Qwen line than qwen3 (ollama model_family qwen35 vs qwen3), so
+the 27B is bigger AND fresher and the arm narrows the question rather
+than settling it. What it can show: whether the high floor is
+Glimmer-specific. The clean scale separator would be a same-family step
+(qwen3:32b) on the same 60 qi. See STAGE10.md for the corrected reading.
 
 Arms: a0_27b_inf (closed) and plain_27b_inf (BM25@600 k=10 RAG), the 60
 inference qi from the stage-8 sample, stage-3 prompts, qwen3.6:27b via

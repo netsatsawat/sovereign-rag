@@ -19,7 +19,12 @@ PROMPT_RAG (`ops/stage10_hatch.py` hard-fails if the sentence drifts).
 
 Paired: +39.58pp, discordant 95:0 — no query got worse — p = 5.0e-29.
 Fates of the 155 hatch-arm abstentions: **94 recovered** (became correct),
-**61 exposed** (became confidently wrong), 0 still abstain.
+**42 committed wrong**, **19 free-form refusals** ("cannot be determined
+from the provided context" and kin) that containment scores as wrong, 0
+emit the prescribed phrase. Composition of the 94: 27 of 29 refused
+open-ended entity questions recovered (hard to fake), while the 126
+refused yes/no items recovered at 67/126 = 53.2% — coin-flip territory,
+so part of the binary recovery is chance, not released knowledge.
 
 Readings, both true:
 - The hatch sentence caused the loss. Without it, Glimmer (72.5) beats the
@@ -76,13 +81,18 @@ the stage-6 configuration.
 | qwen3.6:27b | **88.33** |
 | glimmer 30B | 96.67 |
 
-27B vs glimmer paired: −8.33pp, p = 0.125 (not distinguishable). 27B vs
-8B: +36.67pp, p = 3.0e-06. The 27B is the same generation as the 8B and
-three times its size; it recalls the benchmark almost as well as the
-newer Glimmer. **The memorization floor rises with scale**; recency is at
-most a minor term here. (RAG also drops the 27B on this stratum, 88.3 →
-80.0 with 18.3% abstention — the grounding-suppression effect is not
-Glimmer-specific.)
+27B vs glimmer paired: −8.33pp, 6:1 discordant, p = 0.125 (underpowered
+null, not equivalence). 27B vs 8B: +36.67pp, p = 3.0e-06.
+
+Correction to this stage's original design gloss: qwen3.6:27b is NOT the
+same generation as qwen3:8b — it is a newer Qwen line (model_family
+qwen35 in the ollama config vs qwen3), contemporaneous with Glimmer. The
+27B is bigger AND fresher than the 8B, so this arm cannot attribute the
+floor rise to scale alone. What it does establish: two large models from
+two labs share the high floor (not a Glimmer quirk), and the
+grounding-suppression effect travels (RAG drops the 27B too, 88.3 → 80.0
+with 18.3% abstention). The scale-vs-recency separator — a same-family
+scale step, e.g. qwen3:32b on the same 60 qi — is on the follow-up list.
 
 ## Artifacts
 
