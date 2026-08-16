@@ -5,7 +5,7 @@ Saving them makes every scoring run instant and makes the scored vectors an
 auditable artifact: the manifest records which chunk file (by sha) produced
 which matrix.
 
-Landmine, per PRD 4.5.6: never pass `options` to /api/embed — the triggering
+Landmine, per PRD 4.5.6: never pass `options` to /api/embed: the triggering
 call succeeds and every later embed fails with EOF.
 
     python src/embed_index.py --budget 600

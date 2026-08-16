@@ -1,4 +1,4 @@
-"""E0 and E2/E3 — the cost model, from anecdote to bounded result.
+"""E0 and E2/E3: the cost model, from anecdote to bounded result.
 
 E0 is a precondition, not a formality. Every cost number in the PRD assumes
 `think:false` actually suppressed reasoning and that no call silently hit the
@@ -17,13 +17,14 @@ chunking and once at the 600-token chunking of the SAME text, then:
             WITHIN-CHUNK-UNEMITTED (both entities sat inside one 600-chunk and
             the model simply did not state the relation)
 
-That second split is the point. Extraction is deterministic here — same input
-gives byte-identical output, verified — so an unemitted-but-visible relation
+That second split is what the experiment buys. Extraction is deterministic
+here (same input gives byte-identical output, verified), so an
+unemitted-but-visible relation
 is not noise, it is the model behaving differently with less context. Severed
 edges are recoverable with overlap; unemitted ones are not, and no amount of
 overlap fixes them. Nobody appears to have separated the two.
 
-    python ops/e0_e2e3.py --n 30
+    python ops/extraction_cost_model.py --n 30
 """
 
 from __future__ import annotations

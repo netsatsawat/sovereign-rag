@@ -12,7 +12,7 @@
  },
  "ollama": {
   "version_stage9": "0.32.7",
-  "_version_note": "0.32.5 was upgraded to 0.32.7 on 2026-08-11 during the stage-8 MLX attempts (see reports/STAGE8.md); the stage-9 qwen8b and dense arms ran 2026-08-12 under 0.32.7. Digests below are from ~/.ollama/models/manifests on the study machine, 2026-08-12 (manifest_sha256 = sha256 of the local manifest file; model_layer = the weights blob).",
+  "_version_note": "0.32.5 was upgraded to 0.32.7 on 2026-08-11 during the stage-8 MLX attempts (see reports/glimmer-day-one.md); the stage-9 qwen8b and dense arms ran 2026-08-12 under 0.32.7. Digests below are from ~/.ollama/models/manifests on the study machine, 2026-08-12 (manifest_sha256 = sha256 of the local manifest file; model_layer = the weights blob).",
   "models": {
    "qwen3:8b": {
     "manifest_sha256": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",

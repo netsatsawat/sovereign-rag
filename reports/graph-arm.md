@@ -1,10 +1,10 @@
-# Stage 2 — the graph arm, measured
+# Stage 2: the graph arm, measured
 
 Run 10 Aug 2026. Index: 21.2 h wall clock on the M5, 1,214 chunks through
 qwen3:8b extraction (gleanings disabled), 35 chunks (2.9%) excluded as
-truncated/unparseable — better than E0's 4.8% projection. Graph: **12,604
+truncated/unparseable, better than E0's 4.8% projection. Graph: **12,604
 entities, 18,350 edges** after dropping 2,046 phantom edges to never-emitted
-entities; mean degree 3.17 (inside the 2.88–4.42 band where Leiden is
+entities; mean degree 3.17 (inside the 2.88-4.42 band where Leiden is
 reproducible); coverage 1,178/1,214 chunks.
 
 Retrieval: entity-BM25 over name+type+descriptions, one damped hop over
@@ -36,13 +36,13 @@ slider now has a graph row, and it never wins.
 It is a lower bound on one implementation: entity-match local mode, one
 config, 8B extractor, no gleanings, no community summaries. Microsoft-style
 *global* mode (Leiden communities + summarisation) answers a different
-question class and is a generation-stage feature — untested here and labelled
+question class and is a generation-stage feature, untested here and labelled
 as such. A stronger extractor or community retrieval could close some gap;
 they cannot be assumed to close a 24-point one.
 
 The mechanism is visible in the arm's own numbers: hits@10 74.8% says the
 graph *reaches* a right document often, but strict@10 13.3% says it rarely
-assembles *all* evidence — entity hubs pull retrieval toward one salient
+assembles *all* evidence: entity hubs pull retrieval toward one salient
 document and starve the second and third. Multi-hop evidence assembly is
 exactly what the entity graph was supposed to buy, and it is where it is
 weakest.
@@ -55,5 +55,5 @@ analysis rather than being Holm-corrected in isolation.
 | | BM25 | dense | graph |
 |---|---|---|---|
 | Index build | 0.2 s | 119.5 s | **76,320 s (21.2 h)** |
-| Truncation loss | — | — | 2.9% of chunks |
+| Truncation loss | n/a | n/a | 2.9% of chunks |
 | strict@10 bought | 37.51 | 30.12 | 13.32 |

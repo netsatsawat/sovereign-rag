@@ -1,4 +1,4 @@
-"""Stage 4 — retrieval-feedback re-ranking, and the gate that decides what it
+"""Stage 4: retrieval-feedback re-ranking, and the gate that decides what it
 may be called.
 
 The claim under test is the user's original requirement: "the system should
@@ -21,8 +21,8 @@ The design has to beat two traps that make fake learning look real:
                            deployed feedback (thumbs) could supply.
 
 Split, per seed: 60% learning stream, 40% evaluation. Evaluation divides into
-  N1 "similar"  — shares at least one gold document with some stream query
-  N2 "novel"    — zero gold-document overlap with the stream
+  N1 "similar":  shares at least one gold document with some stream query
+  N2 "novel":    zero gold-document overlap with the stream
 "Gets better on similar queries" is a claim about N1. "Does not get worse" is
 a claim about N2. Both are measured; neither is assumed.
 
@@ -30,7 +30,7 @@ Arms, all evaluated identically at k=10 on strict@10 and hits@10:
   base        BM25 as shipped (Stage 1's winner)
   learned     score' = bm25_norm + LAMBDA * credit_norm  (LAMBDA fixed, declared)
   popularity  credit_norm alone, query-blind  (destructive control #1)
-  shuffled    learned, but credit permuted across documents (control #2 —
+  shuffled    learned, but credit permuted across documents (control #2:
               if this helps, the "signal" is structural, not learned)
 
 Credit: for each stream query, retrieve top-k with epsilon-greedy exploration
@@ -86,7 +86,7 @@ def main() -> None:
     qs = load_queries(set(doc_of))
     idx = BM25([c["text"] for c in chunks])
 
-    # base rankings once — they never change across seeds
+    # base rankings once; they never change across seeds
     base_top50 = [idx.top_k(q["query"], 50) for q in qs]
 
     def strict_at(top, gold):

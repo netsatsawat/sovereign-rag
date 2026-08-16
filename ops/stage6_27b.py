@@ -1,4 +1,4 @@
-"""Stage 6 — the causal test of the synthesis-bottleneck claim.
+"""Stage 6: the causal test of the synthesis-bottleneck claim.
 
 The claim: on comparison and temporal questions, retrieval delivers the
 evidence and the 8B generator fails to synthesise across it. If that is the
@@ -7,7 +7,7 @@ the 27B fails the same way, the bottleneck is elsewhere (prompting, metric,
 task) and the claim must be softened.
 
 Design: paired at the query level against the committed Stage-3 8B rows.
-  sample   comparison and temporal queries only — the strata where the
+  sample   comparison and temporal queries only, the strata where the
            bottleneck lives (inference is already at 95% and can't move)
   arms     closed-book and plain-RAG, both at qwen3.6:27b, with byte-identical
            prompts to Stage 3 (same PROMPT_RAG/PROMPT_CLOSED, same BM25@600
@@ -17,7 +17,7 @@ Design: paired at the query level against the committed Stage-3 8B rows.
            that matter: does RAG-over-closed-book grow with scale?
 
 Checkpointed per (arm, qi); resumable. The 27B does not fully fit this GPU
-(prior calibration: partial CPU offload), so calls are slow — the run is
+(prior calibration: partial CPU offload), so calls are slow: the run is
 sized accordingly and the watcher owns the wait.
 
     python ops/stage6_27b.py --n-comparison 120 --n-temporal 60

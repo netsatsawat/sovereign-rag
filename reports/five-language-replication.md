@@ -1,8 +1,8 @@
-# Stage 9 — the five-language replication (2026-08-12)
+# Stage 9: the five-language replication (2026-08-12)
 
 Muse Glimmer's card claims 100+ languages. Stage 8 measured it in English
-only, and its two sharpest findings — the escape hatch firing on
-evidence-complete queries, and the contamination floor — could each be an
+only, and its two sharpest findings (the escape hatch firing on
+evidence-complete queries, and the contamination floor) could each be an
 English artifact. This stage asks the same paired questions in Thai,
 Japanese, Chinese, Spanish and Vietnamese on native extractive-QA corpora,
 with qwen3:8b as the paired comparator: 100 queries × {closed, RAG@5} ×
@@ -52,8 +52,8 @@ English (stage 8, multi-hop news): glimmer −15.83pp vs the same 8B,
 p<0.001. Outside English, Glimmer ties or wins everywhere, significantly in
 three of five.
 
-Closed-book collapses in every language (glimmer 7–27, 8B 3–12 — single
-digits everywhere except Japanese's 27/12): no contamination floor — these
+Closed-book collapses in every language (glimmer 7-27, 8B 3-12, single
+digits everywhere except Japanese's 27/12): no contamination floor. These
 corpora test knowledge the models do not have, so RAG-over-closed-book is
 +54 to +79pp for glimmer (all p<0.001). The English "+6.25pp, p=0.067,
 retrieval useless" result was the contaminated entity stratum talking, not
@@ -74,7 +74,7 @@ gold article:
 
 The 8B's same cross (recomputed from the same rows + deterministic index
 rebuild): found → 2/1/0/4/2%, missed → 50/20/100/39/50% (th/ja/zh/es/vi).
-It abstains less everywhere — including on the misses, where abstention is
+It abstains less everywhere, including on the misses, where abstention is
 correct: 20 vs 60 (ja), 39 vs 72 (es), 50 vs 86 (vi). Glimmer's hatch
 discriminates better than the model that beat it in English.
 
@@ -85,7 +85,7 @@ languages. The Stage-8 over-refusal is therefore not a fixed trait of the
 model: it is what strict grounding + multi-hop yes/no questions + a
 containment metric jointly produce.
 
-## Confounds, stated
+## Confounds
 
 - Task shape differs from Stage 8 (single-hop extractive vs multi-hop
   news; mostly entity/span answers vs 75% yes/no). Cross-language rows are
@@ -97,9 +97,9 @@ containment metric jointly produce.
   lose their gold span to the trim (verified against the committed
   corpus), so both models' Thai RAG ceiling is 98/100; paired deltas
   unaffected.
-- Reasoning tax persists everywhere: glimmer mean gen tokens 161–371 per
-  answer depending on language and arm (RAG arms 161–276; lowest zh,
-  highest th) vs the 8B's actual means of 7–17 under its 64-token cap.
+- Reasoning tax persists everywhere: glimmer mean gen tokens 161-371 per
+  answer depending on language and arm (RAG arms 161-276; lowest zh,
+  highest th) vs the 8B's actual means of 7-17 under its 64-token cap.
 
 ## Reading the committed numbers
 
@@ -113,7 +113,7 @@ containment metric jointly produce.
   ja closed-book 8B (qi=96, gold '4' matched inside '574族'), i.e. its
   12.0% would be 11.0% with digit boundaries.
 - The same strip removes all combining marks, which for Thai deletes
-  vowels-above/below and tone marks from gold and answer alike — lenient
+  vowels-above/below and tone marks from gold and answer alike, lenient
   (one committed th RAG match rides on a dropped silent-letter mark) and
   documented in `ops/stage9_lang.py`.
 - `abstained_pct` counts the PRESCRIBED escape phrase (plus the English
@@ -123,9 +123,9 @@ containment metric jointly produce.
 - The per-arm summaries do not carry stage 8's `truncated_pct`, and five
   glimmer closed-book rows hit the 1,024-token budget with the ENTIRE
   budget consumed by reasoning (`done_reason: "length"`, gen_tokens 1024,
-  thinking 1,867–3,375 chars, answer ""): th qi=15,36 and ja qi=4,6,37.
+  thinking 1,867-3,375 chars, answer ""): th qi=15,36 and ja qi=4,6,37.
   They score as non-contained, non-abstained misses, indistinguishable in
-  the summary JSON from a confidently wrong answer — i.e. 2pp of th and
+  the summary JSON from a confidently wrong answer, i.e. 2pp of th and
   3pp of ja closed_glimmer's containment/abstention denominators are "the
   answer channel never emitted a token". Footnote them when quoting th/ja
   closed-book numbers. th closed_qwen8b additionally has six
@@ -134,7 +134,7 @@ containment metric jointly produce.
 
 ## Artifacts
 
-`ops/stage9_lang.py` (retrieval/generation/analysis — NOT prep; see the
+`ops/stage9_lang.py` (retrieval/generation/analysis, NOT prep; see the
 provenance caveat below), `ops/run_multiling.sh` (driver; generation +
 analysis only), `data/multiling/{lang}/` (corpus + queries, committed),
 `reports/stage9_{lang}.jsonl` (400 rows each),
@@ -148,7 +148,7 @@ LangBM25 rebuild (no server needed), writing
 percentages to integers.
 
 **Provenance caveat.** The corpora and queries are committed, so every
-downstream number recomputes from the repo — but the script that built
+downstream number recomputes from the repo, but the script that built
 `data/multiling/{lang}/corpus.jsonl` + `queries.jsonl` from the source
 datasets was not committed, and the upstream revision each language was
 pulled at was not recorded (contrast `ops/fetch_data.py` +
@@ -164,7 +164,7 @@ Dense-retrieval caches are also unevenly committed (ja/th `emb.npy`
 tracked, es/vi/zh local-only). The tracked caches ship with the
 `emb.meta.json` corpus fingerprint that `--retrieval`'s stale-cache guard
 requires; the caches predate the guard, so the fingerprints were
-back-filled from the committed corpora — sound because each `corpus.jsonl`
+back-filled from the committed corpora, sound because each `corpus.jsonl`
 is unchanged in git since the commit that added its `emb.npy`, and the
 committed hits@k were computed from exactly these cache/corpus pairs.
 Deleting an `emb.npy` and re-running `--retrieval` regenerates it
@@ -182,6 +182,6 @@ No committed script starts the servers. Prerequisites:
     ollama pull qwen3:8b && ollama pull qwen3-embedding:0.6b
 
 Per language: `--retrieval` (not run by the driver), the two `--model`
-arms (or `ops/run_multiling.sh` for all five), then `--analyze` — the
+arms (or `ops/run_multiling.sh` for all five), then `--analyze`: the
 command sequence in `ops/stage9_lang.py`'s docstring (`--calibration`
 there is optional and derived; it needs no server).

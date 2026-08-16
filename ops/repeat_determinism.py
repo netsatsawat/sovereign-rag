@@ -3,7 +3,7 @@
 Runs one representative chunk through the extraction call three times and
 asserts byte-identical entity and relationship sets. Requires the local
 Ollama and therefore must NOT run while the graph index holds the GPU;
-STAGE0.md cites the result of the run performed 9 Aug 2026.
+machine-measurement.md cites the result of the run performed 9 Aug 2026.
 
     python ops/repeat_determinism.py
 """
@@ -15,7 +15,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(ROOT / "ops"))
-from e0_e2e3 import call, norm, rel_key  # noqa: E402
+from extraction_cost_model import call, norm, rel_key  # noqa: E402
 
 
 def main() -> None:

@@ -1,14 +1,14 @@
 """Does halving the chunk really cost you the relationships it saves?
 
 The 1024-vs-512 measurement was one chunk, and from it I claimed the missing
-relationships were "the severed ones" — the pairs whose two entities land on
+relationships were "the severed ones": the pairs whose two entities land on
 opposite sides of the new boundary. That was an inference, not a measurement.
 
 This measures it. For each source chunk, extract once at 1024 tokens, then
 extract its two 512-token halves, and compare the three outputs:
 
   entities      found at 1024 only / at 512 only / in both
-  relationships same, plus the subset provably SEVERED — present at 1024 with
+  relationships same, plus the subset provably SEVERED: present at 1024 with
                 one endpoint in each half, so no 512 extraction could see it
 
 Severed relationships are the real cost of splitting. Relationships lost for
@@ -29,7 +29,7 @@ from pathlib import Path
 
 import sys
 sys.path.insert(0, str(Path(__file__).parent))
-from stage0_g3 import chunks_from_corpus  # noqa: E402
+from gate_graph_extraction import chunks_from_corpus  # noqa: E402
 
 ROOT = Path(__file__).parent.parent
 OUT = ROOT / "reports" / "chunk_split_probe.json"
@@ -72,7 +72,7 @@ CAP = 8000
 def extract(text: str) -> tuple[dict | None, float, int, str]:
     """Returns (payload_or_None, wall_s, gen_tokens, status).
 
-    A cap is necessary — the first pilot ran past a 600 s client timeout with
+    A cap is necessary. The first pilot ran past a 600 s client timeout with
     no bound. But hitting the cap truncates the JSON mid-object, and that is a
     real failure mode of local graph extraction rather than a bug to hide:
     payload size varies enormously across chunks, and a dense one blows any
@@ -131,7 +131,7 @@ def main() -> None:
                 "gen_tokens": {"whole": w_tok, "split": a_tok + b_tok},
                 "comparable": False,
             })
-            print(f"  {i:2}/{args.n}  SKIPPED — whole:{w_st} a:{a_st} b:{b_st}"
+            print(f"  {i:2}/{args.n}  SKIPPED  whole:{w_st} a:{a_st} b:{b_st}"
                   f"  ({w_tok}/{a_tok}/{b_tok} tok)", flush=True)
             continue
 
@@ -185,7 +185,7 @@ def main() -> None:
 
     if not good:
         OUT.write_text(json.dumps({"n": args.n, "comparable": 0, "rows": rows}, indent=1))
-        print("\nNo comparable pairs — every sample truncated. "
+        print("\nNo comparable pairs: every sample truncated. "
               "That is the finding: extraction payload exceeds any fixed cap on this corpus.")
         return
 

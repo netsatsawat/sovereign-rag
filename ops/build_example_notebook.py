@@ -1,5 +1,5 @@
-"""Builds examples/minimal_eval.ipynb — the study's method as a runnable
-notebook — then executes it against the local ollama so the committed copy
+"""Builds examples/minimal_eval.ipynb, the study's method as a runnable
+notebook, then executes it against the local ollama so the committed copy
 carries real outputs. Rerun after editing cells below.
 
     ./.venv/bin/python ops/build_example_notebook.py
@@ -22,11 +22,11 @@ md("""# Run this study's evaluation on your own corpus
 The [companion articles](https://github.com/netsatsawat/sovereign-rag#readme) end with three questions for your eval team.
 This notebook is the fifteen-minute version of answering them on your own data, with a local model. One pass gives you:
 
-1. a **closed-book arm** — what the model scores with *no* retrieval. High closed-book means your benchmark is answerable from the weights, and your "RAG lift" is measuring recall, not retrieval.
+1. a **closed-book arm**: what the model scores with *no* retrieval. High closed-book means your benchmark is answerable from the weights, and your "RAG lift" is measuring recall, not retrieval.
 2. a **RAG arm**, paired per question against closed-book with an exact McNemar test.
-3. the **calibration cross** — when the model says *insufficient information*, was the evidence actually missing?
-4. the **constant-answer baseline** — what the most common gold answer scores with no model at all.
-5. the **escape-hatch ablation** — the same RAG run with the "reply exactly: insufficient information" sentence deleted. In this study, that one sentence moved a 30B model **forty points**.
+3. the **calibration cross**: when the model says *insufficient information*, was the evidence actually missing?
+4. the **constant-answer baseline**: what the most common gold answer scores with no model at all.
+5. the **escape-hatch ablation**, the same RAG run with the "reply exactly: insufficient information" sentence deleted. In this study, that one sentence moved a 30B model **forty points**.
 
 **Prerequisites:** [ollama](https://ollama.com) running locally with a model pulled (`ollama pull qwen3:8b`), and this repo's venv (`pip install -r requirements.txt`). The bundled sample is 15 documents and 6 questions (a SQuAD-dev subset, CC BY-SA) so the whole notebook runs in a few minutes on a laptop-class machine."""),
 
@@ -48,17 +48,17 @@ print("golds:  ", queries[0]["golds"])"""),
 
 md("""## Data format
 
-Two jsonl files are the whole contract — swap in your own and everything below runs unchanged:
+Two jsonl files are the whole contract: swap in your own and everything below runs unchanged:
 
 ```
 corpus.jsonl   {"article_id": "...", "context": "..."}                          one per document
 queries.jsonl  {"qi": 0, "question": "...", "gold_article": "...", "golds": [...]}  one per question
 ```
 
-`golds` is every acceptable answer string (scoring is normalized substring containment — NFKC, casefold, punctuation-stripped; `ops/stage9_lang.py` documents the caveats). `gold_article` powers the calibration cross. A hundred questions labelled by your own team beats ten thousand synthetic ones — that was this study's experience across six corpora."""),
+`golds` is every acceptable answer string (scoring is normalized substring containment: NFKC, casefold, punctuation-stripped; `ops/stage9_lang.py` documents the caveats). `gold_article` powers the calibration cross. A hundred questions labelled by your own team beats ten thousand synthetic ones. That was this study's experience across six corpora."""),
 
 code("""# BM25 with language-aware segmentation. "en" = whitespace/regex; pass
-# "th" / "ja" / "zh" instead and the same class segments properly — a
+# "th" / "ja" / "zh" instead and the same class segments properly. A
 # whitespace BM25 silently deletes those scripts (the five-language study's
 # retrieval trap).
 bm = LangBM25("en", [c["context"] for c in corpus])
@@ -70,7 +70,7 @@ print("query:    ", q["question"][:70])
 print("retrieved:", [aid_of[i] for i in top])
 print("gold in top-k:", q["gold_article"] in {aid_of[i] for i in top})"""),
 
-md("""## The two arms — and the sentence under test
+md("""## The two arms, and the sentence under test
 
 Same prompts as the study's English arms. `ESCAPE` is the sentence the ablation later deletes: the standard escape hatch nearly every production RAG template ships in some form."""),
 
@@ -111,7 +111,7 @@ for r in rows[:3]:
 
 md("""## Scoring: containment, abstention, and the paired test
 
-Read in this order — the closed-book floor first, then the paired lift, never the RAG number alone."""),
+Read in this order: the closed-book floor first, then the paired lift, never the RAG number alone."""),
 
 code("""def abstained(ans):
     return "insufficientinformation" in norm(ans)
@@ -130,11 +130,11 @@ b = sum(contained(r["golds"], r["rag"]) and not contained(r["golds"], r["closed"
 c = sum(contained(r["golds"], r["closed"]) and not contained(r["golds"], r["rag"]) for r in rows)
 print(f"\\nRAG over closed-book: {b} won by RAG only, {c} by closed only "
       f"-> delta {100*(b-c)/len(rows):+.1f}pp, exact McNemar p = {mcnemar_exact(b, c):.3f}")
-print("(6 questions is a smoke test — the p-value earns meaning at your real n)")"""),
+print("(6 questions is a smoke test; the p-value earns meaning at your real n)")"""),
 
 md("""## The calibration cross
 
-The single most diagnostic table this study produced. An honest model abstains where retrieval **missed**; an obedient one abstains wherever the instruction gives it an exit. In the study's English multi-hop arm the same model refused 56% of questions whose evidence was fully present — then was near-perfectly calibrated on single-hop arms in five languages. Task shape decides; only this cross shows you."""),
+The single most diagnostic table this study produced. An honest model abstains where retrieval **missed**; an obedient one abstains wherever the instruction gives it an exit. In the study's English multi-hop arm the same model refused 56% of questions whose evidence was fully present, then was near-perfectly calibrated on single-hop arms in five languages. Task shape decides; only this cross shows you."""),
 
 code("""for label, cond in (("gold retrieved", True), ("gold missed  ", False)):
     sub = [r for r in rows if r["gold_retrieved"] == cond]
@@ -149,7 +149,7 @@ print("any slice where the constant wins is a slice your evaluation cannot see")
 
 md("""## The ablation: delete one sentence, re-run
 
-Identical queries, identical contexts, identical model — the escape-hatch sentence removed. In the study this flipped a 15.8-point loss into a 24-point win for the same weights (94 of 155 refusals had been suppressing answers the model demonstrably had, 42 became honest-but-wrong, 19 just rephrased the refusal). Whatever it does on *your* stack is a number you are currently running blind."""),
+Identical queries, identical contexts, identical model, with the escape-hatch sentence removed. In the study this flipped a 15.8-point loss into a 24-point win for the same weights (94 of 155 refusals had been suppressing answers the model demonstrably had, 42 became honest-but-wrong, 19 just rephrased the refusal). Whatever it does on *your* stack is a number you are currently running blind."""),
 
 code("""rows_nohatch = run_arms(with_escape=False)
 
@@ -166,10 +166,10 @@ for gold, before, after in flips:
 md("""## Point it at your data
 
 1. Write your `corpus.jsonl` / `queries.jsonl` in the format above and change the two paths in cell 1.
-2. Non-English corpus? `LangBM25("th" | "ja" | "zh", ...)` segments properly (one pip install each: `pythainlp`, `janome`, `jieba`); borrow the native prompt + escape-phrase pairs from `ops/stage9_lang.py` — they ran the five-language study.
-3. For hundreds of queries, lift `run_arms` into a script with per-row checkpointing — every stage script in `ops/` follows that pattern (checkpointed jsonl, deterministic sampling, resumable), so promoting this notebook to that rigor is appetite, not rewriting.
+2. Non-English corpus? `LangBM25("th" | "ja" | "zh", ...)` segments properly (one pip install each: `pythainlp`, `janome`, `jieba`); borrow the native prompt + escape-phrase pairs from `ops/stage9_lang.py`; they ran the five-language study.
+3. For hundreds of queries, lift `run_arms` into a script with per-row checkpointing: every stage script in `ops/` follows that pattern (checkpointed jsonl, deterministic sampling, resumable), so promoting this notebook to that rigor is appetite, not rewriting.
 
-The full study — GraphRAG arm, 27B and Muse Glimmer comparisons, bootstrap CIs, the learning-layer negative, five languages — is the industrial version of exactly this loop. [TUTORIAL.md](../TUTORIAL.md) is the prose map; the `reports/STAGE*.md` files are what it found."""),
+The full study (GraphRAG arm, 27B and Muse Glimmer comparisons, bootstrap CIs, the learning-layer negative, five languages) is the industrial version of exactly this loop. [TUTORIAL.md](../TUTORIAL.md) is the prose map; the `reports/*.md` files are what it found."""),
 ]
 
 nb.cells = cells

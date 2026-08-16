@@ -1,4 +1,4 @@
-"""Stage 10 prep — English single-hop control corpus (SQuAD v1.1 dev).
+"""Stage 10 prep: English single-hop control corpus (SQuAD v1.1 dev).
 
 The five-language stage left one confound standing: language, corpus and
 task shape changed together, so the abstention reversal cannot be pinned on
@@ -9,7 +9,7 @@ single-hop still over-refuses, language/corpus does.
 
 Contamination expectation, stated up front: SQuAD is the most-published QA
 dataset in existence and its Wikipedia facts are old, so the closed-book
-arm should land HIGH — that is not a bug in the control, it is a second
+arm should land HIGH. That is not a bug in the control, it is a second
 test of the parametric-answerability mechanism from the five-language
 piece.
 

@@ -1,4 +1,4 @@
-"""Stage 10 — the escape-hatch ablation.
+"""Stage 10: the escape-hatch ablation.
 
 Stage 8's headline mechanism: Glimmer delivers its English RAG loss through
 the prescribed escape phrase, refusing 56% of evidence-complete queries. The
@@ -6,7 +6,7 @@ causal question the drafts name as the designed next arm: is the hatch
 *causing* the loss, or merely labelling failures that would happen anyway?
 
 Design: the same 240-query stage-8 sample, same BM25@600 k=10 contexts, same
-generator configuration — with the escape-hatch sentence deleted from the
+generator configuration, with the escape-hatch sentence deleted from the
 prompt. One arm, Glimmer RAG only (the mechanism under test lives there).
 
 Readout, paired per query against the committed plain_glimmer rows:
@@ -16,8 +16,8 @@ Readout, paired per query against the committed plain_glimmer rows:
               was honest labelling of failure (not causal).
 Plus the paired containment delta and what replaced each abstention.
 
-    python ops/stage10_hatch.py             # run (checkpointed)
-    python ops/stage10_hatch.py --analyze   # -> reports/stage10_hatch.json
+    python ops/escape_hatch_ablation.py             # run (checkpointed)
+    python ops/escape_hatch_ablation.py --analyze   # -> reports/stage10_hatch.json
 """
 
 from __future__ import annotations
@@ -46,7 +46,7 @@ HATCH_SENTENCE = (" If the context does not contain the answer,\n"
                   "reply exactly: insufficient information.")
 if HATCH_SENTENCE not in PROMPT_RAG:
     raise SystemExit("stage3 PROMPT_RAG no longer contains the expected "
-                     "escape-hatch sentence — ablation would be vacuous")
+                     "escape-hatch sentence; ablation would be vacuous")
 PROMPT_RAG_NOHATCH = PROMPT_RAG.replace(HATCH_SENTENCE, "")
 
 
