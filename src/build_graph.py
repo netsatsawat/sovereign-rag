@@ -3,7 +3,7 @@
 Reads data/graph_{budget}.jsonl (one extraction per chunk, written by
 ops/graph_index.py), merges entities across chunks by normalised name, and
 aggregates relationships into weighted undirected edges. Truncated and
-unparseable chunks are excluded and counted — they are a published number,
+unparseable chunks are excluded and counted: they are a published number,
 not a silent gap.
 
 Outputs data/graph_{budget}.build.json:

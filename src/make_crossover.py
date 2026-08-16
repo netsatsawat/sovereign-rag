@@ -4,7 +4,7 @@ FR-U2: one self-contained file. No network fetch, no CDN, no npm, no webfont;
 the results JSON is inlined at build time, so file:// works with the stack off.
 FR-U3: the renderer reads precomputed `reportable` flags; it computes no
 significance decision. FR-U4: every number shown originates in the committed
-JSON this script inlines — regenerate with `python src/make_crossover.py`.
+JSON this script inlines; regenerate with `python src/make_crossover.py`.
 
     python src/make_crossover.py
 """
@@ -66,14 +66,14 @@ HTML = """<!doctype html>
 <body><div class="wrap">
 <h1>At what question mix does each retriever start paying for itself?</h1>
 <p class="sub">sovereign-rag · Stage 1, retrieval layer · MultiHop-RAG tech+business,
-253 articles · one 24&nbsp;GB M5, no API key · metric: <b>strict@10</b> — every gold
+253 articles · one 24&nbsp;GB M5, no API key · metric: <b>strict@10</b>, every gold
 document for the query retrieved in the top 10 chunks</p>
 
-<div class="banner"><b>Scope labels, before any number.</b> Retrieval layer only — no
+<div class="banner"><b>Scope labels, before any number.</b> Retrieval layer only: no
 generation, no LLM judge; the agentic and graph arms are pending (graph index in progress).
-<span id="satrange"></span> strict@k is the replacement declared in STAGE0.md before Stage 1 ran
+<span id="satrange"></span> strict@k is the replacement declared in machine-measurement.md before Stage 1 ran
 (chosen post-hoc from two candidate metrics). Deltas whose 95% CI includes zero are
-greyed — the flag is computed offline, never in this page.</div>
+greyed; the flag is computed offline, never in this page.</div>
 
 <h2>Per-stratum, per-retriever</h2>
 <div id="strata"></div>
@@ -83,7 +83,7 @@ greyed — the flag is computed offline, never in this page.</div>
 <div class="winner" id="winner"></div>
 <div id="mixbars"></div>
 
-<h2>The fixed-token control — the sign flips</h2>
+<h2>The fixed-token control: the sign flips</h2>
 <p class="sub">Comparing 600@k10 to 1200@k10 confounds chunk size with retrieved tokens
 (k=10 of 1200-token chunks reads 2× the text). At a fixed ~6,000-token budget:</p>
 <table id="ftc"></table>
@@ -113,7 +113,7 @@ function bar(host, label, cls, pct, extra){
   host.appendChild(r);
 }
 
-document.getElementById('satrange').textContent=`Hits@10 is saturated on this corpus (${h10lo}\u2013${h10hi}% across all k=10 configs) and is not a headline;`;
+document.getElementById('satrange').textContent=`Hits@10 is saturated on this corpus (${h10lo}-${h10hi}% across all k=10 configs) and is not a headline;`;
 const sh=document.getElementById('strata');
 for(const s of strata){
   const box=document.createElement('div'); box.className='stratum';
@@ -159,7 +159,7 @@ function render(){
   }
   scores.sort((x,y)=>y.v-x.v);
   document.getElementById('winner').textContent=
-    `Winner at this mix: ${scores[0].k} — weighted strict@10 ${scores[0].v.toFixed(1)}%`;
+    `Winner at this mix: ${scores[0].k}, weighted strict@10 ${scores[0].v.toFixed(1)}%`;
   const mb=document.getElementById('mixbars'); mb.innerHTML='';
   for(const s of scores) bar(mb, s.k, s.cls, s.v);
 }
@@ -176,7 +176,7 @@ ftc.innerHTML='<tr><th>retriever</th><th>600 @ k=5</th><th>600 @ k=10</th><th>12
  `<tr><td colspan=5 style="color:var(--dim)">fixed ~6,000-token budget: 600@k10 − 1200@k5 (BM25) = `+
  `${D.deltas['fixed_tokens_600k10_vs_1200k5_bm25_strict'].delta_pts>0?'+':''}`+
  `${D.deltas['fixed_tokens_600k10_vs_1200k5_bm25_strict'].delta_pts} `+
- `[${D.deltas['fixed_tokens_600k10_vs_1200k5_bm25_strict'].ci95_pts}] — a slot effect, not a chunk-size effect; `+
+ `[${D.deltas['fixed_tokens_600k10_vs_1200k5_bm25_strict'].ci95_pts}], a slot effect, not a chunk-size effect; `+
  `at matched k, 1200 wins both (+${D.deltas['matched_k5_1200_vs_600_bm25_strict'].delta_pts}, `+
  `+${D.deltas['matched_k10_1200_vs_600_bm25_strict'].delta_pts})</td></tr>`;
 
@@ -188,14 +188,14 @@ for(const b of BUDGETS) for(const pair of [["hybrid","bm25"],["hybrid","dense"],
   rows+=`<tr${grey}><td>@${b} ${nice[pair[0]]} − ${nice[pair[1]]}</td>
     <td>${d.delta_pts>0?'+':''}${d.delta_pts}</td>
     <td>[${d.ci95_pts[0]}, ${d.ci95_pts[1]}]</td>
-    <td>${d.reportable?'':'not significant after Holm\u2013Bonferroni — not reported'}</td></tr>`;
+    <td>${d.reportable?'':'not significant after Holm-Bonferroni, not reported'}</td></tr>`;
 }
 dt.innerHTML=rows;
 
 const ct=document.getElementById('cost');
 ct.innerHTML='<tr><th>config</th><th>index build</th><th>query side (incl. one-time query embedding for dense/hybrid)</th></tr>'+
  BUDGETS.flatMap(b=>ARMS.map(a=>{const c=cfg(b,a).cost_s;
-   return `<tr><td>${nice[a]} @${b}</td><td>${c.index_build??'—'} s</td><td>${c.query_side} s</td></tr>`})).join('');
+   return `<tr><td>${nice[a]} @${b}</td><td>${c.index_build??'n/a'} s</td><td>${c.query_side} s</td></tr>`})).join('');
 
 document.getElementById('foot').textContent=
   `Every number originates in reports/stage1_retrieval.json; regenerate this page with `+

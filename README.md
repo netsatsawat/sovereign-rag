@@ -10,7 +10,7 @@ telcos, and governments (the organizations I've spent 16 years with) often can't
 perimeter, is instrumented for evaluation from day one, and improves itself against
 those evaluations instead of against vibes.
 
-**Status:** the measurement study is complete — stages 0–9 done with
+**Status:** the measurement study is complete: stages 0-9 done with
 committed artifacts (see [The study](#the-study) and `STATUS.md`). The
 productized reference architecture is the next track; the roadmap below is
 its build order.
@@ -24,43 +24,44 @@ its build order.
 [TUTORIAL.md](TUTORIAL.md) walks through running the study's method on
 your own corpus in about fifteen minutes: closed-book arm, paired RAG
 lift, the calibration cross, the constant-answer baseline, and the
-escape-hatch ablation — one notebook
+escape-hatch ablation. One notebook
 ([examples/minimal_eval.ipynb](examples/minimal_eval.ipynb), committed
-with its outputs so it reads on GitHub), one local model, a bundled
+with its outputs so it reads on GitHub), one local model, and a bundled
 sample dataset to smoke-test first.
 
 Before building the product, this repo ran the measurements the companion
 articles are written from. Every number in those posts recomputes from
 artifacts committed here. Per-stage reports:
 
-- [Stage 0 — machine measurement](reports/STAGE0.md)
-- [Stage 1 — retrieval layer: BM25 / dense / hybrid](reports/STAGE1.md)
-- [Stage 2 — the graph arm](reports/STAGE2.md)
-- [Stage 3 — generation arms](reports/STAGE3.md)
-- [Stage 4 — the learning layer (pre-registered negative)](reports/STAGE4.md)
-- [Stage 6 — pushing on the claims](reports/STAGE6.md) (includes the
+- [Stage 0: machine measurement](reports/machine-measurement.md)
+- [Stage 1, retrieval layer: BM25 / dense / hybrid](reports/retrieval.md)
+- [Stage 2: the graph arm](reports/graph-arm.md)
+- [Stage 3: generation arms](reports/generation-arms.md)
+- [Stage 4: the learning layer (pre-registered negative)](reports/learning-layer.md)
+- [Stage 6: pushing on the claims](reports/claim-stress-tests.md) (includes the
   full-corpus replication, `reports/stage5_full_corpus.json`)
-- [Stage 7 — the cross-domain replication (HotpotQA)](reports/STAGE7.md): the winner flips, the metric lesson transfers
-- [Stage 8 — Muse Glimmer 30B, day one](reports/STAGE8.md)
-- [Stage 9 — the five-language replication](reports/STAGE9.md)
-- [Stage 10 — the three confound-closers](reports/STAGE10.md): escape-hatch ablation, English single-hop control, 27B entity probe
+- [Stage 7: the cross-domain replication (HotpotQA)](reports/hotpotqa-transfer.md): the winner flips, the metric lesson transfers
+- [Stage 8: Muse Glimmer 30B, day one](reports/glimmer-day-one.md)
+- [Stage 9: the five-language replication](reports/five-language-replication.md)
+- [Stage 10: the three confound-closers](reports/confound-closers.md): escape-hatch ablation, English single-hop control, 27B entity probe
 
-Entry points for stages 8–10: `ops/stage10_hatch.py`, `ops/stage10_27b_inf.py`, `ops/prep_en_squad.py`, `ops/stage8_glimmer.py` and
-`ops/stage9_lang.py` + `ops/run_multiling.sh` (driver — its header
+Entry points for stages 8-10: `ops/escape_hatch_ablation.py`,
+`ops/recency_vs_scale_27b.py`, `ops/prep_en_squad.py`, `ops/stage8_glimmer.py`
+and `ops/stage9_lang.py` + `ops/run_multiling.sh` (driver; its header
 documents the llama-server/ollama prerequisites). Model binaries are not
 committed; `models.manifest.json` records their hashes and runtime pins.
 
 Regenerating from scratch (the `.gitignore` contract: large regenerable
 files are not committed, manifests carry their content hashes):
 
-1. `python ops/fetch_data.py` — source parquets + `data/sources.manifest.json`
-2. `python src/chunker.py --budget 600` — chunk files, sha-manifested
-3. `python src/embed_index.py --budget 600` — embeddings via local ollama
+1. `python ops/fetch_data.py` (source parquets + `data/sources.manifest.json`)
+2. `python src/chunker.py --budget 600` (chunk files, sha-manifested)
+3. `python src/embed_index.py --budget 600` (embeddings via local ollama)
 4. stage scripts under `ops/` in stage order; each is checkpointed/resumable
 
-Known gap, stated rather than hidden: the stage-9 multilingual corpora are
-committed but their prep script is not — see the provenance caveat in
-[reports/STAGE9.md](reports/STAGE9.md).
+Known gap: the stage-9 multilingual corpora are committed but their prep
+script is not. See the provenance caveat in
+[reports/five-language-replication.md](reports/five-language-replication.md).
 
 ## Three pillars
 

@@ -1,4 +1,4 @@
-"""The graph arm, retrieval level — scored on the same harness as Stage 1.
+"""The graph arm, retrieval level: scored on the same harness as Stage 1.
 
 Local-mode graph retrieval, gleanings disabled, per the PRD's arm definition:
 
@@ -14,7 +14,7 @@ Local-mode graph retrieval, gleanings disabled, per the PRD's arm definition:
                       queries, same fairness contract
 
 Everything is deterministic: BM25 ties break on entity index, chunk ties on
-chunk index. The graph arm retrieves through the graph or not at all — no
+chunk index. The graph arm retrieves through the graph or not at all; no
 fallback to text BM25, because a fallback would measure the fallback.
 
     python src/score_graph.py --budget 600 [--smoke]
@@ -107,7 +107,7 @@ def main() -> None:
                          "hits1": [int(r["hits1"]) for r in rows]}}
 
     o = cfg["overall"]
-    tag = "SMOKE (partial graph — not a result)" if g["partial"] else "graph"
+    tag = "SMOKE (partial graph, not a result)" if g["partial"] else "graph"
     print(f"  {tag} @{args.budget} k={args.k}: hits@1 {o['hits1']:.2f}  "
           f"hits@k {o['hitsk']:.2f}  strict@k {o['strict']:.2f}  mrr {o['mrr']:.4f}  "
           f"unreachable {unreachable}/{len(qs)}")

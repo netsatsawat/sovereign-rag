@@ -1,4 +1,4 @@
-"""Stage 0, gate G3 — the one that decides whether GraphRAG exists here.
+"""Stage 0, gate G3: the one that decides whether GraphRAG exists here.
 
 Twenty real chunks from the real corpus through a real GraphRAG-style
 entity/relation extraction prompt, with structured output enforced by Ollama's
@@ -14,7 +14,7 @@ The per-chunk second is also the publishable number. Microsoft indexed ~1M
 tokens in 281 minutes on GPT-4-turbo; nobody reports what the same operation
 costs on a laptop with no API key.
 
-    python ops/stage0_g3.py --n 20
+    python ops/gate_graph_extraction.py --n 20
 """
 
 from __future__ import annotations

@@ -1,4 +1,4 @@
-"""Stage 0 — measure the machine before writing any benchmark code.
+"""Stage 0: measure the machine before writing any benchmark code.
 
 Four gates. All four must pass or the study is re-scoped rather than started.
 

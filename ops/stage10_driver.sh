@@ -27,7 +27,7 @@ if ! curl -sf --max-time 5 http://localhost:8095/health >/dev/null; then
 fi
 
 step "hatch ablation (glimmer, 240 RAG calls)"
-$PY -u ops/stage10_hatch.py >> "$LOG" 2>&1 || fail "hatch run exited $?"
+$PY -u ops/escape_hatch_ablation.py >> "$LOG" 2>&1 || fail "hatch run exited $?"
 
 step "english control: prep + retrieval + glimmer arms"
 $PY -u ops/prep_en_squad.py >> "$LOG" 2>&1 || fail "en prep exited $?"
@@ -43,7 +43,7 @@ if ! curl -sf --max-time 10 http://localhost:11434/api/tags >/dev/null; then
   fail "ollama not reachable"; echo "STAGE10 DRIVER FAILED (see $LOG)"; exit 1
 fi
 $PY -u ops/stage9_lang.py --lang en --model qwen8b >> "$LOG" 2>&1 || fail "en qwen8b exited $?"
-$PY -u ops/stage10_27b_inf.py >> "$LOG" 2>&1 || fail "27b run exited $?"
+$PY -u ops/recency_vs_scale_27b.py >> "$LOG" 2>&1 || fail "27b run exited $?"
 
 # unrecovered-error check, stage-9-driver semantics (latest row per key wins)
 for f in reports/stage10_hatch.jsonl reports/stage9_en.jsonl reports/stage10_27b_inf.jsonl; do
@@ -65,10 +65,10 @@ done
 
 if [ "$FAILED" -eq 0 ]; then
   step "analyzing"
-  $PY ops/stage10_hatch.py --analyze > /dev/null 2>>"$LOG" || fail "hatch analyze"
+  $PY ops/escape_hatch_ablation.py --analyze > /dev/null 2>>"$LOG" || fail "hatch analyze"
   $PY ops/stage9_lang.py --lang en --analyze > /dev/null 2>>"$LOG" || fail "en analyze"
   $PY ops/stage9_lang.py --lang en --calibration > /dev/null 2>>"$LOG" || fail "en calibration"
-  $PY ops/stage10_27b_inf.py --analyze > /dev/null 2>>"$LOG" || fail "27b analyze"
+  $PY ops/recency_vs_scale_27b.py --analyze > /dev/null 2>>"$LOG" || fail "27b analyze"
 fi
 
 if [ "$FAILED" -ne 0 ]; then

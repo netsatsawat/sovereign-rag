@@ -1,4 +1,4 @@
-"""E4 — price the chunk-size confound on the dense arm, and price the title.
+"""E4: price the chunk-size confound on the dense arm, and price the title.
 
 Two questions this settles without running a single generation:
 
@@ -19,11 +19,11 @@ Gold is the query's evidence URLs. A hit is a retrieved chunk belonging to a
 gold document.
 
 Landmine, documented in PRD 4.5.6 and respected here: passing `options` to
-/api/embed kills the Ollama runner — the triggering call returns fine and
+/api/embed kills the Ollama runner: the triggering call returns fine and
 every later embed fails with EOF. So no options are sent, and
 prompt_eval_count is asserted instead.
 
-    python ops/e4_embed_sweep.py
+    python ops/dense_retrieval_sweep.py
 """
 
 from __future__ import annotations
@@ -48,7 +48,7 @@ BATCH = 32
 
 
 def embed(texts: list[str]) -> list[list[float]]:
-    """No `options` — see the module docstring."""
+    """No `options`; see the module docstring."""
     body = json.dumps({"model": EMB, "input": texts}).encode()
     req = urllib.request.Request("http://localhost:11434/api/embed", data=body,
                                  headers={"Content-Type": "application/json"})
@@ -106,6 +106,9 @@ def main() -> None:
                     t = f"{title}\n\n{t}" if title else t
                 elif variant == "title+source":
                     src = c.get("source") or ""
+                    # The separator is embedded text, not prose: the committed
+                    # e4_embed_sweep numbers were measured with this exact
+                    # string. Changing it changes the vectors and the result.
                     head = " — ".join(x for x in (title, src) if x)
                     t = f"{head}\n\n{t}" if head else t
                 texts.append(t)

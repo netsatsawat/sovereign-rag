@@ -1,4 +1,4 @@
-"""Stage 3 pilot — generation, three arms, enough queries to size the grid.
+"""Stage 3 pilot: generation, three arms, enough queries to size the grid.
 
 Purpose: estimate π_d, the per-pair disagreement rate on binary correctness,
 which is the parameter McNemar's power depends on (PRD §7: at π_d = 0.10,
@@ -11,7 +11,7 @@ Arms:
   plain   BM25@600, k=10 chunks as context (Stage 1's winning retriever).
   graph   the Stage 2 graph arm's top-10 chunks as context.
 
-Correctness (pilot-grade, labelled as such): normalised containment — the
+Correctness (pilot-grade, labelled as such): normalised containment, the
 gold answer string, NFKC/casefold/punctuation-stripped, appears in the
 generated answer. Median gold here is short and entity-like, which makes
 containment the honest cheap metric; EM is logged alongside. The full study's

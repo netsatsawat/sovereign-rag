@@ -1,4 +1,4 @@
-"""Stage 8 — Muse Glimmer 30B, day-one, on the committed harness.
+"""Stage 8: Muse Glimmer 30B, day-one, on the committed harness.
 
 Meta released Muse Glimmer (2026-08-10) as an open agentic model built for
 local deployment, quantised to ~4-bit with "minimal to no degradation on
@@ -20,13 +20,13 @@ The questions this run can answer that a launch post cannot:
 Design: paired at the query level.
   sample   the exact Stage-6 deterministic sample (120 comparison + 60
            temporal; asserted equal to the committed stage6 qi set) plus an
-           evenly-spaced 60-query inference sample — the stratum where the
+           evenly-spaced 60-query inference sample, the stratum where the
            8B's real RAG lift lives (57.7 -> 95.2).
   arms     a0_glimmer (closed-book) and plain_glimmer (BM25@600, k=10),
            byte-identical PROMPT_CLOSED/PROMPT_RAG, temperature 0, seed 0,
            max_tokens 1024 with system message "Reasoning strength: low"
-           — the two documented deviations from the 8B/27B protocol
-           (num_predict 64, think off), forced by the model having no
+           (the two documented deviations from the 8B/27B protocol
+           at num_predict 64, think off), forced by the model having no
            non-thinking mode; see the comment above ARMSETS. The rec
            armset swaps in Meta's recommended sampling.
   metric   the same normalised containment, plus abstention as a
@@ -35,7 +35,7 @@ Design: paired at the query level.
 Engine note, because it is itself a finding: the official Ollama MLX build
 (30b-mlx, 21 GB) loads on a 24 GB Mac only after raising iogpu.wired_limit_mb,
 and then generates at ~40 s/token while the OS thrashes in the ~3 GB it has
-left -- one 64-token call took 52m32s, and its template parser returned an
+left: one 64-token call took 52m32s, and its template parser returned an
 empty response for all 64 tokens. The GGUF tags in the Ollama library demand a
 pre-release runtime. What actually runs on a 24 GB Mac today is Meta's
 official muse-glimmer-30B-kquant-17gb.gguf under llama.cpp (day-0 support,
@@ -49,7 +49,7 @@ model thinks anyway.
         --port 8095 -c 8192 --jinja --reasoning off --reasoning-format deepseek
     python ops/stage8_glimmer.py                # run (checkpointed, resumable)
     python ops/stage8_glimmer.py --analyze      # score + paired stats -> reports/stage8_glimmer.json
-    python ops/stage8_glimmer.py --calibration  # STAGE8.md's calibration cross
+    python ops/stage8_glimmer.py --calibration  # glimmer-day-one.md's calibration cross
                                                 #   -> reports/stage8_calibration.json
 """
 
@@ -86,7 +86,7 @@ WANT = {"comparison_query": 120, "temporal_query": 60, "inference_query": 60}
 # Two documented deviations from the 8B/27B protocol, both forced by the
 # model having no non-thinking mode (--reasoning off is a no-op for its
 # template; probe: all 64 tokens went to reasoning, content empty):
-#   system   "Reasoning strength: low" -- Meta's documented control; without
+#   system   "Reasoning strength: low", Meta's documented control; without
 #            it the reasoning spend doubles (664 vs ~270 gen tokens, probe).
 #   budget   max_tokens 1024 vs the others' 64, because reasoning and answer
 #            share the budget. Only the answer channel is scored, same as
@@ -169,7 +169,7 @@ def run(armset: str) -> None:
                 continue
             # qi is only an index; the row's recorded gold must still be
             # what the CURRENT data says that qi means, or resume would mix
-            # answers to different questions under one qi — e.g. a
+            # answers to different questions under one qi, e.g. a
             # regenerated multihoprag_queries.parquet / chunks_600.jsonl
             # that preserves the sampled qi set but shifts which question a
             # qi denotes. Verified to pass on all committed rows; same
@@ -181,7 +181,7 @@ def run(armset: str) -> None:
             if r.get("gold") != cur:
                 raise SystemExit(
                     f"{OUT}: row (arm={r['arm']}, qi={r['qi']}) has gold "
-                    f"{r.get('gold')!r} but the current queries say {cur!r} — "
+                    f"{r.get('gold')!r} but the current queries say {cur!r}: "
                     f"the query/chunk data changed under the checkpoint; "
                     f"resolve before resuming")
             done.add(arm_qi)
@@ -206,7 +206,7 @@ def run(armset: str) -> None:
                         "wall_s": None, "prompt_tokens": 0, "gen_tokens": 0,
                         "done_reason": f"error:{type(ex).__name__}", "thinking_len": 0}
                 # "query" rides along so row identity can be audited
-                # directly — gold text alone is weak identity on the
+                # directly; gold text alone is weak identity on the
                 # comparison stratum, where half the golds are 'Yes'/'No'.
                 # Committed pre-guard rows lack the field; their identity
                 # check is the gold-vs-current-queries guard in the resume
@@ -251,14 +251,14 @@ def mcnemar_exact(b: int, c: int) -> float:
     # KNOWN DISPLAY DEFECT: rounding to 4 dp reports 0.0 whenever p < 5e-5,
     # a value an exact binomial test cannot produce. Three committed stage8
     # pairings (plain_vs_8b, a0_vs_27b, rec_plain_vs_8b) carry mcnemar_p =
-    # 0.0 this way — quote them as p < 0.0001, never "p = 0.0". Returning
+    # 0.0 this way; quote them as p < 0.0001, never "p = 0.0". Returning
     # the unrounded value is the right fix but rewrites committed summary
     # JSONs on the next --analyze; change only with that decision.
     return min(1.0, 2 * p)   # full precision; display rounding is prose's job
 
 
 def latest_rows(path: Path, arms: tuple[str, ...]) -> dict[tuple[str, int], dict]:
-    """Last non-error row wins per (arm, qi) -- same rule as every resume."""
+    """Last non-error row wins per (arm, qi), same rule as every resume."""
     out: dict[tuple[str, int], dict] = {}
     for line in path.open():
         try:
@@ -280,7 +280,7 @@ def analyze() -> None:
 
     # Completeness check: the qi universe below is whatever non-error rows
     # exist in the jsonl, so an interrupted run yields a summary computed
-    # on the surviving subset — and rows for qi OUTSIDE the current sample
+    # on the surviving subset, and rows for qi OUTSIDE the current sample
     # (a WANT change, a superseded armset experiment left in the file)
     # would be silently included. Warn loudly; stderr only, so the summary
     # JSON stays byte-identical on complete data.
@@ -292,7 +292,7 @@ def analyze() -> None:
         if have and have != expected:
             print(f"WARNING: arm {arm} has {len(have & expected)}/"
                   f"{len(expected)} sampled qi and {len(have - expected)} "
-                  f"rows outside the current sample — the summary is "
+                  f"rows outside the current sample: the summary is "
                   f"computed on this mismatched set; treat its numbers as "
                   f"partial", file=sys.stderr)
 
@@ -330,7 +330,7 @@ def analyze() -> None:
         b = c = 0
         for qi in common:
             # qi is trusted as identity across row files; verify it. Passes
-            # on all committed rows — fires only if a regenerated file
+            # on all committed rows; fires only if a regenerated file
             # reassigned qi, where pairing would otherwise silently lie.
             # Gold TEXT is weak identity on the comparison stratum (half
             # the golds are 'Yes'/'No'); rows written after the guard also
@@ -338,7 +338,7 @@ def analyze() -> None:
             # assert: must survive python -O.)
             if g[(mine_arm, qi)]["gold"] != ref[(ref_arm, qi)]["gold"]:
                 raise SystemExit(
-                    f"{name}: gold mismatch at qi={qi} — the qi pairing "
+                    f"{name}: gold mismatch at qi={qi}, the qi pairing "
                     f"across row files is broken; refusing to compare")
             m = contained(g[(mine_arm, qi)]["gold"], g[(mine_arm, qi)]["answer"])
             o = contained(ref[(ref_arm, qi)]["gold"], ref[(ref_arm, qi)]["answer"])
@@ -372,7 +372,7 @@ def analyze() -> None:
             # must survive python -O.)
             if g[(a0_arm, qi)]["gold"] != g[(rag_arm, qi)]["gold"]:
                 raise SystemExit(
-                    f"{label}: gold mismatch at qi={qi} — the within-file "
+                    f"{label}: gold mismatch at qi={qi}, the within-file "
                     f"qi pairing is broken; refusing to compare")
             rag = contained(g[(rag_arm, qi)]["gold"], g[(rag_arm, qi)]["answer"])
             cb = contained(g[(a0_arm, qi)]["gold"], g[(a0_arm, qi)]["answer"])
@@ -395,13 +395,13 @@ def analyze() -> None:
 
 
 def calibration() -> None:
-    """STAGE8.md's calibration cross as a command, not a prose spec:
+    """glimmer-day-one.md's calibration cross as a command, not a prose spec:
     finding 1 (abstention vs evidence-completeness, with the 8B/27B anchors
     and answered-when-complete accuracy) and finding 2's paired-60 8B
-    closed-book figure, recomputed from committed artifacts only —
+    closed-book figure, recomputed from committed artifacts only:
     stage8_glimmer.jsonl, stage1_retrieval.json
     per_query.600_k10.bm25.strict, stage3_pilot.jsonl, stage6_27b.jsonl.
-    Purely derived — writes reports/stage8_calibration.json and touches
+    Purely derived; writes reports/stage8_calibration.json and touches
     nothing --analyze depends on."""
     strict = json.loads((ROOT / "reports" / "stage1_retrieval.json").read_text())[
         "per_query"]["600_k10"]["bm25"]["strict"]

@@ -104,7 +104,7 @@ def pack(article: dict, tok: Tokenizer, budget: int, seg: pysbd.Segmenter) -> li
         so the caller can carry them into the next one.
 
         BPE merges across the joins, so the joined string can tokenize to MORE
-        than the sum of its sentences -- measured at 4 of 1,213 chunks
+        than the sum of its sentences, measured at 4 of 1,213 chunks
         exceeding a 600 budget by up to 3 tokens. Packing on the sum is
         therefore not sufficient; re-count the real string and give sentences
         back until it fits. Giving them back rather than dropping them is the

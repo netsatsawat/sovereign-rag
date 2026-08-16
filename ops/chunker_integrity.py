@@ -4,7 +4,7 @@ Asserts, for both budgets: every pySBD sentence of every article is present in
 that article's chunks (nothing lost), no sentence duplicated beyond its source
 count, nothing over budget. Merges the result into stage0.json.
 
-    python ops/e1_integrity.py
+    python ops/chunker_integrity.py
 """
 from __future__ import annotations
 

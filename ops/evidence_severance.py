@@ -1,4 +1,4 @@
-"""E1b — does the chunker sever the evidence the benchmark grades on?
+"""E1b: does the chunker sever the evidence the benchmark grades on?
 
 The naive character scheme severed 6.83% of gold evidence spans and cost
 17.18% of queries at least one span, asymmetrically by question type
@@ -16,7 +16,7 @@ A span is INTACT if it appears inside a single chunk. Comparison is on
 normalised text, because chunk assembly rejoins sentences with a single space
 and the source may have had other whitespace.
 
-    python ops/e1b_severance.py
+    python ops/evidence_severance.py
 """
 
 from __future__ import annotations

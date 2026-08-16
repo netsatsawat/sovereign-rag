@@ -1,0 +1,25 @@
+# CI runs the offline half of this repo and nothing else: there is no ollama,
+# no llama-server and no GPU on the runner, so no stage is re-run here. The
+# stages produce their numbers locally and commit them under reports/;
+# verify_readme_claims.py recomputes those numbers from the committed
+# artifacts and checks README.md and STATUS.md against them. The verifier is
+# stdlib-only, so the dependency install below is there to keep
+# requirements.txt's pins honest, not because the check needs them.
+
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - name: every quoted number matches its artifact
+        run: python scripts/verify_readme_claims.py

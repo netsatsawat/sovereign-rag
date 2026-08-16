@@ -1,4 +1,4 @@
-"""Stage 1, retrieval layer — three retrievers, two chunkings, hard metrics.
+"""Stage 1, retrieval layer: three retrievers, two chunkings, hard metrics.
 
 v2, after adversarial verification of v1 found four defects in this file:
 
@@ -18,11 +18,11 @@ v2, after adversarial verification of v1 found four defects in this file:
   stats-plan deviation  the PRD registers B=10,000 and Holm-Bonferroni across a
                         pre-registered family; v1 shipped B=3,000 and no
                         multiplicity control. Both now follow the plan, and
-                        `reportable` means Holm-adjusted p < 0.05 — CI bounds
+                        `reportable` means Holm-adjusted p < 0.05; CI bounds
                         are displayed but do not decide the flag.
 
 Metrics per (budget, k, arm): hits@k (any gold doc), hits@1, strict@k (EVERY
-gold doc present — multi-hop queries carry 2-4), mrr@k over deduped docs.
+gold doc present, multi-hop queries carry 2-4), mrr@k over deduped docs.
 Dense/hybrid query cost includes query embedding time, reported separately.
 
     python src/score_retrieval.py

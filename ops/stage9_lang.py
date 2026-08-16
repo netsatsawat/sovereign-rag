@@ -1,8 +1,8 @@
-"""Stage 9 — the multilingual replication: five languages, same two questions.
+"""Stage 9: the multilingual replication: five languages, same two questions.
 
-Muse Glimmer's card claims 100+ languages. Stage 8's two live findings — the
+Muse Glimmer's card claims 100+ languages. Stage 8's two live findings (the
 escape hatch firing on evidence-complete queries, and the contamination floor
-under closed-book — were measured in English on English news. This stage asks
+under closed-book) were measured in English on English news. This stage asks
 the same paired questions (Glimmer vs qwen3:8b, closed-book vs BM25 RAG) in
 Thai, Japanese, Chinese, Spanish and Vietnamese, each on a native-language
 extractive QA corpus normalised to one schema:
@@ -20,14 +20,14 @@ Per-language machinery that has to differ, and why:
              PROMPT_RAG/PROMPT_CLOSED, native escape phrase.
   scoring    containment and abstention on NFKC + casefold text with every
              [\\W_] character deleted. No internal spaces to reproduce, and
-             Latin precomposed accents survive (á/ñ are word characters) —
+             Latin precomposed accents survive (á/ñ are word characters),
              but the strip removes ALL combining marks, so Thai
              vowels-above/below, tone marks and thanthakhat vanish from
              gold and answer alike (NFKC first decomposes SARA AM:
              norm('น้ำ') == 'นา'). One committed verdict rides on that
-             leniency — th rag_glimmer qi=28, where the model dropped a
+             leniency: th rag_glimmer qi=28, where the model dropped a
              silent-letter mark ('เซอรนัก' vs gold 'เซอร์นัก') and still
-             matches — and words differing only in tone marks collapse to
+             matches, and words differing only in tone marks collapse to
              the same normed string, an accepted false-positive channel on
              this single-gold extractive task.
 
@@ -42,7 +42,7 @@ checkpointed per (arm, qi); single-gold datasets so strict@k = hits@k.
     python ops/stage9_lang.py --lang th --model qwen8b
     python ops/stage9_lang.py --lang th --analyze
     python ops/stage9_lang.py --lang th --calibration   # optional, derived:
-                                        # STAGE9.md's calibration-reversal row
+                                        # five-language-replication.md's calibration-reversal row
 """
 
 from __future__ import annotations
@@ -151,7 +151,7 @@ def tokens(lang: str, text: str) -> list[str]:
 
 class LangBM25:
     """src/bm25.py's scoring formula with a language-aware tokeniser (the
-    shared class's normalize() deletes non-Latin text) — but NOT its
+    shared class's normalize() deletes non-Latin text), but NOT its
     parameters: b matches at 0.75, while k1 here is 1.5 vs src/bm25.py's
     1.2. Every committed stage-9 retrieval and RAG number was produced at
     k1=1.5, so the difference is recorded rather than repaired: stage-8 vs
@@ -208,7 +208,7 @@ def norm(s: str) -> str:
     # longer digit run: ja closed_qwen8b qi=96 (gold '4') was scored correct
     # against '574族', the only committed row where this decides a verdict
     # (ja closed-book 8B containment 12.0 vs 11.0 with digit boundaries).
-    # A boundary-aware fix would change committed numbers — do not alter
+    # A boundary-aware fix would change committed numbers; do not alter
     # without an explicit decision to re-run --analyze for every language.
     return re.sub(r"[\W_]+", "", unicodedata.normalize("NFKC", s or "").casefold())
 
@@ -258,11 +258,11 @@ def run_retrieval(lang: str) -> None:
         dv = np.load(p["emb"])
         if dv.shape[0] != len(corpus):
             raise SystemExit(
-                f"emb.npy rows {dv.shape[0]} != corpus {len(corpus)} — stale "
+                f"emb.npy rows {dv.shape[0]} != corpus {len(corpus)}: stale "
                 f"embedding cache; delete {p['emb']} and re-run --retrieval")
         # A missing fingerprint is a hard failure, not a skip: the shape
         # assert alone cannot tell a regenerated corpus with the same
-        # article count from the one this cache was embedded from — and
+        # article count from the one this cache was embedded from, and
         # because the meta file is only written on a cache miss, skipping
         # here would leave pre-guard caches unverified forever (the guard
         # could never self-heal while emb.npy exists). Re-embedding is
@@ -271,11 +271,11 @@ def run_retrieval(lang: str) -> None:
         if not emb_meta.exists():
             raise SystemExit(
                 f"{p['emb']} has no {emb_meta.name} fingerprint, so the cache "
-                f"cannot be verified against the current corpus — stale "
+                f"cannot be verified against the current corpus: stale "
                 f"embedding cache; delete {p['emb']} and re-run --retrieval")
         if json.loads(emb_meta.read_text()) != corpus_fingerprint():
             raise SystemExit(
-                f"{emb_meta} does not match the current corpus — stale "
+                f"{emb_meta} does not match the current corpus: stale "
                 f"embedding cache; delete {p['emb']} and re-run --retrieval")
     else:
         dv = embed([c["context"] for c in corpus])
@@ -349,7 +349,7 @@ def run_generation(lang: str, model: str) -> None:
 
     # qi is only an index; question_id is the identity. Any existing row
     # whose question_id disagrees with the current queries.jsonl means the
-    # query file changed under the checkpoint — resuming would silently mix
+    # query file changed under the checkpoint; resuming would silently mix
     # answers to different questions under one qi. Hard-fail instead.
     # (SystemExit deliberately escapes the except Exception below.)
     qid_of = {q["qi"]: q["question_id"] for q in queries}
@@ -362,7 +362,7 @@ def run_generation(lang: str, model: str) -> None:
                     raise SystemExit(
                         f"{p['rows']}: row (arm={r.get('arm')}, qi={r.get('qi')}) "
                         f"has question_id {r.get('question_id')!r} but "
-                        f"queries.jsonl says {qid_of.get(r.get('qi'))!r} — "
+                        f"queries.jsonl says {qid_of.get(r.get('qi'))!r}: "
                         f"queries.jsonl changed under the checkpoint; resolve "
                         f"before resuming")
                 if not str(r.get("done_reason", "")).startswith("error"):
@@ -422,7 +422,7 @@ def mcnemar_exact(b: int, c: int) -> float:
     # KNOWN DISPLAY DEFECT: rounding to 4 dp reports 0.0 whenever p < 5e-5,
     # a value an exact binomial test cannot produce. All ten committed
     # stage9 rag_over_closed pairings carry mcnemar_p = 0.0 this way (true
-    # values 1e-15..3e-24) — quote them as p < 0.0001, never "p = 0.0".
+    # values 1e-15..3e-24); quote them as p < 0.0001, never "p = 0.0".
     # Returning the unrounded value is the right fix but rewrites committed
     # summary JSONs on the next --analyze; change only with that decision.
     return min(1.0, 2 * p)   # full precision; display rounding is prose's job
@@ -445,7 +445,7 @@ def analyze(lang: str) -> None:
             raise SystemExit(
                 f"{p['rows']}: row (arm={r.get('arm')}, qi={r.get('qi')}) has "
                 f"question_id {r.get('question_id')!r} but queries.jsonl says "
-                f"{qid_of.get(r.get('qi'))!r} — rows and queries.jsonl are out "
+                f"{qid_of.get(r.get('qi'))!r}: rows and queries.jsonl are out "
                 f"of sync; refusing to analyze")
         if not str(r.get("done_reason", "")).startswith("error"):
             rows[(r["arm"], r["qi"])] = r
@@ -455,7 +455,7 @@ def analyze(lang: str) -> None:
 
     # Completeness check: the qi universe above is whatever non-error rows
     # exist, so an interrupted run yields a summary computed on the
-    # surviving subset — same shape as the committed artifact,
+    # surviving subset, same shape as the committed artifact,
     # distinguishable only by its small "n" fields. Warn loudly; stderr
     # only, so the summary JSON stays byte-identical on complete data.
     # (Rows for qi absent from queries.jsonl already hard-fail the
@@ -465,7 +465,7 @@ def analyze(lang: str) -> None:
         n_arm = sum(1 for (a, _q) in rows if a == arm)
         if n_arm != expected:
             print(f"WARNING: [{lang}] arm {arm} has {n_arm}/{expected} "
-                  f"scored rows — the summary is computed on an incomplete "
+                  f"scored rows: the summary is computed on an incomplete "
                   f"run; treat every number in it as partial",
                   file=sys.stderr)
 
@@ -509,11 +509,11 @@ def analyze(lang: str) -> None:
 
 
 def calibration(lang: str) -> None:
-    """STAGE9.md's 'calibration reversal' table as a command, not a prose
+    """five-language-replication.md's 'calibration reversal' table as a command, not a prose
     spec: glimmer RAG abstention crossed with whether the BM25@5 arm
     actually retrieved the gold article, recomputed from the committed
     corpus/queries/rows via a deterministic LangBM25 rebuild (no server
-    needed). Purely derived — writes reports/stage9_{lang}_calibration.json
+    needed). Purely derived; writes reports/stage9_{lang}_calibration.json
     and touches nothing --analyze depends on."""
     p = paths(lang)
     corpus, queries = load(lang)
@@ -535,7 +535,7 @@ def calibration(lang: str) -> None:
             raise SystemExit(
                 f"{p['rows']}: row (arm={r.get('arm')}, qi={r.get('qi')}) has "
                 f"question_id {r.get('question_id')!r} but queries.jsonl says "
-                f"{qid_of.get(r.get('qi'))!r} — rows and queries.jsonl are out "
+                f"{qid_of.get(r.get('qi'))!r}: rows and queries.jsonl are out "
                 f"of sync; refusing to compute the calibration cross")
         if r.get("arm") == "rag_glimmer" and \
                 not str(r.get("done_reason", "")).startswith("error"):

@@ -4,18 +4,18 @@
 # machine allows: all glimmer arms while llama-server is resident, then stop
 # it and run all qwen8b arms via ollama, then analyze per language.
 #
-# Prerequisites — nothing below starts a server for you:
+# Prerequisites, nothing below starts a server for you:
 #   llama-server resident on :8095 (the stage-8 launch line):
 #     models/llama-b10353/llama-server -m models/muse-glimmer-30B-kquant-17gb.gguf \
 #         --port 8095 -c 8192 --jinja --reasoning off --reasoning-format deepseek
 #   ollama on :11434 with the models pulled:
 #     ollama pull qwen3:8b && ollama pull qwen3-embedding:0.6b
-#   retrieval is NOT run by this driver — run it per language (the dense arm
+#   retrieval is NOT run by this driver; run it per language (the dense arm
 #   needs ollama):  ./.venv/bin/python ops/stage9_lang.py --lang $L --retrieval
 #
 # The driver refuses to print DRIVER COMPLETE if any step exited non-zero or
 # any rows file contains error rows (a dead server writes error:URLError rows
-# and every $PY call still exits 0 — the row check is what catches it).
+# and every $PY call still exits 0; the row check is what catches it).
 cd "$(dirname "$0")/.." || { echo "STAGE9 DRIVER FAILED (cd to repo root failed)"; exit 1; }
 LANGS="th ja zh es vi"
 PY=./.venv/bin/python
@@ -27,7 +27,7 @@ fail() { echo "$(date '+%H:%M') FAIL: $*" >> "$LOG"; FAILED=1; }
 
 check_error_rows() {  # $1 = lang
   # Fail only on UNRECOVERED errors. The checkpoint recovers from an error
-  # by APPENDING a fresh row — old error rows stay in the jsonl forever, so
+  # by APPENDING a fresh row: old error rows stay in the jsonl forever, so
   # a raw grep for error rows would flag every run after any crash+resume
   # cycle and train the operator to ignore FAIL. Mirror the analysis
   # semantics instead (last row per (arm, qi) wins): count pairs whose
@@ -52,14 +52,14 @@ PYEOF
 echo "$(date '+%H:%M') driver up; waiting for stage8 rec completion" >> "$LOG"
 while ! grep -q "stage8 glimmer run complete" reports/stage8_rec.log 2>/dev/null; do
   if ! pgrep -f "stage8_glimmer.py --armset rec" >/dev/null; then
-    echo "$(date '+%H:%M') rec process gone without completing — proceeding anyway" >> "$LOG"
+    echo "$(date '+%H:%M') rec process gone without completing, proceeding anyway" >> "$LOG"
     break
   fi
   sleep 300
 done
 
 if ! curl -sf --max-time 10 http://localhost:8095/health >/dev/null; then
-  fail "llama-server not reachable on :8095 — glimmer arms cannot run; aborting"
+  fail "llama-server not reachable on :8095, glimmer arms cannot run; aborting"
   echo "STAGE9 DRIVER FAILED (see $LOG)"
   exit 1
 fi
@@ -80,7 +80,7 @@ echo "$(date '+%H:%M') stopping llama-server, qwen8b arms" >> "$LOG"
 pkill -f "llama-server" 2>/dev/null
 sleep 5
 if ! curl -sf --max-time 10 http://localhost:11434/api/tags >/dev/null; then
-  fail "ollama not reachable on :11434 — qwen8b arms cannot run; aborting"
+  fail "ollama not reachable on :11434, qwen8b arms cannot run; aborting"
   echo "STAGE9 DRIVER FAILED (see $LOG)"
   exit 1
 fi
@@ -97,11 +97,11 @@ done
 
 # The skip branches above mean a driver with both servers reachable but no
 # data (failed checkout, typo'd LANGS, wrong working directory) would run
-# zero steps, never touch FAILED, and print COMPLETE — the header's
+# zero steps, never touch FAILED, and print COMPLETE; the header's
 # row-check safety net only executes for languages that have data. A run
 # that processed nothing is a failure, not a completion.
 if [ "$PROCESSED" -eq 0 ]; then
-  fail "no language under data/multiling had queries.jsonl — nothing ran"
+  fail "no language under data/multiling had queries.jsonl, nothing ran"
 fi
 
 # Analyze only when every generation step and error-row check passed:
@@ -119,11 +119,11 @@ if [ "$FAILED" -eq 0 ]; then
     fi
   done
 else
-  echo "$(date '+%H:%M') skipping analyze: a generation step FAILED — refusing to overwrite committed summaries with partial-data numbers" >> "$LOG"
+  echo "$(date '+%H:%M') skipping analyze: a generation step FAILED, refusing to overwrite committed summaries with partial-data numbers" >> "$LOG"
 fi
 
 if [ "$FAILED" -ne 0 ]; then
-  echo "$(date '+%H:%M') stage9 driver FAILED — see FAIL lines above" >> "$LOG"
+  echo "$(date '+%H:%M') stage9 driver FAILED, see FAIL lines above" >> "$LOG"
   echo "STAGE9 DRIVER FAILED (see $LOG)"
   exit 1
 fi
