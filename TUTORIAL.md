@@ -26,6 +26,7 @@ What you get from one run:
 - [ollama](https://ollama.com) running locally with a model pulled
   (`ollama pull qwen3:8b` is a fine start)
 - this repo's Python env: `python -m venv .venv && .venv/bin/pip install -r requirements.txt`
+- Jupyter, the notebook viewer, which `requirements.txt` does not install: `.venv/bin/pip install jupyterlab`
 
 ## 1. Open the notebook
 
